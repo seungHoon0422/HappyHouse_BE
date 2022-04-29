@@ -21,18 +21,6 @@
 						<option value="name">아파트명</option>
 					</select>
 				</div>
-				<div class="form-group row ym">
-					<label for="dealYear"><strong>거래년도</strong></label>
-					<input class="form-control" type="text" id="dealYear" name="dealYear" placeholder="거래년도"/>
-				</div>
-				<div class="form-group row ym">
-					<label for="dealMonth"><strong>거래월</strong></label>
-					<input class="form-control" type="text" id="dealMonth" name="dealMonth" placeholder="거래월"/>
-				</div>
-				<div class="form-group row name">
-					<label for="aptName"><strong>아파트명</strong></label>
-					<input class="form-control" type="text" id="aptName" name="aptName" placeholder="아파트명"/>
-				</div>
 				<div class="form-group row">
 					<label for="sidoName"><strong>시도명</strong></label>
 					<input class="form-control" type="text" id="sidoName" name="sidoName" placeholder="시/도"/>
@@ -44,6 +32,10 @@
 				<div class="form-group row">
 					<label for="dongName"><strong>동명</strong></label>
 					<input class="form-control" type="text" id="dongName" name="dongName" placeholder="읍/면/동"/>
+				</div>
+				<div class="form-group row name">
+					<label for="aptName"><strong>아파트명</strong></label>
+					<input class="form-control" type="text" id="aptName" name="aptName" placeholder="아파트명"/>
 				</div>
 				<input type="submit" id="dealListBtn" value="검색"/>
 			</form>
