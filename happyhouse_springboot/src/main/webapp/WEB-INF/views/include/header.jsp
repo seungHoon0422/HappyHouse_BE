@@ -34,9 +34,9 @@
 <ul class="navbar-nav justify-content-end">
 	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user?act=userList">회원정보</a></li>
 	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/interest?act=interestList">관심목록</a></li>
-	<%--
+	
 	<li class="nav-item"><a class="nav-link text-secondary" href="${root}/house?act=mvDealList">매매 목록</a></li>
-	--%>
+	
 	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user?act=logout">LogOut</a></li>
 	</ul>
 </c:if>
