@@ -22,12 +22,12 @@
 <nav class="navbar navbar-expand-sm bg-light fixed-top">
 <div class="container">
 <div class="text-center">
-		<h3 class="font-weight-bold text-info"><a href="${root}/index.jsp">Happy house</a></h3>
+		<h3 class="font-weight-bold text-info"><a href="${root}/">Happy house</a></h3>
 </div>
 <c:if test="${empty userinfo}">
 	<ul class="navbar-nav justify-content-end">
-	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user?act=mvregister">Sign Up</a></li>
-	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user?act=mvlogin">Sign In</a></li>
+	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user/mvregister">Sign Up</a></li>
+	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user/mvlogin">Sign In</a></li>
 	</ul>
 </c:if>
 <c:if test="${!empty userinfo}">
