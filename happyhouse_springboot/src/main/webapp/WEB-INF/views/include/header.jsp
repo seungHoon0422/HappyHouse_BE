@@ -22,22 +22,25 @@
 <nav class="navbar navbar-expand-sm bg-light fixed-top">
 <div class="container">
 <div class="text-center">
-		<h3 class="font-weight-bold text-info"><a href="${root}/index.jsp">Happy house</a></h3>
+		<h3 class="font-weight-bold text-info"><a href="${root}/">Happy house</a></h3>
 </div>
 <c:if test="${empty userinfo}">
 	<ul class="navbar-nav justify-content-end">
-	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user?act=mvregister">Sign Up</a></li>
-	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user?act=mvlogin">Sign In</a></li>
+	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user/userregister">Sign Up</a></li>
+	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user/mvlogin">Sign In</a></li>
 	</ul>
 </c:if>
 <c:if test="${!empty userinfo}">
-<ul class="navbar-nav justify-content-end">
-	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user?act=userList">회원정보</a></li>
+	<ul class="navbar-nav justify-content-end">
+	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user/info">회원정보</a></li>
 	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/interest?act=interestList">관심목록</a></li>
-	
+	<c:if test="${userinfo.level ==0}">
 	<li class="nav-item"><a class="nav-link text-secondary" href="${root}/house?act=mvDealList">매매 목록</a></li>
-	
-	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user?act=logout">LogOut</a></li>
+	</c:if>
+	<c:if test="${userinfo.level ==1}">
+	<li class="nav-item"><a class="nav-link text-secondary" href="${root}/house?act=mvDealList">매매 등록</a></li>
+	</c:if>
+	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user/logout">LogOut</a></li>
 	</ul>
 </c:if>
 </div>

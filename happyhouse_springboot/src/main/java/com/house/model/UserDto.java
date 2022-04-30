@@ -71,4 +71,8 @@ public class UserDto {
 	}
 
 	
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'master' of https://github.com/seungHoon0422/house.git

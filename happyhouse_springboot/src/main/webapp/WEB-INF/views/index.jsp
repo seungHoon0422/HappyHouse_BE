@@ -46,6 +46,10 @@
 		<a href="${root}/house?act=mvInfo" class="btn btn-dark">주택 정보 검색</a>
 	</div>
 	
+	<div class="container text-center mt-3">
+		<a href="${root}/house?act=mvDealRegister" class="btn btn-dark">매매 정보 등록</a>
+		<a href="${root}/house?act=mvInfo" class="btn btn-dark">주택 정보 검색</a>
+	</div>
 	<!-- type에 따른, input 태그 toggle -->
 	<script>
 	$(function() {
