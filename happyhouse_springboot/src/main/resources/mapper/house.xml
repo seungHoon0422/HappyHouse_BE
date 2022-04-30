@@ -20,7 +20,7 @@
 		from housedeal as hd
 		inner join houseinfo as hf
 		on hd.aptCode = hf.aptCode
-		where dongCode = #{dongCode};
+		where dongCode = #{dongCode}
 	</select>
 
 	<resultMap type="HouseListVo" id="dealList">
@@ -43,4 +43,16 @@
 		<result column="type" property="type"/>
 		<result column="rentMoney" property="rentMoney"/>
 		</resultMap>
+		
+		
+		
+		
+	<select id="listDong" parameterType="String" resultType="SimpleHouseInfoDto">
+		select hd.aptCode, aptName, buildYear, dealAmount, dealYear, dealMonth, dealDay, area
+		from housedeal as hd
+		inner join houseinfo as hf
+		on hd.aptCode = hf.aptCode
+		where hf.dongCode = #{dong};
+	</select>
+		
 </mapper>

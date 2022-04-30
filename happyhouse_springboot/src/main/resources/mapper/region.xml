@@ -13,9 +13,26 @@
 		select *
 		from sidocode
 	</select>
+	<select id="getGugun" resultMap="guguns">
+		select *
+		from guguncode
+	</select>
+	<select id="getDong" resultMap="dongs">
+		select *
+		from dongcode
+	</select>
 
 	<resultMap type="RegionDto" id="sidos">
-	<result column="sidoCode" property="code"/>
-	<result column="sidoName" property="name"/>
+		<result column="sidoCode" property="code"/>
+		<result column="sidoName" property="name"/>
 	</resultMap>
+	<resultMap type="RegionDto" id="guguns">
+		<result column="gugunCode" property="code"/>
+		<result column="gugunName" property="name"/>
+	</resultMap>
+	<resultMap type="RegionDto" id="dongs">
+		<result column="dongCode" property="code"/>
+		<result column="dongName" property="name"/>
+	</resultMap>
+	
 </mapper>

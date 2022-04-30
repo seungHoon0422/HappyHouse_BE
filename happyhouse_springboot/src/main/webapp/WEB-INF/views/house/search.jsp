@@ -20,21 +20,24 @@ $(document).ready(function(){
 		$("#aptdiv").css("display", "");
 	});
 	
-	
-	// 검색 정보가 모두 입력되면 submit
+	// 	검색 정보가 모두 입력되면 submit
 	$("#dealListBtn").on("click", function(){
-		$("#housesearchfrom").attr("action", "${root}/house/register").submit();
+		console.log(`btn clicked`);
+		$("#HouseSearchform").attr("action", "${root}/house/list").submit();
 	});
 	
 	
+	
+	
+	// 시,도 select options 비동기로 입력
 	$.ajax({
 		url:'${root}/region/sido',  
 		type:'GET',
 		contentType:'application/json;charset=utf-8',
 		dataType:'json',
-		success:function(sido) {
-			console.log(sido);
-			makeList(sido);
+		success:function(data) {
+			console.log(data);
+			makeList("sido", data);
 			
 		},
 		error:function(xhr, status, error){
@@ -52,7 +55,45 @@ $(document).ready(function(){
 		}	
 	});
 	
-	function makeList(sidos) {
+	$(document).on("change", "#sido", function () {
+		let regcode = $("option:selected", this).val();
+		sendRequest("gugun", regcode);
+	});
+	$(document).on("change", "#gugun", function () {
+		let regcode = $("option:selected", this).val();
+		sendRequest("dong", regcode);
+	});
+	
+	
+	function sendRequest(selid, regcode) {
+	      $.ajax({
+	        url: `${root}/region/`+selid+`/`+regcode,
+	        type: "GET",
+			contentType:'application/json;charset=utf-8',
+			dataType:'json',
+	        success: function (response) {
+	          addOption(selid, response);
+	        },
+	        error: function (xhr, status, msg) {
+	          console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+	        },
+	      });
+  	}
+	function addOption(selid, data) {
+		let options = ``;
+		let initOption = `<option>Choose..</option>`;
+		let codeOption = "code";
+		let nameOption = "name";
+		selid = "#" + selid;
+		$(selid).empty().append(initOption);
+		for(let cur of data) {
+			options += '<option value="' + cur[codeOption] + '">' + cur[nameOption] + '</option>\n';
+		}
+		$(selid).append(options);
+    }
+	
+	// makeList : 지역구분과 데이터를 받아 select option을 그리는 함수
+	function makeList(part, sidos) {
 		
 		let options = ``;
 		let initOption = `<option>Choose..</option>`;
@@ -61,9 +102,8 @@ $(document).ready(function(){
 		$(sidos).each(function(index, sido) {
 			options += '<option value="' + sido["code"] + '">' + sido["name"] + '</option>\n';
 		});//each
-		$("#sido").append(options);
+		$("#"+part).append(options);
 	} // end of makeList
-	
 	
 }); // end of document ready
 
@@ -81,24 +121,23 @@ $(document).ready(function(){
 				<button type="button" class="btn btn-outline-warning" id="aptBtn" name="aptBtn">아파트명으로 검색</button>
 			</div>
 
-            <form id="housesearchfrom" class="text-left mb-3" method="post" action="">
+            <form id="HouseSearchform" class="text-left mb-3" method="POST" action="">
 			
-
 <!-- ==================================================================================== -->
 			<div class="form-group row">
 				    <label for="sido"><strong>시,도</strong></label>
-				  <select class="custom-select" id="sido">
+				  <select class="custom-select" id="sido" name="sido">
 				  </select>
 			</div>
 			<div class="form-group row">
 				    <label for="sido"><strong>구,군</strong></label>
-				  <select class="custom-select" id="gugun">
+				  <select class="custom-select" id="gugun" name="gugun">
 				    <option selected>Choose...</option>
 				  </select>
 			</div>
 			<div class="form-group row">
 				    <label for="sido"><strong>동</strong></label>
-				  <select class="custom-select" id="dong">
+				  <select class="custom-select" id="dong" name="dong">
 				    <option selected>Choose...</option>
 				  </select>
 			</div>

@@ -6,4 +6,7 @@ import com.house.model.RegionDto;
 
 public interface RegionMapper {
 	List<RegionDto> getSido();
+	List<RegionDto> getGugun();
+	List<RegionDto> getDong();
+
 }

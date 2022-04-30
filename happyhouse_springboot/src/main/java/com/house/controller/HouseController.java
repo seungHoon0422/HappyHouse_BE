@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.house.model.HouseDealInfoDto;
+import com.house.model.SimpleHouseInfoDto;
 import com.house.model.service.HouseService;
 /***
  * 아파트 처리 컨트롤러*/
@@ -37,9 +38,8 @@ public class HouseController {
 	@GetMapping("/search")
 	private String search(@RequestParam Map<String, String> select, Model model) {
 		
-		List<HouseDealInfoDto> dealList = houseService.search(select);
-		model.addAllAttributes(dealList);
-		
+//		List<HouseDealInfoDto> dealList = houseService.search(select);
+//		model.addAllAttributes(dealList);
 		System.out.println("search controller");
 		return "house/search";
 		
@@ -62,7 +62,20 @@ public class HouseController {
 		return "/house/list";
 	}
 
-
+	
+	// 입력된 dong code에 해당하는 모들 매물정보를 보여준다.
+	// aptName(아파트 이름), area(면적), dealAmount(거래가격), buildYear(건축년도), 거래년도(년,월,일)
+	@PostMapping("/list")
+	public String listDong(@RequestParam String dong, Model model) {
+		
+		System.out.println("list dong method start, code : "+dong);
+		List<SimpleHouseInfoDto> houseInfoList = houseService.listDong(dong);
+		System.out.println(houseInfoList.size());
+		model.addAttribute("infos", houseInfoList);
+		
+		return "/house/list";
+		
+	}
 	
 	
 }

@@ -20,6 +20,16 @@ public class RegionServiceImpl implements RegionService{
 		return regionMapper.getSido();
 	}
 
+	@Override
+	public List<RegionDto> getGugun() {
+		return regionMapper.getGugun();
+	}
+
+	@Override
+	public List<RegionDto> getDong() {
+		return regionMapper.getDong();
+	}
+
 	
 	
 }
