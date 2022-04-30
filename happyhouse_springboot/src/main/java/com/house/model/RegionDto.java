@@ -2,61 +2,32 @@ package com.house.model;
 
 public class RegionDto {
 
-	String sidoCode;
-	String sidoName;
-	String gugunCode;
-	String gugunName;
-	String dongCode;
-	String dongName;
-
+	private String code;
+	private String name;
+	
+	
 	public RegionDto() {
 	}
-	public RegionDto(String sidoCode, String sidoName, String gugunCode, String gugunName, String dongCode,
-			String dongName) {
+	
+	public RegionDto(String code, String name) {
 		super();
-		this.sidoCode = sidoCode;
-		this.sidoName = sidoName;
-		this.gugunCode = gugunCode;
-		this.gugunName = gugunName;
-		this.dongCode = dongCode;
-		this.dongName = dongName;
+		this.code = code;
+		this.name = name;
 	}
-	public String getSidoCode() {
-		return sidoCode;
+	
+	public String getCode() {
+		return code;
 	}
-	public void setSidoCode(String sidoCode) {
-		this.sidoCode = sidoCode;
+	public void setCode(String code) {
+		this.code = code;
 	}
-	public String getSidoName() {
-		return sidoName;
+	public String getName() {
+		return name;
 	}
-	public void setSidoName(String sidoName) {
-		this.sidoName = sidoName;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getGugunCode() {
-		return gugunCode;
-	}
-	public void setGugunCode(String gugunCode) {
-		this.gugunCode = gugunCode;
-	}
-	public String getGugunName() {
-		return gugunName;
-	}
-	public void setGugunName(String gugunName) {
-		this.gugunName = gugunName;
-	}
-	public String getDongCode() {
-		return dongCode;
-	}
-	public void setDongCode(String dongCode) {
-		this.dongCode = dongCode;
-	}
-	public String getDongName() {
-		return dongName;
-	}
-	public void setDongName(String dongName) {
-		this.dongName = dongName;
-	}
+	
 	
 	
 }

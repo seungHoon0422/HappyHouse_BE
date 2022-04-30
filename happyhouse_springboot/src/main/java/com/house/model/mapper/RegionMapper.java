@@ -1,10 +1,9 @@
-package com.house.model.service;
+package com.house.model.mapper;
 
 import java.util.List;
 
 import com.house.model.RegionDto;
 
-public interface RegionService {
-
+public interface RegionMapper {
 	List<RegionDto> getSido();
 }

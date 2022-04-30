@@ -1,6 +1,8 @@
 package com.house.model;
 
 public class HouseDealInfoDto{
+	private int no;
+	
 	private int aptCode; // 아파트 코드
 	private String dealAmount; //거래가격
     private int dealYear; // 년(조회)

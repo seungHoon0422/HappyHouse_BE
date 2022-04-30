@@ -1,14 +1,18 @@
 package com.house.model;
 
 public class HouseInfoDto {
+	
+	
+	private int aptCode;
+	
 	private String aptName;//아파트명
+	private String dongCode; //법정동 코드
+	private String dongName; //동
     private int buildYear; //지어진년도
     private String jibun;//지번
     private String lat;  //위도
     private String lng;   //경도
     private String img;   //사진
-    private String dongName; //동
-    private String dongCode; //법정동 코드
     
     public HouseInfoDto() {
 	}

@@ -24,6 +24,7 @@ public class RegionController {
 	
 	@GetMapping(value="/sido")
 	public ResponseEntity<?> getSido(){
+		System.out.println("/reigon/sido");
 		List<RegionDto> list = regionService.getSido();
 		 return new ResponseEntity<List<RegionDto>>(list, HttpStatus.OK);
 	}
