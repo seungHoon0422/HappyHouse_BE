@@ -19,7 +19,7 @@
 			
 			//회원가입 버튼 클릭
 			$("#registerBtn").click(function(){
-				location.href="${root}/user/mvregister"; 
+				location.href="${root}/user/userregister"; 
 			});
 		});
 	

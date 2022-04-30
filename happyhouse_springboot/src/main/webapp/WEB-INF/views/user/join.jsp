@@ -33,13 +33,14 @@
 				<form id="registerform" class="text-left mb-3" method="post" action="">
 				<input type ="hidden" id="email" name="email">
 				<input type ="hidden" id="phone" name="phone">
+				<input type ="hidden" id="level" name="level" value="${level}">
 				
-					<div class="form-group">
+					<!-- <div class="form-group">
 					<select class="form-control" id="level" name="level">
 						<option value="0">일반 사용자</option>
 						<option value="1">중개사무소</option>
 					</select>
-					</div>
+					</div> -->
 					<div class="form-group">
                     <label for="username">이름</label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="이름을 입력하세요">

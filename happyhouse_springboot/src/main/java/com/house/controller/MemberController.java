@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,9 +27,18 @@ public class MemberController {
 	@Autowired
 	private UserService userService;
 	
+		
+	/**레벨 구분 페이지이동*/
+	@GetMapping("/userregister")
+	public String userregister() {
+		return "user/level";
+	}
+	
+	
 	/**회원가입 페이지 이동*/
 	@GetMapping("/mvregister")
-	public String mvregister() {
+	public String mvregister(@RequestParam("level") int level, Model model) {
+		model.addAttribute("level", level);
 		return "user/join";
 	}
 	
