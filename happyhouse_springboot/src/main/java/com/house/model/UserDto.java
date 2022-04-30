@@ -69,10 +69,4 @@ public class UserDto {
 	public void setLevel(int level) {
 		this.level = level;
 	}
-
-	
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> branch 'master' of https://github.com/seungHoon0422/house.git
