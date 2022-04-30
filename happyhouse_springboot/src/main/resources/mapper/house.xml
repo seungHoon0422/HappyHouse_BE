@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.house.model.mapper.HouseMapper">
+
+	<!-- 회원정보조회 -->
+<!-- 	<select id="info" parameterType="UserDto" resultType="UserDto"> -->
+<!-- 		select name, id, pw, email, phone  -->
+<!-- 		from user -->
+<!-- 		where name=#{username} and id=#{userid} -->
+<!-- 	</select> -->
+
+
+
+	<select id="listArticle" parameterType="map" resultMap="dealList">
+		select hd.no, hd.aptCode, hd.dealAmount, hd.dealYear, hd.dealDay, hd.area, hd.floor, hd.type, hd.rentMoney
+		hi.aptCode, hi.aptName, hi.dongCode, hi.buildYear, hi.jibun
+		from housedeal hd, houseinfo hi
+		where #{dongCode} = hi.dongCode
+	</select>
+
+	<resultMap type="HouseDealInfoDto" id="dealList">
+		<result column="no" property="no"/>
+		<result column="aptCode" property="aptCode"/>
+		<result column="dealAmount" property="dealAmount"/>
+		<result column="dealYear" property="dealYear"/>
+		<result column="dealMonth" property="dealMonth"/>
+		<result column="dealDay" property="dealDay"/>
+		<result column="area" property="area"/>
+		<result column="floor" property="floor"/>
+		<result column="rentMoney" property="rentMoney"/>
+	</resultMap>
+
+
+</mapper>
