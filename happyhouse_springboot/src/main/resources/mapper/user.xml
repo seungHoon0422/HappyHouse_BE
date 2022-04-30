@@ -4,16 +4,24 @@
 
 <mapper namespace="com.house.model.mapper.UserMapper">
 
+	<!-- 회원가입 -->
 	<insert id="registerMember" parameterType="UserDto">
 		insert into user(id, pw, email, name, phone, level)
 		values (#{userid},#{userpass},#{email},#{username},#{phone},#{level})
 	</insert>
 
+	<!-- 로그인 -->
 	<select id="login" parameterType="map" resultType="UserDto">
 		select name, id, level
 		from user
 		where id=#{userid} and pw = #{userpass} 
 	</select>
-
+	
+	<!-- 회원정보조회 -->
+	<select id="info" parameterType="UserDto" resultType="UserDto">
+		select name, id, pw, email, phone 
+		from user
+		where name=#{username} and id=#{userid}
+	</select>
 
 </mapper>

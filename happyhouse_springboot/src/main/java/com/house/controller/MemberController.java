@@ -35,7 +35,7 @@ public class MemberController {
 	}
 	
 	
-	/**회원가입 페이지 이동*/
+	/**레벨 선택 후 회원가입 페이지 이동*/
 	@GetMapping("/mvregister")
 	public String mvregister(@RequestParam("level") int level, Model model) {
 		model.addAttribute("level", level);
@@ -75,4 +75,15 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	/**회원정보 페이지 이동
+	 * @throws Exception */
+	@GetMapping("/info")
+	public String info(HttpSession session, Model model) throws Exception {
+		UserDto user = (UserDto) session.getAttribute("userinfo"); 
+		
+		UserDto userDto = userService.info(user); // 사용자의 정보 담겨있는 userDto 
+		model.addAttribute("userlist", userDto);  
+		return "user/info";
+		
+	}
 }	

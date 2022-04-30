@@ -24,4 +24,9 @@ public class UserServiceImpl implements UserService {
 		return userMapper.login(map);
 	}
 
+	@Override
+	public UserDto info(UserDto user) throws Exception {
+		return userMapper.info(user); 
+	}
+
 }
