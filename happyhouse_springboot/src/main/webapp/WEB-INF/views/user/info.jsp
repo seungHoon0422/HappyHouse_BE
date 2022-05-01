@@ -61,7 +61,6 @@
                 	<button type="button" id="deleteBtn" class="btn btn-outline-danger">회원탈퇴</button>
                 	<button type="button" id="updateUser" class="btn btn-outline-primary">수정</button>
                 	<button type="button" id="cancelBtn" class="btn btn-outline-danger">취소</button>
-                	
                 </div>
 				</form>
 			</div>
