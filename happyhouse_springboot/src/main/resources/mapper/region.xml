@@ -22,10 +22,11 @@
 		from dongcode
 	</select>
 
-	<select id="getAddress" parameterType="String" resultType="AddressDto">
+	<select id="getAddress" parameterType="String" resultType="HouseInfoDto">
 		select *
 		from houseinfo
 		where aptCode=#{code}
+		GROUP BY aptCode
 	</select>
 
 	<resultMap type="RegionDto" id="sidos">

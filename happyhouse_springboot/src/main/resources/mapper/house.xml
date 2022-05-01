@@ -38,7 +38,7 @@
 		
 		
 	<select id="listDong" parameterType="String" resultType="SimpleHouseInfoDto">
-		select hd.aptCode, aptName, buildYear, dealAmount, dealYear, dealMonth, dealDay, area
+		select hd.aptCode, no, aptName, buildYear, dealAmount, dealYear, dealMonth, dealDay, area
 		from housedeal as hd
 		inner join houseinfo as hi
 		on hd.aptCode = hi.aptCode
@@ -46,7 +46,7 @@
 	</select>
 
 	<select id="apartNameSearch" parameterType="String" resultType="SimpleHouseInfoDto">
-		select hd.aptCode, aptName, buildYear, dealAmount, dealYear, dealMonth, dealDay, area
+		select hd.aptCode, no, aptName, buildYear, dealAmount, dealYear, dealMonth, dealDay, area
 		from housedeal as hd
 		inner join houseinfo as hi
 		on hd.aptCode = hi.aptCode
