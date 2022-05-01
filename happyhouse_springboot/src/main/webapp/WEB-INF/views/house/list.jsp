@@ -23,6 +23,7 @@
 			      <th scope="col">년</th>
 			      <th scope="col">월</th>
 			      <th scope="col">일</th>
+			      <th scope="col">찜</th>
 			    </tr>
 			</thead>
 			<tbody>
