@@ -15,7 +15,9 @@ public class SimpleHouseInfoDto {
     
     
     
-	public SimpleHouseInfoDto(int aptCode, String aptName, int buildYear, String dealAmount, int dealYear,
+
+    
+    public SimpleHouseInfoDto(int aptCode, String aptName, int buildYear, String dealAmount, int dealYear,
 			int dealMonth, int dealDay, String area) {
 		super();
 		this.aptCode = aptCode;
@@ -27,6 +29,10 @@ public class SimpleHouseInfoDto {
 		this.dealDay = dealDay;
 		this.area = area;
 	}
+    
+    
+    
+
 	public int getAptCode() {
 		return aptCode;
 	}
