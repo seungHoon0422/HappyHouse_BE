@@ -5,6 +5,8 @@
     
 <script type="text/javascript">
 
+var dongSearch = true;
+var apartSearch = false;
 $(document).ready(function(){
 	
 	
@@ -13,17 +15,36 @@ $(document).ready(function(){
 
 	// 지역으로 검색버튼 클릭 시 아파트 input x
 	$("#regionBtn").on("click", function(){
+		dongSearch = true;
+		apartSearch = false;
+		$("#sidodiv").css("display", "");
+		$("#gugundiv").css("display", "");
+		$("#dongdiv").css("display", "");
 		$("#aptdiv").css("display", "none");
 	});
 	// 아파트명으로 검색하기 버튼을 클릭하면 아파트명 입력 input box 보이게 처리
 	$("#aptBtn").on("click", function(){
+		dongSearch = false;
+		apartSerach = true;
 		$("#aptdiv").css("display", "");
+		$("#sidodiv").css("display", "none");
+		$("#gugundiv").css("display", "none");
+		$("#dongdiv").css("display", "none");
 	});
 	
 	// 	검색 정보가 모두 입력되면 submit
 	$("#dealListBtn").on("click", function(){
 		console.log(`btn clicked`);
-		$("#HouseSearchform").attr("action", "${root}/house/list").submit();
+		
+		
+		if(dongSearch){
+			// 시,군,동 정보로 검색
+			$("#HouseSearchform").attr("action", "${root}/house/list").submit();
+		} else {
+			// 아파트 이름으로 검색
+			$("#HouseSearchform").attr("action", "${root}/house/apartlist").submit();
+		}			
+		
 	});
 	
 	
@@ -122,50 +143,28 @@ $(document).ready(function(){
 			</div>
 
             <form id="HouseSearchform" class="text-left mb-3" method="POST" action="">
-			
-<!-- ==================================================================================== -->
-			<div class="form-group row">
-				    <label for="sido"><strong>시,도</strong></label>
-				  <select class="custom-select" id="sido" name="sido">
-				  </select>
-			</div>
-			<div class="form-group row">
-				    <label for="sido"><strong>구,군</strong></label>
-				  <select class="custom-select" id="gugun" name="gugun">
-				    <option selected>Choose...</option>
-				  </select>
-			</div>
-			<div class="form-group row">
-				    <label for="sido"><strong>동</strong></label>
-				  <select class="custom-select" id="dong" name="dong">
-				    <option selected>Choose...</option>
-				  </select>
-			</div>
-			<div class="form-group row" id="aptdiv">
-				    <label for="aptName"><strong>아파트 이름</strong></label>
-				  <select class="custom-select" id="aptName" name="aptName">
-				    <option selected>Choose...</option>
-				  </select>
-			</div>
-<!-- ==================================================================================== -->
-
-<!-- 			<div class="form-group row"> -->
-<!-- 				<label for="sidoName"><strong>시도명</strong></label> -->
-<!-- 				<input class="form-control" type="text" id="sidoName" name="sidoName" placeholder="시/도"/> -->
-<!-- 			</div> -->
-<!-- 			<div class="form-group row"> -->
-<!-- 				<label for="gugunName"><strong>구군명</strong></label> -->
-<!-- 				<input class="form-control" type="text" id="gugunName" name="gugunName" placeholder="구/군"/> -->
-<!-- 			</div> -->
-<!-- 			<div class="form-group row"> -->
-<!-- 				<label for="dongName"><strong>동명</strong></label> -->
-<!-- 				<input class="form-control" type="text" id="dongName" name="dongName" placeholder="읍/면/동"/> -->
-<!-- 			</div> -->
-<!-- 			<div class="form-group row name" id="aptdiv"> -->
-<!-- 				<label for="aptName"><strong>아파트명</strong></label> -->
-<!-- 				<input class="form-control" type="text" id="aptName" name="aptName" placeholder="아파트명"/> -->
-<!-- 			</div> -->
-		</form>
+				<div class="form-group row" id="sidodiv">
+					    <label for="sido"><strong>시,도</strong></label>
+					  <select class="custom-select" id="sido" name="sido">
+					  </select>
+				</div>
+				<div class="form-group row" id="gugundiv">
+					    <label for="sido"><strong>구,군</strong></label>
+					  <select class="custom-select" id="gugun" name="gugun">
+					    <option selected>Choose...</option>
+					  </select>
+				</div>
+				<div class="form-group row" id="dongdiv">
+					    <label for="sido"><strong>동</strong></label>
+					  <select class="custom-select" id="dong" name="dong">
+					    <option selected>Choose...</option>
+					  </select>
+				</div>
+				<div class="form-group row" id="aptdiv">
+					<label for="aptName"><strong>아파트명</strong></label>
+					<input class="form-control" type="text" id="aptName" name="aptName" placeholder="원하시는 아파트명을 입력해주세요 (ex. 푸르지오)"/>
+				</div>
+			</form>
 			<input type="button" id="dealListBtn" class="btn btn-outline-warning" value="검색"/>
 	</div>
 </div>

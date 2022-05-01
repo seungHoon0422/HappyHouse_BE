@@ -14,7 +14,6 @@
 <!-- 	</select> -->
 
 
-
 	<select id="search" parameterType="map" resultMap="dealList">
 		select * 
 		from housedeal as hd
@@ -50,9 +49,17 @@
 	<select id="listDong" parameterType="String" resultType="SimpleHouseInfoDto">
 		select hd.aptCode, aptName, buildYear, dealAmount, dealYear, dealMonth, dealDay, area
 		from housedeal as hd
-		inner join houseinfo as hf
-		on hd.aptCode = hf.aptCode
-		where hf.dongCode = #{dong};
+		inner join houseinfo as hi
+		on hd.aptCode = hi.aptCode
+		where hi.dongCode = #{dong};
+	</select>
+
+	<select id="apartNameSearch" parameterType="String" resultType="SimpleHouseInfoDto">
+		select hd.aptCode, aptName, buildYear, dealAmount, dealYear, dealMonth, dealDay, area
+		from housedeal as hd
+		inner join houseinfo as hi
+		on hd.aptCode = hi.aptCode
+		where hi.aptName like concat('%',#{aptName},'%');
 	</select>
 		
 </mapper>

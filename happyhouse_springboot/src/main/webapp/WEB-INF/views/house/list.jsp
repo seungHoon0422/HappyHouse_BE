@@ -33,7 +33,7 @@ $(function () {
 
 
 <div class="container text-center mt-3">
-	<div class="col-lg-8 mx-auto">
+	<div class="col-lg-10 mx-auto ">
 	
 	
 		<h4><strong>아파트 매매 내역</strong></h4>
@@ -41,13 +41,17 @@ $(function () {
 		<c:if test="${empty infos }">
 			<strong>아파트 매매 정보가 존재하지 않습니다.</strong>
 		</c:if>
+		
+		
 		<c:if test="${!empty infos }">
-		<div class="row mt-3">
+		<div class="col-8 mt-3 bg-warning">
 			<div id="mapDiv" class="container col-sm-12">
 				<div id="kmap" style="height: 450px"></div>
 			</div>
-	 	</div>
+	 	</div >
 		
+		<div class="col-4 mt-3">
+		</div>
 		<table class="table table-striped">
 			<thead>
 			    <tr>
@@ -79,6 +83,7 @@ $(function () {
 		</table>
 		
 		</c:if>
+		
 
 	</div>
 </div>
