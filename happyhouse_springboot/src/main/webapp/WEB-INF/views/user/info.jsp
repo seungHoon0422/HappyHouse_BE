@@ -2,6 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
+		<script type="text/javascript">
+			$(document).ready(function() {
+				
+			//회원 정보 수정 
+			
+			
+			//회원 탈퇴 
+				$("#deleteBtn").click(function() {
+					if(confirm("회원 탈퇴 하시겠습니까 ?")){
+						location.href="${root}/user/delete"; 
+					}
+				});
+			
+			});
+			
+		</script>
+
 
 		<div class="container text-center mt-4">
 			<h4 class="mt-3 mb-5">회원가입</h4>

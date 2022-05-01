@@ -29,4 +29,10 @@ public class UserServiceImpl implements UserService {
 		return userMapper.info(user); 
 	}
 
+	@Override
+	public void delete(UserDto user) throws Exception {
+		userMapper.delete(user);
+		
+	}
+
 }

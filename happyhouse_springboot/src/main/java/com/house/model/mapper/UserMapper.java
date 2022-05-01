@@ -14,5 +14,7 @@ public interface UserMapper {
 	UserDto login(Map<String, String> map) throws Exception;
 
 	UserDto info(UserDto user) throws Exception;
+
+	void delete(UserDto user) throws Exception;
 	
 }

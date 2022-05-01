@@ -23,5 +23,11 @@
 		from user
 		where username=#{username} and userid=#{userid}
 	</select>
+	
+	<!-- 회원 정보 삭제 (탈퇴) -->
+	<delete id="delete" parameterType="UserDto">
+		delete from user
+		where userid=#{userid}
+	</delete>
 
 </mapper>

@@ -87,4 +87,14 @@ public class MemberController {
 		return "user/info";
 		
 	}
+	
+	/**회원 탈퇴*/
+	@GetMapping("/delete")
+	public String delete(HttpSession session) throws Exception{
+		UserDto user = (UserDto) session.getAttribute("userinfo");
+		session.invalidate(); //  세션 만료 시키고 
+		userService.delete(user);  // 회원 탈퇴 
+	
+		return "redirect:/";
+	}
 }	
