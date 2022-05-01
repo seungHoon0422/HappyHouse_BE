@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.house.model.AddressDto;
 import com.house.model.RegionDto;
 import com.house.model.service.RegionService;
 
@@ -64,5 +65,12 @@ public class RegionController {
 	}
 	
 	
+	@GetMapping(value="/address/{code}")
+	public ResponseEntity<?> getAddress(@PathVariable("code") String code){
+		
+		AddressDto address = regionService.getAddress(code);
+		System.out.println("address : "+address.getDongName()+" "+address.getJibun());
+		return new ResponseEntity<String>(address.getDongName()+" "+address.getJibun(), HttpStatus.OK);
+	}
 	
 }

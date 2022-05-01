@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.house.model.AddressDto;
 import com.house.model.RegionDto;
 import com.house.model.mapper.RegionMapper;
 
@@ -28,6 +29,12 @@ public class RegionServiceImpl implements RegionService{
 	@Override
 	public List<RegionDto> getDong() {
 		return regionMapper.getDong();
+	}
+
+	@Override
+	public AddressDto getAddress(String code) {
+		return regionMapper.getAddress(code);
+		
 	}
 
 	

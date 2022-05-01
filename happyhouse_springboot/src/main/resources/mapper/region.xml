@@ -22,6 +22,12 @@
 		from dongcode
 	</select>
 
+	<select id="getAddress" parameterType="String" resultType="AddressDto">
+		select *
+		from houseinfo
+		where aptCode=#{code}
+	</select>
+
 	<resultMap type="RegionDto" id="sidos">
 		<result column="sidoCode" property="code"/>
 		<result column="sidoName" property="name"/>
