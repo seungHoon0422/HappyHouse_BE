@@ -77,6 +77,17 @@ public class HouseController {
 		
 	}
 	
+	@PostMapping("/apartlist")
+	public String apartNameSearch(@RequestParam String aptName, Model model) {
+		
+		System.out.println("apart Name Search method start, apart name : "+ aptName);
+		List<SimpleHouseInfoDto> houseInfoList = houseService.apartNameSearch(aptName);
+		System.out.println(houseInfoList.size());
+		model.addAttribute("infos", houseInfoList);
+		
+		return "/house/list";
+		
+	}
 
 	
 	

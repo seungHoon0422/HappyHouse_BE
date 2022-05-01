@@ -27,4 +27,9 @@ public class HouseServiceImpl implements HouseService{
 		return houseMapper.listDong(dong);
 	}
 
+	@Override
+	public List<SimpleHouseInfoDto> apartNameSearch(String aptName) {
+		return houseMapper.apartNameSearch(aptName);
+	}
+
 }

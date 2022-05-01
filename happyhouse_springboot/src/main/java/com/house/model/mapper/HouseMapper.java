@@ -10,5 +10,6 @@ public interface HouseMapper {
 	
 	List<HouseDealInfoDto> search(Map<String, String> map);
 	List<SimpleHouseInfoDto> listDong(String dong);
+	List<SimpleHouseInfoDto> apartNameSearch(String aptName);
 
 }

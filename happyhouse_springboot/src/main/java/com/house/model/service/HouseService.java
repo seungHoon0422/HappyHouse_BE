@@ -10,4 +10,5 @@ public interface HouseService {
 
 	public List<HouseDealInfoDto> search(Map<String, String> map);
 	public List<SimpleHouseInfoDto> listDong(String dong);
+	public List<SimpleHouseInfoDto> apartNameSearch(String aptName);
 }
