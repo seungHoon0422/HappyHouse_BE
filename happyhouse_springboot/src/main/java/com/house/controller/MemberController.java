@@ -88,12 +88,25 @@ public class MemberController {
 		
 	}
 	
+	/**회원 정보 수정 */
+	@PostMapping("/update")
+	public String update(HttpSession session, UserDto updateUser) {
+		UserDto user = (UserDto) session.getAttribute("userinfo"); // 기존 로그인 정보 
+		String id = user.getUserid();
+		String newpw = updateUser.getUserpass(); 
+		System.out.println(id+" "+newpw);
+		
+		return "user/login"; 
+	}
+	
+	
 	/**회원 탈퇴*/
 	@GetMapping("/delete")
 	public String delete(HttpSession session) throws Exception{
 		UserDto user = (UserDto) session.getAttribute("userinfo");
 		session.invalidate(); //  세션 만료 시키고 
 		userService.delete(user);  // 회원 탈퇴 
+
 	
 		return "redirect:/";
 	}

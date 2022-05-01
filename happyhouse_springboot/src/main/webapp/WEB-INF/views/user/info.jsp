@@ -4,8 +4,16 @@
 
 		<script type="text/javascript">
 			$(document).ready(function() {
-				
+				$("#updateUser").css("display", "none"); 
+				$("#cancelBtn").css("display", "none"); 
 			//회원 정보 수정 
+				$("#updateBtn").click(function(){
+					$("#userpass").attr("disabled", false);
+					$("#updateBtn").css("display", "none"); 
+					$("#deleteBtn").css("display", "none");
+					$("#updateUser").css("display", ""); 
+					$("#cancelBtn").css("display", ""); 
+				});
 			
 			
 			//회원 탈퇴 
@@ -16,6 +24,8 @@
 				});
 			
 			});
+			
+		
 			
 		</script>
 
@@ -47,8 +57,11 @@
                 </div>
                 
                 <div class="form-group text-center">
-                	<button type="button" id="updateBtn" class="btn btn-outline-primary">회원정보 수정</button>
-                	<button type="button" id="deleteBtn" class="btn btn-outline-primary">회원탈퇴</button>
+                	<button type="button" id="updateBtn" class="btn btn-outline-primary" >회원정보 수정</button>
+                	<button type="button" id="deleteBtn" class="btn btn-outline-danger">회원탈퇴</button>
+                	<button type="button" id="updateUser" class="btn btn-outline-primary">수정</button>
+                	<button type="button" id="cancelBtn" class="btn btn-outline-danger">취소</button>
+                	
                 </div>
 				</form>
 			</div>
