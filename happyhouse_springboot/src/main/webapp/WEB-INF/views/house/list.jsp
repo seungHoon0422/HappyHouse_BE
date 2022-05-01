@@ -1,29 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8273ad75e4cf13f650633b14013a60c0"></script>
-
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8273ad75e4cf13f650633b14013a60c0&libraries=services"></script>
 <script type="text/javascript">
 
-var map;
-var markers = []; //마커 제거를 위해 현재 마커들 저장해놓음
-var storeData;
-var totalData = 0;
 
+	// geocoder API 인증키 : 81AC2C2C-517F-346E-BC83-A387C88B194E	
 $(function () {
 	
 	
-	var container = document.getElementById("kmap");
-	var options = {
-	   	center: new kakao.maps.LatLng(33.450701, 126.570667),
-	   	level: 3,
-	 	};
-	 
-	map = new kakao.maps.Map(container, options);
-	
-	
+	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
+		level: 3 //지도의 레벨(확대, 축소 정도)
+	};
 
-} // document on load
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	
+	// 마커가 표시될 위치입니다 
+	var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
+
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition
+	});
+
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
+
+	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
+	// marker.setMap(null);    
+
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch("도화동 83", function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	        
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">장소</div>'
+	        });
+	        infowindow.open(map, marker);
+
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	});
+		
+	
+	
+	
+}); // document on load
 
 
 
@@ -44,13 +81,13 @@ $(function () {
 		
 		
 		<c:if test="${!empty infos }">
-		<div class="col-8 mt-3 bg-warning">
+		<div class="row mt-3">
 			<div id="mapDiv" class="container col-sm-12">
-				<div id="kmap" style="height: 450px"></div>
+				<div id="map" style="height: 450px"><strong>kakao map</strong></div>
 			</div>
 	 	</div >
 		
-		<div class="col-4 mt-3">
+		<div class="row mt-3">
 		</div>
 		<table class="table table-striped">
 			<thead>

@@ -5,15 +5,6 @@
 <mapper namespace="com.house.model.mapper.HouseMapper">
 
 
-
-	<!-- 회원정보조회 -->
-<!-- 	<select id="info" parameterType="UserDto" resultType="UserDto"> -->
-<!-- 		select name, id, pw, email, phone  -->
-<!-- 		from user -->
-<!-- 		where name=#{username} and id=#{userid} -->
-<!-- 	</select> -->
-
-
 	<select id="search" parameterType="map" resultMap="dealList">
 		select * 
 		from housedeal as hd

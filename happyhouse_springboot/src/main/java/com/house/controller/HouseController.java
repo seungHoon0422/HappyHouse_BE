@@ -70,7 +70,7 @@ public class HouseController {
 		
 		System.out.println("list dong method start, code : "+dong);
 		List<SimpleHouseInfoDto> houseInfoList = houseService.listDong(dong);
-		System.out.println(houseInfoList.size());
+		System.out.println("dong code search return size : " + houseInfoList.size());
 		model.addAttribute("infos", houseInfoList);
 		
 		return "/house/list";
@@ -82,7 +82,7 @@ public class HouseController {
 		
 		System.out.println("apart Name Search method start, apart name : "+ aptName);
 		List<SimpleHouseInfoDto> houseInfoList = houseService.apartNameSearch(aptName);
-		System.out.println(houseInfoList.size());
+		System.out.println("apart name search return size : "+houseInfoList.size());
 		model.addAttribute("infos", houseInfoList);
 		
 		return "/house/list";
