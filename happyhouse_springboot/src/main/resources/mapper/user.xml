@@ -6,22 +6,22 @@
 
 	<!-- 회원가입 -->
 	<insert id="registerMember" parameterType="UserDto">
-		insert into user(id, pw, email, name, phone, level)
+		insert into user(userid, userpass, email, username, phone, level)
 		values (#{userid},#{userpass},#{email},#{username},#{phone},#{level})
 	</insert>
 
 	<!-- 로그인 -->
 	<select id="login" parameterType="map" resultType="UserDto">
-		select name, id, level
+		select username, userid, level
 		from user
-		where id=#{userid} and pw = #{userpass} 
+		where userid=#{userid} and userpass = #{userpass} 
 	</select>
 	
 	<!-- 회원정보조회 -->
 	<select id="info" parameterType="UserDto" resultType="UserDto">
-		select name, id, pw, email, phone 
+		select username, userid, userpass, email, phone 
 		from user
-		where name=#{username} and id=#{userid}
+		where username=#{username} and userid=#{userid}
 	</select>
 
 </mapper>

@@ -62,6 +62,7 @@ public class MemberController {
 		UserDto userDto = userService.login(map);
 		if(userDto != null) { // 로그인 성공 
 			session.setAttribute("userinfo", userDto); // userinfo : 이름, 아이디  , 레벨 ( 중개인 / 사용자 ) 
+			System.out.println(userDto.toString());
 			return "redirect:/";
 		}else { // 로그인 실패 
 			model.addAttribute("msg", "아이디 또는 비밀번호를 확인해주세요."); 
@@ -80,7 +81,7 @@ public class MemberController {
 	@GetMapping("/info")
 	public String info(HttpSession session, Model model) throws Exception {
 		UserDto user = (UserDto) session.getAttribute("userinfo"); 
-		
+		if(user != null ) System.out.println(user.toString());
 		UserDto userDto = userService.info(user); // 사용자의 정보 담겨있는 userDto 
 		model.addAttribute("userlist", userDto);  
 		return "user/info";

@@ -69,4 +69,12 @@ public class UserDto {
 	public void setLevel(int level) {
 		this.level = level;
 	}
+
+	@Override
+	public String toString() {
+		return "UserDto [userid=" + userid + ", userpass=" + userpass + ", email=" + email + ", username=" + username
+				+ ", phone=" + phone + ", level=" + level + "]";
+	}
+	
+	
 }

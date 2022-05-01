@@ -9,7 +9,7 @@
 				<form id="updateform" class="text-left mb-3" method="post" action="">
 				<div class="form-group">
                     <label for="username">이름</label>
-                    <input type="text" class="form-control" id="username" name="username" value="${userlist.name}" disabled>
+                    <input type="text" class="form-control" id="username" name="username" value="${userlist.username}" disabled>
                 </div>
                 <div class="form-group">
                     <label for="userid">아이디</label>
