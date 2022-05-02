@@ -79,6 +79,7 @@ $(function () {
 			        	    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
 			        	    infowindow.close();
 			        	});
+			        	
 				        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 				        map.setCenter(coords);
 				    } 
@@ -138,7 +139,7 @@ $(function () {
 		var code = selectAptCode;
 		$.ajax({
 			url : '${root}/interest/regist/'+code,
-			type : 'GET',
+			type : 'POST',
 			contentType:'application/json;charset=utf-8',
 			success:function(response) {
 				if(response == 1){
@@ -172,44 +173,47 @@ $(function () {
 		
 		
 		<c:if test="${!empty infos }">
-		<div class="row mt-3">
-			<div id="mapDiv" class="container col-sm-12">
-				<div id="map" style="height: 450px"><strong>kakao map</strong></div>
-			</div>
-	 	</div >
 		
-		<div class="row mt-3">
-		</div>
-		<table class="table table-striped">
-			<thead>
-			    <tr>
-			      <th scope="col">아파트 이름</th>
-			      <th scope="col">건축년도</th>
-			      <th scope="col">매매 가격</th>
-			      <th scope="col">면적</th>
-			      <th scope="col">년</th>
-			      <th scope="col">월</th>
-			      <th scope="col">일</th>
-			      <th scope="col">관심등록</th>
-			    </tr>
-			</thead>
-			<tbody>
-			<c:forEach var="info" items="${infos }">
-				<tr>
-					<input type="hidden" id="aptCode" name="aptCode" value="${info.aptCode}"/>
-					<input type="hidden" id="no" name="no" value="${info.no}"/>
-					<td>${info.aptName}</td>
-					<td>${info.buildYear}</td>
-					<td>${info.dealAmount}</td>
-					<td>${info.area}</td>
-					<td>${info.dealYear}</td>
-					<td>${info.dealMonth}</td>
-					<td>${info.dealDay}</td>
-					<td><input type="button" class="btn btn-outline-warning" name="detailBtn" data-id="${info.no}" data-toggle="modal" data-target="#houseModal" value="세부 정보" /></td>
-				</tr>				
-			</c:forEach>
-			</tbody>
-		</table>
+
+			<div class="row mt-3">
+				<div id="mapDiv" class="container col-sm-12">
+					<div id="map" style="height: 450px"><strong>kakao map</strong></div>
+				</div>
+		 	</div >
+			<div class="row mt-3">
+				<table class="table table-striped">
+					<thead>
+					    <tr>
+					      <th scope="col">아파트 이름</th>
+					      <th scope="col" style="display : none">건축년도</th>
+					      <th scope="col">매매 가격</th>
+					      <th scope="col" style="display : none">면적</th>
+					      <th scope="col" style="display : none">년</th>
+					      <th scope="col" style="display : none">월</th>
+					      <th scope="col" style="display : none">일</th>
+					      <th scope="col">관심등록</th>
+					    </tr>
+					</thead>
+					<tbody>
+					<c:forEach var="info" items="${infos }">
+						<tr>
+							<input type="hidden" id="aptCode" name="aptCode" value="${info.aptCode}"/>
+							<input type="hidden" id="no" name="no" value="${info.no}"/>
+							<td>${info.aptName}</td>
+							<td style="display : none">${info.buildYear}</td>
+							<td>${info.dealAmount}</td>
+							<td style="display : none">${info.area}</td>
+							<td style="display : none">${info.dealYear}</td>
+							<td style="display : none">${info.dealMonth}</td>
+							<td style="display : none">${info.dealDay}</td>
+							<td><input type="button" class="btn btn-outline-warning" name="detailBtn" data-id="${info.no}" data-toggle="modal" data-target="#houseModal" value="세부 정보" /></td>
+						</tr>				
+					</c:forEach>
+					</tbody>
+				</table>
+			</div>
+
+		
 		
 		</c:if>
 		
