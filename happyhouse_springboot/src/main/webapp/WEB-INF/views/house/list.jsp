@@ -89,8 +89,8 @@ $(function () {
 		        },
 		}); // end of ajax
 	}); // end of 1
+	
 	// =================== 2. 세부정보 버튼 클릭시 이벤트 생성 ==================================
-
 	$(document).on("click", "[name=detailBtn]", function() {
 		
 		let no = $(this).attr('data-id');
@@ -100,6 +100,7 @@ $(function () {
 		$('#mdealamount').text('');
 		$('#mdate').text('');
 		$('#marea').text('');
+		$('#mno').text('');
 		
 		$.ajax({
 			url : '${root}/region/detail/'+no,
@@ -115,6 +116,8 @@ $(function () {
 		
 	});// end of click event
 		
+	// 상세정보 보기 버튼을 누른 아파트 코드
+	var selectAptCode;
 	
 	function drawModal(deal, house) {
 		console.log(deal, house);
@@ -124,9 +127,29 @@ $(function () {
 		$('#mdealamount').text(deal.dealAmount+'');
 		$('#mdate').text(deal.dealYear+'년 '+deal.dealMonth+'월 '+deal.dealDay+'일');
 		$('#marea').text(deal.area+'');
+		$('#mno').text(deal.no+'');
+
+		selectAptCode = house.aptCode;
 	}
 	
+	// =================== 3. 관심 등록 버튼 클릭 이벤트  ==================================
+	$(document).on("click", "#interestBtn", function() {
+	
+		var code = selectAptCode;
+		$.ajax({
+			url : '${root}/interest/regist/'+code,
+			type : 'GET',
+			contentType:'application/json;charset=utf-8',
+			success:function(response) {
+				if(response == 1){
+					alert("관심 목록에 등록되었습니다.");
+				} else if(response == 2){
+					alert("이미 등록된 아파트입니다.");
+				} 
+			}
+		}); // end of ajax
 		
+	});
 	
 }); // document on load
 
@@ -216,34 +239,39 @@ $(function () {
 		  <tbody>
 		    <tr>
 		      <th scope="row">아파트명</th>
-		      <td><div id="maptname">apart name</div></td>
+		      <td><div id="maptname"></div></td>
 		    </tr>
 		    <tr>
 		      <th scope="row">주소</th>
-		      <td id="maddress">서울특별시 마포구 아현동 777</td>
+		      <td id="maddress"></td>
 		    </tr>
 		    <tr>
 		      <th scope="row">건축 년도</th>
-		      <td colspan="2" id="mbuildyear">1988</td>
+		      <td colspan="2" id="mbuildyear"></td>
 		    </tr>
 		    <tr>
 		      <th scope="row">매매 가격</th>
-		      <td colspan="2" id="mdealamount">14,000</td>
+		      <td colspan="2" id="mdealamount"></td>
 		    </tr>
 		    <tr>
 		      <th scope="row">거래 년도</th>
-		      <td colspan="2" id="mdate">2020년 3월 15일</td>
+		      <td colspan="2" id="mdate"></td>
 		    </tr>
 		    <tr>
 		      <th scope="row">면적(m2)</th>
-		      <td colspan="2" id="marea">35</td>
+		      <td colspan="2" id="marea"></td>
 		    </tr>
+		    <tr style="display : none">
+		      <th scope="row"></th>
+		      <td colspan="2" id="mno" ></td>
+		    </tr>
+		    
 
 		  </tbody>
 		</table>
       </div>
        <div class="modal-footer">
-        <button type="button" class="btn btn-primary">관심 등록</button>
+        <button type="button" class="btn btn-primary" id="interestBtn">관심 등록</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">목록</button>
       </div>
     </div>
