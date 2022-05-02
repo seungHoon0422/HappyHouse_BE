@@ -35,4 +35,10 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	@Override
+	public void update(UserDto user) throws Exception {
+		userMapper.update(user);
+		
+	}
+
 }

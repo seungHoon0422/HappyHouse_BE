@@ -16,7 +16,7 @@
 				});
 				
 			$(document).on("click", "#updateUser", function(){
-				alert("hi");
+				$("#updateform").attr("action", "${root}/user/update").submit();
 			}); 
 			
 			
@@ -38,6 +38,7 @@
 			<h4 class="mt-3 mb-5">회원정보</h4>
 			<div class="col-lg-8 mx-auto">
 				<form id="updateform" class="text-left mb-3" method="post" action="">
+				<input type ="hidden" id="level" name="level" value="${userlist.level}">
 				<div class="form-group">
                     <label for="username">이름</label>
                     <input type="text" class="form-control" id="username" name="username" value="${userlist.username}" disabled>

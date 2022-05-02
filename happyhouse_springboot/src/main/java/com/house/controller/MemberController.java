@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.house.model.UserDto;
 import com.house.model.service.UserService;
+
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 
 /***
@@ -89,20 +92,20 @@ public class MemberController {
 		
 	}
 	
-	/**회원 정보 수정 */
-	@PutMapping("/update")
-	public String update(HttpSession session, UserDto updateUser) {
-		UserDto user = (UserDto) session.getAttribute("userinfo"); // 기존 로그인 정보 
-		String id = user.getUserid();
-		String newpw = updateUser.getUserpass(); 
-		System.out.println(id+" "+newpw);
+	/**회원 정보 수정 
+	 * @throws Exception */
+	@PostMapping("/update")
+	public String update(HttpSession session, @ModelAttribute UserDto user, Model model) throws Exception {
+		System.out.println(user.toString());
+		userService.update(user);
+		session.invalidate();
 		
 		return "user/login"; 
 	}
 	
 	
 	/**회원 탈퇴*/
-	@GetMapping("/delete")
+	@DeleteMapping("/delete")
 	public String delete(HttpSession session) throws Exception{
 		UserDto user = (UserDto) session.getAttribute("userinfo");
 		session.invalidate(); //  세션 만료 시키고 

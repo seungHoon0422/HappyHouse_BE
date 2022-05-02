@@ -16,5 +16,7 @@ public interface UserMapper {
 	UserDto info(UserDto user) throws Exception;
 
 	void delete(UserDto user) throws Exception;
+
+	void update(UserDto user) throws Exception;
 	
 }

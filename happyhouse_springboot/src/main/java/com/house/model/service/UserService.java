@@ -14,5 +14,7 @@ public interface UserService  {
 	UserDto info(UserDto user) throws Exception;
 	/**회원 정보 삭제 ( 회원 탈퇴 ) */
 	void delete(UserDto user) throws Exception;
+	/**회원 정보 수정 (아이디는 그대로) */
+	void update(UserDto user) throws Exception;
 
 }

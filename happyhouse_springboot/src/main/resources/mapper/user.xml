@@ -29,5 +29,12 @@
 		delete from user
 		where userid=#{userid}
 	</delete>
+	
+	<!-- 회원 정보 수정 -->
+	<update id="update" parameterType="UserDto">
+		update user
+		set userpass=#{userpass}
+		where userid= #{userid} 
+	</update>
 
 </mapper>
