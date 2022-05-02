@@ -36,5 +36,8 @@
 		set userpass=#{userpass}
 		where userid= #{userid} 
 	</update>
+	
+	<!-- 관심목록 조회 -->
+	<select id=""
 
 </mapper>

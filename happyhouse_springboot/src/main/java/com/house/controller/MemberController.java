@@ -98,9 +98,8 @@ public class MemberController {
 	public String update(HttpSession session, @ModelAttribute UserDto user, Model model) throws Exception {
 		System.out.println(user.toString());
 		userService.update(user);
-		session.invalidate();
 		
-		return "user/login"; 
+		return "redirect:/user/info"; 
 	}
 	
 	
@@ -113,5 +112,12 @@ public class MemberController {
 
 	
 		return "redirect:/";
+	}
+	
+	/**관심 목록 조회*/
+	@GetMapping("/interest")
+	public String interest(HttpSession session) {
+		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
+		List<>userService.interest(user); 
 	}
 }	

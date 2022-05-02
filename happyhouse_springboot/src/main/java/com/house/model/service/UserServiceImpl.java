@@ -41,4 +41,9 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	@Override
+	public void interest(UserDto user) throws Exception {
+		userMapper.interest(user);
+	}
+
 }
