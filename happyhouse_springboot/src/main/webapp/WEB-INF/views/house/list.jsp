@@ -18,10 +18,20 @@ $(function () {
 
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 	var geocoder = new kakao.maps.services.Geocoder();
-	
+	// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+	var mapTypeControl = new kakao.maps.MapTypeControl();
+
+	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+
+	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+	var zoomControl = new kakao.maps.ZoomControl();
+	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	// 중복된 마커를 찍지 않게하기위해 사용
 	var prevAptCode = 0;
-	
+	var markers = [];
+	var count = 0;
 	// =================== 1. 검색된 아파트마다 마커 생성 ==================================
 	$("input[name=aptCode]").each(function(index, code){
 		let value = $(this).val();
@@ -29,13 +39,13 @@ $(function () {
 		if(value == prevAptCode) return true;
 		prevAptCode = value;
 		
-		console.log('value : '+value);
+// 		console.log('value : '+value);
 		$.ajax({
 			url : '${root}/region/address/'+value,
 			type : 'GET',
 			contentType:'application/json;charset=utf-8',
 			success:function(info) {
-				console.log(info);
+// 				console.log(info);
 				let address = info.dongName+' '+info.jibun
 				
 				
@@ -59,7 +69,6 @@ $(function () {
 				            '</div>'
 				        });
 				        infowindow.close(map, marker);
-				        
 				        kakao.maps.event.addListener(marker, 'mouseover', function() {
 			        	  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
 			        	    infowindow.open(map, marker);
@@ -89,7 +98,8 @@ $(function () {
 		
 	});	
 		
-		
+	
+	
 		
 	
 }); // document on load
@@ -160,20 +170,19 @@ $(function () {
 
 
 <!--		 modal			 -->
-<div class="modal" id="houseModal">
+<div class="modal text-center" id="houseModal">
   <div class="modal-dialog">
     <div class="modal-content">
 
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title"><strong>아파트 매매 상세 정보</strong></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" >
         <span aria-hidden="true">&times;</span>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-      
       
       	<table class="table table-hover">
 		  <thead>
