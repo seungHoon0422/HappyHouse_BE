@@ -5,6 +5,7 @@ public class SimpleHouseInfoDto {
 	
 	// foreign key
 	private int aptCode;
+	private int no;
 	private String aptName;//아파트명
     private int buildYear; //지어진년도
 	private String dealAmount; //거래가격
@@ -17,10 +18,11 @@ public class SimpleHouseInfoDto {
     
 
     
-    public SimpleHouseInfoDto(int aptCode, String aptName, int buildYear, String dealAmount, int dealYear,
+    public SimpleHouseInfoDto(int aptCode, int no, String aptName, int buildYear, String dealAmount, int dealYear,
 			int dealMonth, int dealDay, String area) {
 		super();
 		this.aptCode = aptCode;
+		this.no = no;
 		this.aptName = aptName;
 		this.buildYear = buildYear;
 		this.dealAmount = dealAmount;
@@ -32,6 +34,13 @@ public class SimpleHouseInfoDto {
     
     
     
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
+	}
 
 	public int getAptCode() {
 		return aptCode;

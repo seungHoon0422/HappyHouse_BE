@@ -5,10 +5,11 @@
 <script type="text/javascript">
 
 
-	// geocoder API 인증키 : 81AC2C2C-517F-346E-BC83-A387C88B194E	
 $(function () {
 	
 	
+	
+// 	=========================  kakao map api 사용  =================================
 	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
 	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
@@ -16,49 +17,90 @@ $(function () {
 	};
 
 	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-	
-	// 마커가 표시될 위치입니다 
-	var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667); 
-
-	// 마커를 생성합니다
-	var marker = new kakao.maps.Marker({
-	    position: markerPosition
-	});
-
-	// 마커가 지도 위에 표시되도록 설정합니다
-	marker.setMap(map);
-
-	// 아래 코드는 지도 위의 마커를 제거하는 코드입니다
-	// marker.setMap(null);    
-
 	var geocoder = new kakao.maps.services.Geocoder();
-	
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch("도화동 83", function(result, status) {
+	// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+	var mapTypeControl = new kakao.maps.MapTypeControl();
 
-	    // 정상적으로 검색이 완료됐으면 
-	     if (status === kakao.maps.services.Status.OK) {
-	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-	        
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-	        var marker = new kakao.maps.Marker({
-	            map: map,
-	            position: coords
-	        });
-	
-	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:6px 0;">장소</div>'
-	        });
-	        infowindow.open(map, marker);
+	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	    } 
-	});
+	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+	var zoomControl = new kakao.maps.ZoomControl();
+	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+	// 중복된 마커를 찍지 않게하기위해 사용
+	var prevAptCode = 0;
+	var markers = [];
+	var count = 0;
+	// =================== 1. 검색된 아파트마다 마커 생성 ==================================
+	$("input[name=aptCode]").each(function(index, code){
+		let value = $(this).val();
+		let parents = $(this).parents('tr');
+		if(value == prevAptCode) return true;
+		prevAptCode = value;
+		
+// 		console.log('value : '+value);
+		$.ajax({
+			url : '${root}/region/address/'+value,
+			type : 'GET',
+			contentType:'application/json;charset=utf-8',
+			success:function(info) {
+// 				console.log(info);
+				let address = info.dongName+' '+info.jibun
+				
+				
+				geocoder.addressSearch(address, function(result, status) {
+
+				    // 정상적으로 검색이 완료됐으면 
+				     if (status === kakao.maps.services.Status.OK) {
+				        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+				        // 결과값으로 받은 위치를 마커로 표시합니다
+				        var marker = new kakao.maps.Marker({
+				            map: map,
+				            position: coords
+				        });
+				        // 인포윈도우로 장소에 대한 설명을 표시합니다
+				        var infowindow = new kakao.maps.InfoWindow({
+				            content: '<div style="width:200px;padding:6px 0;">'+
+				            '이름 : '+info.aptName + '</br>'+
+				            '주소 : '+ address + '</br>'+
+				            '건축년도 : '+ info.buildYear +
+				            '</div>'
+				        });
+				        infowindow.close(map, marker);
+				        kakao.maps.event.addListener(marker, 'mouseover', function() {
+			        	  // 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+			        	    infowindow.open(map, marker);
+			        	});
+
+			        	// 마커에 마우스아웃 이벤트를 등록합니다
+			        	kakao.maps.event.addListener(marker, 'mouseout', function() {
+			        	    // 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+			        	    infowindow.close();
+			        	});
+				        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+				        map.setCenter(coords);
+				    } 
+				}); // end of geocoder
+			},
+	        error: function (xhr, status, msg) {
+		          console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+		        },
+		}); // end of ajax
+	}); // end of 1
+	// =================== 2. 세부정보 버튼 클릭시 이벤트 생성 ==================================
+
+	$(document).on("click", "[name=detailBtn]", function() {
+		
+// 		$('#houseModal').empty();
+		let no = $(this).attr('data-id');
+		
+	});	
 		
 	
 	
+		
 	
 }); // document on load
 
@@ -106,6 +148,7 @@ $(function () {
 			<c:forEach var="info" items="${infos }">
 				<tr>
 					<input type="hidden" id="aptCode" name="aptCode" value="${info.aptCode}"/>
+					<input type="hidden" id="no" name="no" value="${info.no}"/>
 					<td>${info.aptName}</td>
 					<td>${info.buildYear}</td>
 					<td>${info.dealAmount}</td>
@@ -113,7 +156,7 @@ $(function () {
 					<td>${info.dealYear}</td>
 					<td>${info.dealMonth}</td>
 					<td>${info.dealDay}</td>
-					<td><input type="button" class="btn btn-outline-warning" value="등록" /></td>
+					<td><input type="button" class="btn btn-outline-warning" name="detailBtn" data-id="${info.no}" data-toggle="modal" data-target="#houseModal" value="세부 정보" /></td>
 				</tr>				
 			</c:forEach>
 			</tbody>
@@ -124,6 +167,60 @@ $(function () {
 
 	</div>
 </div>
+
+
+<!--		 modal			 -->
+<div class="modal text-center" id="houseModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><strong>아파트 매매 상세 정보</strong></h4>
+        <button type="button" class="close" data-dismiss="modal" >
+        <span aria-hidden="true">&times;</span>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+      
+      	<table class="table table-hover">
+		  <thead>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <th scope="row">아파트명</th>
+		      <td><div id="maptname">apart name</div></td>
+		    </tr>
+		    <tr>
+		      <th scope="row">주소</th>
+		      <td id="maddress">서울특별시 마포구 아현동 777</td>
+		    </tr>
+		    <tr>
+		      <th scope="row">건축 년도</th>
+		      <td colspan="2" id="mbuildYear">1988</td>
+		    </tr>
+		    <tr>
+		      <th scope="row">매매 가격</th>
+		      <td colspan="2" id="mdealAmount">14,000</td>
+		    </tr>
+		    <tr>
+		      <th scope="row">거래 년도</th>
+		      <td colspan="2" id="mdate">2020년 3월 15일</td>
+		    </tr>
+		  </tbody>
+		</table>
+      </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-primary">관심 등록</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">목록</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 <script type="text/javascript">
 

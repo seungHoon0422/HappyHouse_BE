@@ -3,6 +3,8 @@ package com.house.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.house.model.AddressDto;
+import com.house.model.HouseInfoDto;
 import com.house.model.RegionDto;
 import com.house.model.service.RegionService;
 
@@ -20,6 +24,9 @@ import com.house.model.service.RegionService;
 @CrossOrigin("*")
 public class RegionController {
 
+	private static final Logger logger = LoggerFactory.getLogger(RegionController.class);
+
+	
 	@Autowired
 	RegionService regionService;	
 	
@@ -64,5 +71,11 @@ public class RegionController {
 	}
 	
 	
+	@GetMapping(value="/address/{code}")
+	public ResponseEntity<?> getAddress(@PathVariable("code") String code){
+		
+		HouseInfoDto houseInfo = regionService.getAddress(code);		
+		return new ResponseEntity<HouseInfoDto>(houseInfo, HttpStatus.OK);
+	}
 	
 }
