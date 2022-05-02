@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.house.model.HouseDealInfoDto;
+import com.house.model.HouseInfoDto;
 import com.house.model.SimpleHouseInfoDto;
 
 public interface HouseService {
@@ -11,4 +12,7 @@ public interface HouseService {
 	public List<HouseDealInfoDto> search(Map<String, String> map);
 	public List<SimpleHouseInfoDto> listDong(String dong);
 	public List<SimpleHouseInfoDto> apartNameSearch(String aptName);
+	public HouseDealInfoDto dealInfoSearch(String no);
+	public HouseInfoDto houseInfoSearch(int aptCode);
+	
 }

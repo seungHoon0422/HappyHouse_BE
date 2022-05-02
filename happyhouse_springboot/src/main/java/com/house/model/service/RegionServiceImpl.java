@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.house.model.AddressDto;
+import com.house.model.DetailVo;
 import com.house.model.HouseInfoDto;
 import com.house.model.RegionDto;
 import com.house.model.mapper.RegionMapper;
@@ -36,6 +37,11 @@ public class RegionServiceImpl implements RegionService{
 	public HouseInfoDto getAddress(String code) {
 		return regionMapper.getAddress(code);
 		
+	}
+
+	@Override
+	public DetailVo getDetail(String no) {
+		return regionMapper.getDetail(no);
 	}
 
 	

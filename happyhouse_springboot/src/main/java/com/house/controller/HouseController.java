@@ -23,7 +23,7 @@ import com.house.model.service.HouseService;
 @RequestMapping("/house")
 public class HouseController {
 
-	private static final Logger logger = LoggerFactory.getLogger(HouseController.class);
+//	private static final Logger logger = LoggerFactory.getLogger(HouseController.class);
 
 	
 	@Autowired
