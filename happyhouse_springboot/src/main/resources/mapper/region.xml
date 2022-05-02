@@ -29,6 +29,13 @@
 		GROUP BY aptCode
 	</select>
 
+	<select id="detailVo" parameterType="String" resultType="DetailVo">
+		select *
+		from houseinfo as hi, housedeal as hd
+		where aptCode=#{code}
+		and hd.no = #{no}
+	</select>
+
 	<resultMap type="RegionDto" id="sidos">
 		<result column="sidoCode" property="code"/>
 		<result column="sidoName" property="name"/>

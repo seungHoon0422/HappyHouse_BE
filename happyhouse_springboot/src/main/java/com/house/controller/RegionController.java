@@ -1,7 +1,9 @@
 package com.house.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.house.model.AddressDto;
+import com.house.model.DetailVo;
+import com.house.model.HouseDealInfoDto;
 import com.house.model.HouseInfoDto;
 import com.house.model.RegionDto;
+import com.house.model.service.HouseService;
 import com.house.model.service.RegionService;
 
 @RestController
@@ -29,7 +34,8 @@ public class RegionController {
 	
 	@Autowired
 	RegionService regionService;	
-	
+	@Autowired
+	HouseService houseService;
 	
 	@GetMapping(value="/sido")
 	public ResponseEntity<?> getSido(){
@@ -78,4 +84,18 @@ public class RegionController {
 		return new ResponseEntity<HouseInfoDto>(houseInfo, HttpStatus.OK);
 	}
 	
+	@GetMapping(value="/detail/{no}")
+	public ResponseEntity<?> getDetail(@PathVariable("no") String no){
+		
+		HouseDealInfoDto dealInfo = houseService.dealInfoSearch(no);
+		HouseInfoDto houseInfo = houseService.houseInfoSearch(dealInfo.getAptCode());
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("deal", dealInfo);
+		map.put("house", houseInfo);
+		
+		DetailVo detailVo = new DetailVo(dealInfo, houseInfo);
+		System.out.println(dealInfo.getNo());
+		System.out.println(houseInfo.getAptName());
+		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+	}
 }

@@ -93,12 +93,38 @@ $(function () {
 
 	$(document).on("click", "[name=detailBtn]", function() {
 		
-// 		$('#houseModal').empty();
 		let no = $(this).attr('data-id');
+		$('#maptname').text('');
+		$('#maddress').text('');
+		$('#mbuildyear').text('');
+		$('#mdealamount').text('');
+		$('#mdate').text('');
+		$('#marea').text('');
 		
-	});	
+		$.ajax({
+			url : '${root}/region/detail/'+no,
+			type : 'GET',
+			contentType:'application/json;charset=utf-8',
+			success:function(detail) {
+				console.log(detail)
+				var dealinfo = detail.deal;
+				var houseinfo = detail.house;
+				drawModal(dealinfo, houseinfo);	
+			}
+		}); // end of ajax
+		
+	});// end of click event
 		
 	
+	function drawModal(deal, house) {
+		console.log(deal, house);
+		$('#maptname').text(house.aptName);
+		$('#maddress').text(house.dongName+` `+house.jibun);
+		$('#mbuildyear').text(house.buildYear+'');
+		$('#mdealamount').text(deal.dealAmount+'');
+		$('#mdate').text(deal.dealYear+'년 '+deal.dealMonth+'월 '+deal.dealDay+'일');
+		$('#marea').text(deal.area+'');
+	}
 	
 		
 	
@@ -198,16 +224,21 @@ $(function () {
 		    </tr>
 		    <tr>
 		      <th scope="row">건축 년도</th>
-		      <td colspan="2" id="mbuildYear">1988</td>
+		      <td colspan="2" id="mbuildyear">1988</td>
 		    </tr>
 		    <tr>
 		      <th scope="row">매매 가격</th>
-		      <td colspan="2" id="mdealAmount">14,000</td>
+		      <td colspan="2" id="mdealamount">14,000</td>
 		    </tr>
 		    <tr>
 		      <th scope="row">거래 년도</th>
 		      <td colspan="2" id="mdate">2020년 3월 15일</td>
 		    </tr>
+		    <tr>
+		      <th scope="row">면적(m2)</th>
+		      <td colspan="2" id="marea">35</td>
+		    </tr>
+
 		  </tbody>
 		</table>
       </div>

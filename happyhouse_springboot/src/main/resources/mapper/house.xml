@@ -13,6 +13,19 @@
 		where dongCode = #{dongCode}
 	</select>
 
+	<select id="dealInfoSearch" parameterType="String" resultType="HouseDealInfoDto">
+		select * 
+		from housedeal
+		where no = #{no}
+	</select>
+
+	<select id="houseInfoSearch" parameterType="int" resultType="HouseInfoDto">
+		select * 
+		from houseinfo
+		where aptCode = #{aptCode}
+	</select>
+
+
 	<resultMap type="HouseListVo" id="dealList">
 		<result column="aptCode" property="aptCode"/>
 		<result column="aptName" property="aptName"/>
