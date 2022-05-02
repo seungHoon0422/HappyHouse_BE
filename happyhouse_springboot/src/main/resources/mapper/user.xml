@@ -38,8 +38,8 @@
 	</update>
 	
 	<!-- 관심목록 조회 -->
-	<selectAll id="interest" parameterType="UserDto" resultType="InterestDto">
-	
+<!-- 	<select id="interest" parameterType="UserDto" resultType="InterestDto">
+		select apt
 	</select>
-
+ -->
 </mapper>

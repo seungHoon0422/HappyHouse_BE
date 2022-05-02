@@ -117,11 +117,11 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	/**관심 목록 조회
-	 * @throws Exception */
-	@GetMapping("/interest")
-	public String interest(HttpSession session) throws Exception {
-		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
-		List<InterestDto> list= userService.interest(user);
-	}
+//	/**관심 목록 조회
+//	 * @throws Exception */
+//	@GetMapping("/interest")
+//	public String interest(HttpSession session) throws Exception {
+//		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
+//		List<InterestDto> list= userService.interest(user);
+//	}
 }	
