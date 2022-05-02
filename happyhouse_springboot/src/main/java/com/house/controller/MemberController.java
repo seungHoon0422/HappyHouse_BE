@@ -1,6 +1,8 @@
 package com.house.controller;
 
+import java.util.List;
 import java.util.Map;
+
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.house.model.InterestDto;
 import com.house.model.UserDto;
 import com.house.model.service.UserService;
 
@@ -118,6 +121,6 @@ public class MemberController {
 	@GetMapping("/interest")
 	public String interest(HttpSession session) {
 		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
-		List<>userService.interest(user); 
+		List<InterestDto> list= userService.interest(user);
 	}
 }	

@@ -1,10 +1,12 @@
 package com.house.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.house.model.InterestDto;
 import com.house.model.UserDto;
 import com.house.model.mapper.UserMapper;
 
@@ -42,8 +44,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void interest(UserDto user) throws Exception {
-		userMapper.interest(user);
+	public List<InterestDto> interest(UserDto user) throws Exception {
+		return userMapper.interest(user);
 	}
 
 }
