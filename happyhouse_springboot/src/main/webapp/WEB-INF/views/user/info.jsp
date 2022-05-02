@@ -8,7 +8,7 @@
 				$("#cancelBtn").css("display", "none"); 
 			//회원 정보 수정 
 				$("#updateBtn").click(function(){
-					$("#userpass").attr("disabled", false);
+					$("#userpass").attr("readonly", false);
 					$("#updateBtn").css("display", "none"); 
 					$("#deleteBtn").css("display", "none");
 					$("#updateUser").css("display", ""); 
@@ -41,24 +41,24 @@
 				<input type ="hidden" id="level" name="level" value="${userlist.level}">
 				<div class="form-group">
                     <label for="username">이름</label>
-                    <input type="text" class="form-control" id="username" name="username" value="${userlist.username}" disabled>
+                    <input type="text" class="form-control" id="username" name="username" value="${userlist.username}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="userid">아이디</label>
-                  	<input type="text" class="form-control" id="userid" name="userid" value="${userlist.userid}" disabled>     
+                  	<input type="text" class="form-control" id="userid" name="userid" value="${userlist.userid}" readonly>     
                     <div id="idresult" class="mt-1"></div>
                 </div>
                 <div class="form-group">
                     <label for="userpwd">비밀번호</label>
-                    <input type="text" class="form-control" id="userpass" name="userpass" value="${userlist.userpass}" disabled>
+                    <input type="text" class="form-control" id="userpass" name="userpass" value="${userlist.userpass}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="phone">전화번호</label>
-                   <input type="text" class="form-control" id="phone" name="phone" value="${userlist.phone}" disabled>
+                   <input type="text" class="form-control" id="phone" name="phone" value="${userlist.phone}" readonly>
                 </div>
                 <div class="form-group">
                     <label for="email">이메일</label><br>
-                    <input type="text" class="form-control" id="email" name="email" value="${userlist.email}" disabled>
+                    <input type="text" class="form-control" id="email" name="email" value="${userlist.email}" readonly>
                 </div>
                 
                 <div class="form-group text-center">
