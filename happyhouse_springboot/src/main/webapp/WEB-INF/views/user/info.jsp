@@ -14,6 +14,10 @@
 					$("#updateUser").css("display", ""); 
 					$("#cancelBtn").css("display", ""); 
 				});
+				
+			$(document).on("click", "#updateUser", function(){
+				alert("hi");
+			}); 
 			
 			
 			//회원 탈퇴 
@@ -31,7 +35,7 @@
 
 
 		<div class="container text-center mt-4">
-			<h4 class="mt-3 mb-5">회원가입</h4>
+			<h4 class="mt-3 mb-5">회원정보</h4>
 			<div class="col-lg-8 mx-auto">
 				<form id="updateform" class="text-left mb-3" method="post" action="">
 				<div class="form-group">
