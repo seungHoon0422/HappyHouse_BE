@@ -3,6 +3,12 @@ package com.house.model;
 public class InterestDto {
 	private String userid;
 	private int aptCode;
+	
+	public InterestDto(String userid, int aptCode) {
+		this.userid = userid;
+		this.aptCode = aptCode;
+	}
+
 	public String getUserid() {
 		return userid;
 	}

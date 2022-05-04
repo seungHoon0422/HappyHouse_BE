@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.house.model.InterestDto;
 import com.house.model.UserDto;
 import com.house.model.service.InterestService;
 
@@ -22,14 +23,16 @@ import com.house.model.service.InterestService;
 @RequestMapping("/interest")
 public class InterestController {
 
+
 	@Autowired
 	private InterestService interestService;
+
 	
 	@PostMapping("/regist")
 	@ResponseBody
+
 	private ResponseEntity<?> regist(@RequestBody String aptCode, HttpSession session) throws Exception{
 		System.out.println(aptCode);
-		
 		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
 		System.out.println(user);
 		interestService.regist(user, aptCode);

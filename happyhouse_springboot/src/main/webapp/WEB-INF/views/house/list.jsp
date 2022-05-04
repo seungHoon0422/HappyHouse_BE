@@ -137,15 +137,15 @@ $(function () {
 	// =================== 3. 관심 등록 버튼 클릭 이벤트  ==================================
 	$(document).on("click", "#interestBtn", function() {
 	
-		let code = selectAptCode;
+		let code = parseInt(selectAptCode);
 		console.log('code : ' + code);
 		
 		$.ajax({
 			url : '${root}/interest/regist',
 			type : 'POST',
-			data : {
-				"aptCode" : selectAptCode 
-			}, 
+			data : JSON.stringify({
+				"aptCode" : code
+			}), 
 			contentType:'application/json;charset=utf-8',
 			success:function(response) {
 				if(response == 1){
