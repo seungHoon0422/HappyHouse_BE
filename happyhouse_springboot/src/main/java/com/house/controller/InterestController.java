@@ -25,7 +25,7 @@ public class InterestController {
 	private ResponseEntity<?> regist(@RequestBody String aptCode, HttpSession session){
 	
 
-		System.out.println("code : "+aptCode);
+		System.out.println(aptCode);
 //			UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
 //		String userid = user.getUserid(); 
 //		System.out.println(userid);

@@ -143,9 +143,9 @@ $(function () {
 		$.ajax({
 			url : '${root}/interest/regist',
 			type : 'POST',
-			data : JSON.stringify({
+			data : {
 				"aptCode" : selectAptCode
-			}), 
+			}, 
 			contentType:'application/json;charset=utf-8',
 			success:function(response) {
 				if(response == 1){
