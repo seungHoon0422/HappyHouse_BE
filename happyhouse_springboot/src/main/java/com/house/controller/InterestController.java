@@ -22,12 +22,13 @@ public class InterestController {
 
 	@PostMapping("/regist")
 	@ResponseBody
-	private ResponseEntity<?> regist(@RequestParam("aptCode") int code, HttpSession session){
+	private ResponseEntity<?> regist(@RequestBody String aptCode, HttpSession session){
 	
-		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
-		String userid = user.getUserid(); 
-		System.out.println(userid);
-		System.out.println(code);
+
+		System.out.println("code : "+aptCode);
+//			UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
+//		String userid = user.getUserid(); 
+//		System.out.println(userid);
 		
 		// 1. session에 있는 userid받아서 interestService.regist(userid, code) 실행
 		// 2. return 0 : 등록 실패(Exception), return 1 : 정상 등록, return 2 : 이미 등록된 아파트
