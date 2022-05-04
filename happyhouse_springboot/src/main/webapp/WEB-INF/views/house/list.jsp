@@ -137,10 +137,14 @@ $(function () {
 	$(document).on("click", "#interestBtn", function() {
 	
 		var code = selectAptCode;
+		console.log(code);
+		
 		$.ajax({
-			url : '${root}/interest/regist/'+code,
+			url : '${root}/interest/regist',
 			type : 'POST',
-			contentType:'application/json;charset=utf-8',
+			data : {
+				"aptCode" : selectAptCode
+			}, 
 			success:function(response) {
 				if(response == 1){
 					alert("관심 목록에 등록되었습니다.");

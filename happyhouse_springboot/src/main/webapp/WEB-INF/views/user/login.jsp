@@ -21,7 +21,14 @@
 			$("#registerBtn").click(function(){
 				location.href="${root}/user/userregister"; 
 			});
+			
+			//비밀번호 찾기 버튼 클릭 
+			$("#findPassBtn").click(function(){
+				
+			}); 
 		});
+		
+		
 	
 	</script>
 	
@@ -45,9 +52,48 @@
                 	<button type="button" id="loginBtn" class="btn btn-outline-primary">로그인</button>
                 	<button type="button" id="registerBtn" class="btn btn-outline-primary">회원가입</button>
                 </div>
+                <div class="form-groupt text-center">
+                	<button type="button" id="findPassBtn" class="btn btn-outline-danger">비밀번호 찾기</button>
+                </div>
 				</form>
 			</div>
 		</div>
+		
+		
+		<!--		 modal			 -->
+<div class="modal text-center" id="houseModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><strong>비밀번호 찾기</strong></h4>
+        <button type="button" class="close" data-dismiss="modal" >
+        <span aria-hidden="true">&times;</span>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+                <div class="form-group">
+                    <label for="findname">이름</label>
+                    <input type="text" class="form-control" id="findname" name="findname" placeholder="이름을 입력하세요">
+                </div>
+                <div class="form-group">
+                    <label for="findid">아이디</label>
+                    <input type="text" class="form-control" id="findid" name="findid" placeholder="아이디를 입력하세요">
+                </div>
+      </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="findpass">비밀번호 찾기</button>
+      </div>
+    </div>
+  </div>
+</div>
+		
+		
+		
+		
+		
 	</body>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
