@@ -43,4 +43,9 @@ public class HouseServiceImpl implements HouseService{
 		return houseMapper.houseInfoSearch(aptCode);
 	}
 
+	@Override
+	public List<HouseInfoDto> searchHouseByDong(String dongcode) {
+		return houseMapper.searchHouseByDong(dongcode);
+	}
+
 }

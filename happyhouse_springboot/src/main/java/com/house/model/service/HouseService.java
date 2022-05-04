@@ -14,5 +14,6 @@ public interface HouseService {
 	public List<SimpleHouseInfoDto> apartNameSearch(String aptName);
 	public HouseDealInfoDto dealInfoSearch(String no);
 	public HouseInfoDto houseInfoSearch(int aptCode);
+	public List<HouseInfoDto> searchHouseByDong(String dongcode);
 	
 }

@@ -2,71 +2,38 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
     
-<script type="text/javascript">
 
-
-
-$(document).ready(function () {
-    $("#dealRegisterBtn").click(function () {
-//         if (!$("#dealAmount").val()) {
-//         	alert("");
-//             return;
-//         } else if (!$("#dealYear").val()) {
-//         	alert("");
-//             return;
-//         } else if (!$("#dealMonth").val()) {
-//         	alert("");
-//             return;
-//         } else if (!$("#dealDay").val()) {
-//         	alert("");
-//             return;
-//         } else if (!$("#aptName").val()) {
-//         	alert("");
-//             return;
-//         } else if (!$("#buildYear").val()) {
-//         	alert("");
-//             return;
-//         } else if (!$("#sidoName").val()) {
-//         	alert("");
-//             return;
-//         } else if (!$("#gugunName").val()) {
-//         	alert("");
-//             return;
-//         } else if (!$("#dongName").val()) {
-//         	alert("");
-//             return;
-//         } else if (!$("#jibun").val()) {
-//         	alert("");
-//             return;
-//         } else if (!$("#area").val()) {
-//         	alert("");
-//             return;
-//         } else if (!$("#floor").val()) {
-//         	alert("");
-//             return;
-//         } else {
-			alert('매매정보 등록 완료')
-            $("#dealform").attr("action", "${root}/house/register").submit();
-//         }
-    });
-	
-});
-    
-</script>
 
 <div class="container text-center mt-3">
 	<div class="col-lg-10 mx-auto ">
 		<h4><strong>아파트 매매 정보 입력</strong></h4>
 		<div class="col-8 mx-auto">
 		<form id="dealform" class="text-left mb-3" method="post" action="">
-			<div class="form-group">
-				<label for="apartname">아파트 이름</label>
-				<input type="text" class="form-control" name="apartname" id="apartname" placeholder="아파트 이름"/>
+
+			<div class="form-group" id="sidodiv">
+				    <label for="sido"><strong>시,도</strong></label>
+				  <select class="custom-select" id="sido" name="sido">
+				  </select>
 			</div>
-			<div class="form-group">
-				<label for="dongname">행정동</label>
-				<input type="text" class="form-control" name="dongname" id="dongname" placeholder="행정동"/>
+			<div class="form-group" id="gugundiv">
+				    <label for="sido"><strong>구,군</strong></label>
+				  <select class="custom-select" id="gugun" name="gugun">
+				    <option selected>구/군을 선택하세요</option>
+				  </select>
 			</div>
+			<div class="form-group" id="dongdiv">
+				    <label for="sido"><strong>동</strong></label>
+				  <select class="custom-select" id="dong" name="dong">
+				    <option selected>행정동을 선택하세요</option>
+				  </select>
+			</div>
+			<div class="form-group" id="aptdiv">
+				<label for="aptName"><strong>아파트명</strong></label>
+				  <select class="custom-select" id="aptName" name="aptName" >
+				    <option selected>아파트 이름을 입력해주세요</option>
+				  </select>
+			</div>
+			
 			<div class="form-group">
 				<label for="jibun">지번</label>
 				<input type="text" class="form-control" name="jibun" id="jibun" placeholder="지번"/>
@@ -104,6 +71,118 @@ $(document).ready(function () {
 	</div>
 </div>
 
+<script type="text/javascript">
 
+
+
+$(document).ready(function () {
+	
+		
+	// 1. 시/도 select options 비동기로 입력
+	$.ajax({
+		url:'${root}/region/sido',  
+		type:'GET',
+		contentType:'application/json;charset=utf-8',
+		dataType:'json',
+		success:function(data) {
+			console.log(data);
+			makeList("sido", data);
+			
+		},
+		error:function(xhr, status, error){
+			console.log("상태값 : " + xhr.status + "\tHttp 에러메시지 : " + xhr.responseText);
+		},
+		statusCode: {
+			500: function() {
+				alert("서버에러.");
+				// location.href = "/error/e500";
+			},
+			404: function() {
+				alert("페이지없다.");
+				// location.href = "/error/e404";
+			}
+		}	
+	}); // end of sido ajax
+		
+	$(document).on("change", "#sido", function () {
+		let regcode = $("option:selected", this).val();
+		sendRequest("gugun", regcode);
+	});
+	$(document).on("change", "#gugun", function () {
+		let regcode = $("option:selected", this).val();
+		sendRequest("dong", regcode);
+	});
+		
+	$(document).on("change", "#dong", function () {
+		let regcode = $("option:selected", this).val();
+		$.ajax({
+	        url: `${root}/house/search/`+regcode,
+	        type: "GET",
+			contentType:'application/json;charset=utf-8',
+			dataType:'json',
+	        success: function (response) {
+	        	console.log('response : ' + response);
+	    		let options = ``;
+	    		let initOption = `<option>Choose..</option>`;
+	    		let selid = "#aptName";
+	    		$(selid).empty().append(initOption);
+	    		for(let info of response) {
+	    			console.log('info : '+ info);
+	    			options += '<option value="' + response["aptCode"] +  '">'+response["aptName"]+'</option>\n';
+	    		}
+	    		$(selid).append(options);
+	          addOption('aptName', response);
+	        },
+	        error: function (xhr, status, msg) {
+	          console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+	        },
+	    });
+		
+	});
+		
+	function sendRequest(selid, regcode) {
+		$.ajax({
+	        url: `${root}/region/`+selid+`/`+regcode,
+	        type: "GET",
+			contentType:'application/json;charset=utf-8',
+			dataType:'json',
+	        success: function (response) {
+	          addOption(selid, response);
+	        },
+	        error: function (xhr, status, msg) {
+	          console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+	        },
+	    });
+  	}
+
+	function addOption(selid, data) {
+		let options = ``;
+		let initOption = `<option>Choose..</option>`;
+		let codeOption = "code";
+		let nameOption = "name";
+		selid = "#" + selid;
+		$(selid).empty().append(initOption);
+		for(let cur of data) {
+			options += '<option value="' + cur[codeOption] + '">' + cur[nameOption] + '</option>\n';
+		}
+		$(selid).append(options);
+    }
+		
+	// makeList : 지역구분과 데이터를 받아 select option을 그리는 함수
+	function makeList(part, sidos) {
+		
+		let options = ``;
+		let initOption = `<option>Choose..</option>`;
+		$(sido).empty().append(initOption);
+		
+		$(sidos).each(function(index, sido) {
+			options += '<option value="' + sido["code"] + '">' + sido["name"] + '</option>\n';
+		});//each
+		$("#"+part).append(options);
+	} // end of makeList
+	
+}); // end of document ready
+    
+</script>
 
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
