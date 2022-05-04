@@ -4,7 +4,6 @@ public class HouseInfoDto {
 	
 	
 	private int aptCode;
-	
 	private String aptName;//아파트명
 	private String dongCode; //법정동 코드
 	private String dongName; //동

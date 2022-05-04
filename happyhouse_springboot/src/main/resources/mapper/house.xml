@@ -5,6 +5,7 @@
 <mapper namespace="com.house.model.mapper.HouseMapper">
 
 
+
 	<select id="search" parameterType="map" resultMap="dealList">
 		select * 
 		from housedeal as hd
@@ -25,6 +26,11 @@
 		where aptCode = #{aptCode}
 	</select>
 
+	<select id="searchHouseByDong" parameterType="String" resultType="HouseInfoDto">
+		select * 
+		from houseinfo
+		where dongcode = #{dongcode}
+	</select>
 
 	<resultMap type="HouseListVo" id="dealList">
 		<result column="aptCode" property="aptCode"/>

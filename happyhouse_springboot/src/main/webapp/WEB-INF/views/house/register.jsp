@@ -29,7 +29,9 @@
 			</div>
 			<div class="form-group" id="aptdiv">
 				<label for="aptName"><strong>아파트명</strong></label>
-				<input class="form-control" type="text" id="aptName" name="aptName" placeholder="아파트 이름을 입력해주세요"/>
+				  <select class="custom-select" id="aptName" name="aptName" >
+				    <option selected>아파트 이름을 입력해주세요</option>
+				  </select>
 			</div>
 			
 			<div class="form-group">
@@ -111,6 +113,32 @@ $(document).ready(function () {
 		sendRequest("dong", regcode);
 	});
 		
+	$(document).on("change", "#dong", function () {
+		let regcode = $("option:selected", this).val();
+		$.ajax({
+	        url: `${root}/house/search/`+regcode,
+	        type: "GET",
+			contentType:'application/json;charset=utf-8',
+			dataType:'json',
+	        success: function (response) {
+	        	console.log('response : ' + response);
+	    		let options = ``;
+	    		let initOption = `<option>Choose..</option>`;
+	    		let selid = "#aptName";
+	    		$(selid).empty().append(initOption);
+	    		for(let info of response) {
+	    			console.log('info : '+ info);
+	    			options += '<option value="' + response["aptCode"] +  '">'+response["aptName"]+'</option>\n';
+	    		}
+	    		$(selid).append(options);
+	          addOption('aptName', response);
+	        },
+	        error: function (xhr, status, msg) {
+	          console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+	        },
+	    });
+		
+	});
 		
 	function sendRequest(selid, regcode) {
 		$.ajax({
