@@ -13,8 +13,8 @@ public class InterestServiceImpl implements InterestService {
 	private InterestMapper interestMapper; 
 	
 	@Override
-	public void regist(UserDto user, String aptCode) throws Exception {
-		interestMapper.regist(user, aptCode); 
+	public void regist(String userid, int aptCode) throws Exception {
+		interestMapper.regist(userid, aptCode); 
 	}
 
 }

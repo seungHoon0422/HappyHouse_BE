@@ -5,11 +5,9 @@ import org.apache.ibatis.annotations.Mapper;
 import com.house.model.UserDto;
 
 @Mapper
-public class InterestMapper {
+public interface InterestMapper {
 
-	public void regist(UserDto user, String aptCode) throws Exception {
-		
-	}
+	void regist(String userid, int aptCode) throws Exception;
 
 
 }
