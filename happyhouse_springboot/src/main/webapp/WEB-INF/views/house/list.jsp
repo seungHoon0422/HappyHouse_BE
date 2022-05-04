@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8273ad75e4cf13f650633b14013a60c0&libraries=services"></script>
 <script type="text/javascript">
+var selectAptCode;
 
 
 $(function () {
@@ -118,7 +119,6 @@ $(function () {
 	});// end of click event
 		
 	// 상세정보 보기 버튼을 누른 아파트 코드
-	var selectAptCode;
 	
 	function drawModal(deal, house) {
 		console.log(deal, house);
@@ -130,14 +130,15 @@ $(function () {
 		$('#marea').text(deal.area+'');
 		$('#mno').text(deal.no+'');
 
-		selectAptCode = house.aptCode;
+		console.log('select apt code : '+deal.aptCode);
+		selectAptCode = deal.aptCode;
 	}
 	
 	// =================== 3. 관심 등록 버튼 클릭 이벤트  ==================================
 	$(document).on("click", "#interestBtn", function() {
 	
-		var code = selectAptCode;
-		console.log(code);
+		let code = selectAptCode;
+		console.log('code : ' + code);
 		
 		$.ajax({
 			url : '${root}/interest/regist',
@@ -145,6 +146,7 @@ $(function () {
 			data : {
 				"aptCode" : selectAptCode 
 			}, 
+			contentType:'application/json;charset=utf-8',
 			success:function(response) {
 				if(response == 1){
 					alert("관심 목록에 등록되었습니다.");
