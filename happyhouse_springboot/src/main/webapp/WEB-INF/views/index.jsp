@@ -13,7 +13,9 @@
 	<div class="container text-center mt-3">
         <div class="col-lg-8 mx-auto">
 			<div>
-				<a href="${root}/house/register" class="btn btn-outline-warning">매매 정보 등록</a>
+				<c:if test="${!empty userinfo and userinfo.level > 0}">
+					<a href="${root}/house/register" class="btn btn-outline-warning">매매 정보 등록</a>
+				</c:if>
 				<a href="${root}/house/search" class="btn btn-outline-warning">주택 정보 검색</a>
 			</div>
 		</div>
