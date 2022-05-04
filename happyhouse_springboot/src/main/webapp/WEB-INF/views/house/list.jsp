@@ -143,7 +143,7 @@ $(function () {
 			url : '${root}/interest/regist',
 			type : 'POST',
 			data : {
-				"aptCode" : selectAptCode
+				"aptCode" : selectAptCode 
 			}, 
 			success:function(response) {
 				if(response == 1){

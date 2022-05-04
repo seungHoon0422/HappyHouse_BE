@@ -4,12 +4,42 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
+
+			var isId = false ; 
+			// 아이디 중복 검사 
+			$("#userid").keyup(function(){
+				var ckid = $("#userid").val();
+				$.ajax({
+					url : '${root}/user/idcheck',
+					data: {'ckid' : ckid },
+					type :'GET',
+					dataType: 'json',
+					success:function(response){
+						var cnt = response.idcount;
+					 	if(cnt == 0) {
+                    		$("#idresult").text(ckid + "는 사용가능한 아이디 입니다.").removeClass('text-dark').removeClass('text-danger').addClass('text-primary');
+                    		isId = true;
+                    	} else {
+                    		$("#idresult").text(ckid + "는 사용할 수 없는 아이디 입니다.").removeClass('text-dark').removeClass('text-primary').addClass('text-danger');
+                    		isId = false;
+                    	}
+                  	}, 
+                  	error: function(request, status, error) {
+                  		console.log("status : " + request.status + "\tmsg : " + error);
+                  	}
+						
+					})
+				});
+			
 		//회원가입 버튼 클릭 
 		$("#registerBtn").click(function() {
 			if(!$("#username").val()){
 				alert("이름을 입력해주세요 ! ");
 				return;
-			}else if(!$("#userpass").val()){
+			}else if (!isId) {
+                alert("아이디를 확인하여 주세요 ! ");
+                return;
+            }else if(!$("#userpass").val()){
 				alert("비밀번호를 입력해주세요 ! ");
 				return;
 			}else if ($("#userpass").val() != $("#pwdcheck").val()) {
@@ -23,7 +53,7 @@
 			}
 		});
 			
-		})
+		});
 	</script>
 	
 	<body>

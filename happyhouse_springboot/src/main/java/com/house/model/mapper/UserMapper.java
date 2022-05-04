@@ -22,5 +22,7 @@ public interface UserMapper {
 	void update(UserDto user) throws Exception;
 
 	List<InterestDto> interest(UserDto user) throws Exception;
+
+	int idCheck(String checkId) throws Exception;
 	
 }

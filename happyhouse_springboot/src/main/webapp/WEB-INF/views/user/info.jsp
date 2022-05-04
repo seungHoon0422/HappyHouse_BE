@@ -44,7 +44,6 @@
                 <div class="form-group">
                     <label for="userid">아이디</label>
                   	<input type="text" class="form-control" id="userid" name="userid" value="${userlist.userid}" readonly>     
-                    <div id="idresult" class="mt-1"></div>
                 </div>
                 <div class="form-group">
                     <label for="userpwd">비밀번호</label>

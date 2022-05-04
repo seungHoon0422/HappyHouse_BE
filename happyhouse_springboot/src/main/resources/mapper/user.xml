@@ -10,6 +10,13 @@
 		values (#{userid},#{userpass},#{email},#{username},#{phone},#{level})
 	</insert>
 
+	<!-- 아이디 중복검사 -->
+	<select id="idCheck" parameterType="string" resultType="int">
+		select count(userid) 
+		from user
+		where userid = #{userid} 
+	</select>
+	
 	<!-- 로그인 -->
 	<select id="login" parameterType="map" resultType="UserDto">
 		select username, userid, level

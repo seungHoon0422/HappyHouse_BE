@@ -48,4 +48,9 @@ public class UserServiceImpl implements UserService {
 		return userMapper.interest(user);
 	}
 
+	@Override
+	public int idCheck(String checkId) throws Exception {
+		return userMapper.idCheck(checkId);
+	}
+
 }

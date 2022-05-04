@@ -21,5 +21,7 @@ public interface UserService  {
 	/**회원의 관심 목록 조회 
 	 * @return */
 	List<InterestDto> interest(UserDto user) throws Exception;
+	/**아이디 중복검사*/
+	int idCheck(String checkId) throws Exception;
 
 }

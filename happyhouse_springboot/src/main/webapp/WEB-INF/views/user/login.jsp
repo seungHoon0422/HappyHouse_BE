@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
+<c:if test="${cookie.save_id.value ne null}">
+	<c:set var="idck" value=" checked"/>
+	<c:set var="saveid" value="${cookie.save_id.value}"/>
+</c:if>
 
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -37,10 +41,14 @@
 			<h4 class="mt-3 mb-5">로그인</h4>
 			<div class="col-lg-8 mx-auto">
 				<form id="loginform" class="text-left mb-3" method="post" action="">
-			
+			 <div class="form-group form-check text-right">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="idsave" name="idsave" value="saveok"${idck}> 아이디저장
+                    </label>
+                </div>
                 <div class="form-group">
                     <label for="userid">아이디</label>
-                    <input type="text" class="form-control" id="userid" name="userid" placeholder="아이디를 입력하세요">
+                    <input type="text" class="form-control" id="userid" name="userid" placeholder="아이디를 입력하세요" value="${saveid}">
                     <div id="idresult" class="mt-1"></div>
                 </div>
                 <div class="form-group">

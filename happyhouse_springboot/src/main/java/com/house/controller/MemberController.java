@@ -3,10 +3,11 @@ package com.house.controller;
 import java.util.List;
 import java.util.Map;
 
-
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.house.model.InterestDto;
 import com.house.model.UserDto;
@@ -57,6 +59,16 @@ public class MemberController {
 		return "user/login";
 	}
 	
+	/**아이디 중복검사*/
+	@GetMapping("/idcheck")
+	public @ResponseBody String idCheck(@RequestParam("ckid") String checkId) throws Exception {
+		int idCount = userService.idCheck(checkId);
+		System.out.println(idCount);
+		JSONObject json = new JSONObject();
+		json.put("idcount", idCount);
+		return json.toString();
+	}
+	
 	/**로그인 페이지 이동*/
 	@GetMapping("/mvlogin")
 	public String mvlogin() {
@@ -69,6 +81,14 @@ public class MemberController {
 		UserDto userDto = userService.login(map);
 		if(userDto != null) { // 로그인 성공 
 			session.setAttribute("userinfo", userDto); // userinfo : 이름, 아이디  , 레벨 ( 중개인 / 사용자 ) 
+			Cookie cookie = new Cookie("save_id" , map.get("userid"));
+			cookie.setPath("/");
+			if ("saveok".equals(map.get("idsave"))) {
+				cookie.setMaxAge(60 * 60 * 24 * 365 * 40);
+			} else {
+				cookie.setMaxAge(0);
+			}
+			response.addCookie(cookie);
 			System.out.println(userDto.toString());
 			return "redirect:/";
 		}else { // 로그인 실패 
