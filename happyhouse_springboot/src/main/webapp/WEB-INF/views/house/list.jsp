@@ -104,6 +104,7 @@ $(function () {
 		$('#marea').text('');
 		$('#mno').text('');
 		
+		// 모달 정보 가져오는 비동기
 		$.ajax({
 			url : '${root}/region/detail/'+no,
 			type : 'GET',
@@ -112,9 +113,39 @@ $(function () {
 				console.log(detail)
 				var dealinfo = detail.deal;
 				var houseinfo = detail.house;
+
+				// 관심등록 여부 확인
+				$.ajax({
+					url : '${root}/interest/search/'+dealinfo.aptCode,
+					type : 'Get',
+					contentType:'application/json;charset=utf-8',
+					success:function(response) {
+						
+						console.log('관심 등록여부 확인');
+						// 관심등록 되어있으면 버튼 display : none;
+						
+						// 관심등록 안되어있으면 dispalay : ;
+					
+					},
+					error: function (xhr, status, msg) {
+				          console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+				        },
+				}); // end of ajax
+
+				
+				
+				
+				
+				
 				drawModal(dealinfo, houseinfo);	
-			}
+			},
+			error: function (xhr, status, msg) {
+		          console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+		        },
 		}); // end of ajax
+		
+		
+		
 		
 	});// end of click event
 		
@@ -137,23 +168,19 @@ $(function () {
 	// =================== 3. 관심 등록 버튼 클릭 이벤트  ==================================
 	$(document).on("click", "#interestBtn", function() {
 	
-		let code = parseInt(selectAptCode);
-		console.log('code : ' + code);
-		
 		$.ajax({
 			url : '${root}/interest/regist',
 			type : 'POST',
 			data : JSON.stringify({
-				"aptCode" : code
+				"aptCode" : selectAptCode
 			}), 
 			contentType:'application/json;charset=utf-8',
 			success:function(response) {
-				if(response == 1){
-					alert("관심 목록에 등록되었습니다.");
-				} else if(response == 2){
-					alert("이미 등록된 아파트입니다.");
-				} 
-			}
+				alert("관심 목록에 등록되었습니다.");
+			},
+			error: function (xhr, status, msg) {
+		          console.log("상태값 : " + status + " Http에러메시지 : " + msg);
+		        },
 		}); // end of ajax
 		
 	});
@@ -281,7 +308,9 @@ $(function () {
 		</table>
       </div>
        <div class="modal-footer">
+		<c:if test="${!empty userinfo}">
         <button type="button" class="btn btn-primary" id="interestBtn">관심 등록</button>
+        </c:if>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">목록</button>
       </div>
     </div>

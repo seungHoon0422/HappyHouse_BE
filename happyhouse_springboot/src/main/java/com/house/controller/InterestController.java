@@ -1,11 +1,14 @@
 package com.house.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,9 +28,9 @@ public class InterestController {
 	@Autowired
 	private InterestService interestService;
 
-	
 	@PostMapping("/regist")
 	@ResponseBody
+
 	private ResponseEntity<?> regist(@RequestBody String aptCode, HttpSession session) throws Exception{
 //		System.out.println(aptCode);
 		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
