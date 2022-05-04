@@ -2,9 +2,19 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 
+	<script type="text/javascript">
+	$(document).ready(function(){
+		//관심목록 삭제 
+		$("#cancelBtn").click(function(){
+			if(confirm("관심 목록에서 삭제하시겠습니까 ?")){
+				// 삭제 
+			}
+		}); 
+	}); 
+	</script>
 
-<div class="container text-center mt-3">
-	<div class="col-lg-10 mx-auto ">
+	<div class="container text-center mt-3">
+		<div class="col-lg-10 mx-auto ">
 	
 	
 		<h4 class="mt-3 mb-5">관심 목록</h4>
@@ -16,12 +26,12 @@
 		
 		<c:if test="${!empty apartlist }">
 		
-<!-- 
+
 			<div class="row mt-3">
 				<div id="mapDiv" class="container col-sm-12">
 					<div id="map" style="height: 450px"><strong>kakao map</strong></div>
 				</div>
-		 	</div > -->
+		 	</div >
 			<div class="row mt-3">
 				<table class="table table-striped">
 					<thead>
@@ -31,16 +41,11 @@
 					    </tr>
 					</thead>
 					<tbody>
-					<c:forEach var="info" items="${infos }">
+					<c:forEach var="aptname" items="${apartlist}">
 						<tr>
-							<td>${apartlist.aptCode}</td>
-							<td style="display : none">${info.buildYear}</td>
-							<td>${info.dealAmount}</td>
-							<td style="display : none">${info.area}</td>
-							<td style="display : none">${info.dealYear}</td>
-							<td style="display : none">${info.dealMonth}</td>
-							<td style="display : none">${info.dealDay}</td>
-							<td><input type="button" class="btn btn-outline-warning" name="detailBtn" data-id="${info.no}" data-toggle="modal" data-target="#houseModal" value="세부 정보" /></td>
+							<td>${aptname}</td>
+							
+							<td><input type="button" class="btn btn-outline-danger" name="cancelBtn" id="cancelBtn" value="삭제" /></td>
 						</tr>				
 					</c:forEach>
 					</tbody>

@@ -21,7 +21,7 @@ public class InterestServiceImpl implements InterestService {
 	}
 
 	@Override
-	public List<Integer> interest(String userid) throws Exception {
+	public List<String> interest(String userid) throws Exception {
 		return interestMapper.interest(userid);
 	}
 }

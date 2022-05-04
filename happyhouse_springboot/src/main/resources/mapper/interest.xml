@@ -11,10 +11,10 @@
  
  	
 	<!-- 관심목록 조회 -> 아파트 코드로 넘겨주기 -->
-	<select id="interest" parameterType="string" resultType="int">
-		select aptCode
-		from interest 
-		where userid=#{userid}
+	<select id="interest" parameterType="string" resultType="String">
+		select aptName from houseinfo join interest 
+		on houseinfo.aptCode = interest.aptCode 
+		where interest.userid= #{userid};
 	</select>
 	
 </mapper>

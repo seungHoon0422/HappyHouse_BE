@@ -12,6 +12,6 @@ public interface InterestService {
 	
 	/**회원의 관심 목록 조회 
 	 * @return */
-	List<Integer> interest(String userid) throws Exception;
+	List<String> interest(String userid) throws Exception;
 
 }

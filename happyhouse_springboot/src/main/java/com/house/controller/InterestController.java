@@ -78,9 +78,9 @@ public class InterestController {
 		System.out.println("hi");
 		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
 		String userid = user.getUserid();
-		List<Integer> list= interestService.interest(userid);
-		System.out.println(list.toString());
-		model.addAttribute("apartlist", list); 
+		List<String> list= interestService.interest(userid);
+		System.out.println(list.toString()); 
+		model.addAttribute("apartlist", list);  // 관심등록한 아파트의 이름
 		return "user/interest"; 
 			
 	}

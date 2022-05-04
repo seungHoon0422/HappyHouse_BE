@@ -12,7 +12,7 @@ public interface InterestMapper {
 
 	void regist(InterestDto interestDto) throws Exception;
 	
-	List<Integer> interest(String userid) throws Exception;
+	List<String> interest(String userid) throws Exception;
 
 
 }
