@@ -48,18 +48,18 @@ public class HouseController {
 	@PostMapping("/register")
 	public String register(@RequestParam Map<String, String> select, Model model) throws Exception {
 		
-		List<HouseDealInfoDto> houseDealList = houseService.search(select);
-		for (HouseDealInfoDto info : houseDealList) {
-			model.addAttribute(info);
-		}
-
-		Set<String> keySet = select.keySet();
-		System.out.println("<request parameters>");
-		for (String key : keySet) {
-			System.out.println(key+" : "+select.get(key));
-		}
-		
-		return "/house/list";
+//		List<HouseDealInfoDto> houseDealList = houseService.search(select);
+//		for (HouseDealInfoDto info : houseDealList) {
+//			model.addAttribute(info);
+//		}
+//
+//		Set<String> keySet = select.keySet();
+//		System.out.println("<request parameters>");
+//		for (String key : keySet) {
+//			System.out.println(key+" : "+select.get(key));
+//		}
+//		
+		return "/house/search";
 	}
 
 	
