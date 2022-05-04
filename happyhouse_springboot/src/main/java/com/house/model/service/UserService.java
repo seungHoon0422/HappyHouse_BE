@@ -1,9 +1,7 @@
 package com.house.model.service;
 
-import java.util.List;
 import java.util.Map;
 
-import com.house.model.InterestDto;
 import com.house.model.UserDto;
 
 public interface UserService  {
@@ -18,9 +16,6 @@ public interface UserService  {
 	void delete(UserDto user) throws Exception;
 	/**회원 정보 수정 (아이디는 그대로) */
 	void update(UserDto user) throws Exception;
-	/**회원의 관심 목록 조회 
-	 * @return */
-	List<InterestDto> interest(UserDto user) throws Exception;
 	/**아이디 중복검사*/
 	int idCheck(String checkId) throws Exception;
 

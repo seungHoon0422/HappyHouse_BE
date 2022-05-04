@@ -4,9 +4,17 @@
 	
 <mapper namespace= "com.house.model.mapper.InterestMapper">
 
-	<insert id="regist">
-	 insert into interest(userid, aptCode)
-	 values(#{param1}, #{param2})
+	<insert id="regist" parameterType="InterestDto">
+		insert ignore into interest(userid, aptCode)
+	 	values(#{userid} , ${aptCode})
 	</insert> 
  
+ 	
+	<!-- 관심목록 조회 -> 아파트 코드로 넘겨주기 -->
+	<select id="interest" parameterType="string" resultType="int">
+		select aptCode
+		from interest 
+		where userid=#{userid}
+	</select>
+	
 </mapper>

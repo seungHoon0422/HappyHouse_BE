@@ -1,8 +1,11 @@
 package com.house.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.house.model.InterestDto;
 import com.house.model.UserDto;
 import com.house.model.mapper.InterestMapper;
 
@@ -13,8 +16,12 @@ public class InterestServiceImpl implements InterestService {
 	private InterestMapper interestMapper; 
 	
 	@Override
-	public void regist(String userid, int aptCode) throws Exception {
-		interestMapper.regist(userid, aptCode); 
+	public void regist(InterestDto interestDto) throws Exception {
+		interestMapper.regist(interestDto); 
 	}
 
+	@Override
+	public List<Integer> interest(String userid) throws Exception {
+		return interestMapper.interest(userid);
+	}
 }

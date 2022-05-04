@@ -1,11 +1,9 @@
 package com.house.model.mapper;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.house.model.InterestDto;
 import com.house.model.UserDto;
 
 @Mapper
@@ -20,8 +18,6 @@ public interface UserMapper {
 	void delete(UserDto user) throws Exception;
 
 	void update(UserDto user) throws Exception;
-
-	List<InterestDto> interest(UserDto user) throws Exception;
 
 	int idCheck(String checkId) throws Exception;
 	

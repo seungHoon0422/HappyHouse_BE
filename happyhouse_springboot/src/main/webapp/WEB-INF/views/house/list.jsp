@@ -177,6 +177,7 @@ $(function () {
 			contentType:'application/json;charset=utf-8',
 			success:function(response) {
 				alert("관심 목록에 등록되었습니다.");
+				$("#houseModal").modal('hide');
 			},
 			error: function (xhr, status, msg) {
 		          console.log("상태값 : " + status + " Http에러메시지 : " + msg);

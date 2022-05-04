@@ -43,12 +43,5 @@
 		set userpass=#{userpass}
 		where userid= #{userid} 
 	</update>
-	
-	<!-- 관심목록 조회 -> 아파트 코드로 넘겨주기 -->
-	<select id="interest" parameterType="UserDto" resultType="InterestDto">
-		select aptCode 
-		from interest 
-		where userid=#{userid}
-	</select>
 
 </mapper>
