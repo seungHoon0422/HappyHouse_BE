@@ -5,7 +5,8 @@
 <mapper namespace= "com.house.model.mapper.InterestMapper">
 
 	<insert id="regist">
-	 insert into 
+	 insert into interest(userid, aptCode)
+	 values(#{param1}, #{param2})
 	</insert> 
  
 </mapper>
