@@ -31,6 +31,11 @@
 		from houseinfo
 		where dongcode = #{dongcode}
 	</select>
+	
+	<insert id="registDealInfo" parameterType="HouseDealInfoDto">
+		insert into housedeal(aptCode, dealAmount, dealYear, dealMonth, dealDay, area, floor)
+		values (#{aptCode}, #{dealAmount}, #{dealYear}, #{dealMonth}, #{dealDay}, #{area}, #{floor})
+	</insert>
 
 	<resultMap type="HouseListVo" id="dealList">
 		<result column="aptCode" property="aptCode"/>

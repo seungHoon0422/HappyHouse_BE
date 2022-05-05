@@ -28,31 +28,32 @@
 				  </select>
 			</div>
 			<div class="form-group" id="aptdiv">
-				<label for="aptName"><strong>아파트명</strong></label>
-				  <select class="custom-select" id="aptName" name="aptName" >
+				<label for="aptCode"><strong>아파트명</strong></label>
+				  <select class="custom-select" id="aptCode" name="aptCode" >
 				    <option selected>아파트 이름을 입력해주세요</option>
 				  </select>
 			</div>
-			
 			<div class="form-group">
-				<label for="jibun">지번</label>
-				<input type="text" class="form-control" name="jibun" id="jibun" placeholder="지번"/>
-			</div>
-			<div class="form-group">
-				<label for="dealamount">거래 금액</label>
-				<input type="text" class="form-control" name="dealamount" id="dealamount" placeholder="거래금액(만원)"/>
+				<label for="dealAmount">거래 금액</label>
+				<input type="text" class="form-control" name="dealAmount" id="dealAmount" placeholder="거래금액(만원)"/>
 			</div>
 			<div class="form-group">
 				<label for="dealyear">거래 년도</label>
-				<input type="text" class="form-control" name="dealyear" id="dealyear" placeholder="거래년도 (숫자만 입력)"/>
+				  <select class="custom-select" id="dealYear" name="dealYear" >
+				    <option selected>거래년도</option>
+				  </select>
 			</div>
 			<div class="form-group">
-				<label for="dealmonth">거래 월</label>
-				<input type="text" class="form-control" name="dealmonth" id="dealmonth" placeholder="월 (숫자만 입력)"/>
+				<label for="dealNonth">거래 월</label>
+				  <select class="custom-select" id="dealMonth" name="dealMonth" >
+				    <option selected>월</option>
+				  </select>
 			</div>
 			<div class="form-group">
-				<label for="dealday">거래 일</label>
-				<input type="text" class="form-control" name="dealday" id="dealday" placeholder="일 (숫자만 입력)"/>
+				<label for="dealDay">거래 일</label>
+				  <select class="custom-select" id="dealDay" name="dealDay" >
+				    <option selected>일</option>
+				  </select>
 			</div>
 			<div class="form-group">
 				<label for="area">면적</label>
@@ -78,6 +79,50 @@
 $(document).ready(function () {
 	
 		
+	// 거래년도 select option 추가
+	let initOption = `<option>거래년도</option>`;
+	$('#dealYear').empty().append(initOption);
+	let option = '';
+	for(let i=2022; i>=2000; i--){
+		option += '<option value="' +i+'">' + i + '년도</option><br>'; 
+	}
+	$('#dealYear').append(option);
+		
+
+	
+	// 거래월 select option 추가
+	initOption = `<option>월</option>`;
+	$('#dealMonth').empty().append(initOption);
+	option = '';
+	for(let i=1; i<=12; i++){
+		option += '<option value="' +i+'">' + i + '월</option><br>'; 
+	}
+	$('#dealMonth').append(option);
+	
+	
+	// 거래일 select option 추가
+	initOption = `<option>일</option>`;
+	$('#dealDay').empty().append(initOption);
+	option = '';
+	for(let i=1; i<=31; i++){
+		option += '<option value="' +i+'">' + i + '일</option><br>'; 
+	}
+	$('#dealDay').append(option);
+	
+	
+	// 등록 버튼 눌렀을 떄 regist
+	$('#dealRegisterBtn').on('click', function(){
+		
+		// 1. 유효성 검사 필요
+		
+		
+		
+		// 2. post mapping으로 house deal 정보 register
+		$("#dealform").attr("action", "${root}/house/register").submit();
+	});
+	
+	
+	
 	// 1. 시/도 select options 비동기로 입력
 	$.ajax({
 		url:'${root}/region/sido',  
@@ -124,14 +169,17 @@ $(document).ready(function () {
 	        	console.log('response : ' + response);
 	    		let options = ``;
 	    		let initOption = `<option>Choose..</option>`;
-	    		let selid = "#aptName";
+	    		let selid = "#aptCode";
 	    		$(selid).empty().append(initOption);
+	    		
+	    		
 	    		for(let info of response) {
 	    			console.log('info : '+ info);
-	    			options += '<option value="' + response["aptCode"] +  '">'+response["aptName"]+'</option>\n';
+	    			console.log(info.aptCode + " " + info['aptName'])
+	    			options += '<option value="' + info.aptCode +  '">'+info.aptName +'</option>\n';
 	    		}
+	    		
 	    		$(selid).append(options);
-	          addOption('aptName', response);
 	        },
 	        error: function (xhr, status, msg) {
 	          console.log("상태값 : " + status + " Http에러메시지 : " + msg);

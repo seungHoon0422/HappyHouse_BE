@@ -40,6 +40,16 @@ public class HouseController {
 		return "house/register";
 	}
 	
+	@PostMapping("/register")
+	private String registDealInfo(HouseDealInfoDto houseDealInfoDto) {
+		
+		System.out.println("regist house deal info controller");
+		System.out.println("aptCode : "+ houseDealInfoDto.getAptCode());
+		System.out.println("deal Amount : "+ houseDealInfoDto.getDealAmount());
+		houseService.registDealInfo(houseDealInfoDto);
+		return "house/search";
+	}
+
 	@GetMapping("/search")
 	private String search(@RequestParam Map<String, String> select, Model model) {
 		
@@ -57,15 +67,15 @@ public class HouseController {
 		List<HouseInfoDto> list = houseService.searchHouseByDong(dongcode);
 		System.out.println("house info size : "+list.size());
 		for (HouseInfoDto houseInfoDto : list) {
-			System.out.println(houseInfoDto.getAptName() + " " + houseInfoDto.getDongName());
+			System.out.println( houseInfoDto.getAptCode() + " "+ houseInfoDto.getAptName() + " " + houseInfoDto.getDongName());
 		}
 		return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);
 	}
 
 	
-	@PostMapping("/register")
-	public String register(@RequestParam Map<String, String> select, Model model) throws Exception {
-		
+//	@PostMapping("/register")
+//	public String register(@RequestParam Map<String, String> select, Model model) throws Exception {
+//		
 //		List<HouseDealInfoDto> houseDealList = houseService.search(select);
 //		for (HouseDealInfoDto info : houseDealList) {
 //			model.addAttribute(info);
@@ -77,8 +87,8 @@ public class HouseController {
 //			System.out.println(key+" : "+select.get(key));
 //		}
 //		
-		return "/house/search";
-	}
+//		return "/house/search";
+//	}
 
 	// 입력된 dong code에 해당하는 모들 매물정보를 보여준다.
 	// aptName(아파트 이름), area(면적), dealAmount(거래가격), buildYear(건축년도), 거래년도(년,월,일)

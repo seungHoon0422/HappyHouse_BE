@@ -48,4 +48,10 @@ public class HouseServiceImpl implements HouseService{
 		return houseMapper.searchHouseByDong(dongcode);
 	}
 
+	@Override
+	public void registDealInfo(HouseDealInfoDto houseDealInfoDto) {
+		houseMapper.registDealInfo(houseDealInfoDto);
+		
+	}
+
 }

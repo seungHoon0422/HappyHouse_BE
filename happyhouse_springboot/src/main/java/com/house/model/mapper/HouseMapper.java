@@ -15,5 +15,6 @@ public interface HouseMapper {
 	HouseDealInfoDto dealInfoSearch(String no);
 	HouseInfoDto houseInfoSearch(int aptCode);
 	List<HouseInfoDto> searchHouseByDong(String dongcode);
+	void registDealInfo(HouseDealInfoDto houseDealInfoDto);
 
 }

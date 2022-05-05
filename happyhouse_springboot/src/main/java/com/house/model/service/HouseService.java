@@ -15,5 +15,6 @@ public interface HouseService {
 	public HouseDealInfoDto dealInfoSearch(String no);
 	public HouseInfoDto houseInfoSearch(int aptCode);
 	public List<HouseInfoDto> searchHouseByDong(String dongcode);
+	public void registDealInfo(HouseDealInfoDto houseDealInfoDto);
 	
 }
