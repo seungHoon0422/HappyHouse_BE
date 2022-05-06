@@ -24,4 +24,7 @@ public interface InterestService {
 	/**아파트 이름에 대한 모든 매매 목록 불러오기*/
 	List<HashMap> list(String aptName) throws Exception;
 
+	/**찜 등록순으로 정렬하기 위해 count 값 얻어오기*/
+	List<HashMap> likelist(String userid) throws Exception;
+
 }

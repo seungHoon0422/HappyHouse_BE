@@ -38,4 +38,9 @@ public class InterestServiceImpl implements InterestService {
 	public List<HashMap> list(String aptName) throws Exception {
 		return interestMapper.list(aptName);
 	}
+
+	@Override
+	public List<HashMap> likelist(String userid) throws Exception {
+		return interestMapper.likelist(userid);
+	}
 }

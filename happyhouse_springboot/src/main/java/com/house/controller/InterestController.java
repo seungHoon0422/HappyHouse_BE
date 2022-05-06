@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
@@ -97,6 +98,59 @@ public class InterestController {
 			
 	}
 	
+	/**관심 목록 오름차순
+	 * @throws Exception */
+	@GetMapping("/interestup")
+	public ResponseEntity<?> interestup(HttpSession session) throws Exception {
+		System.out.println("hi");
+		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
+		String userid = user.getUserid();
+		List<HashMap> list= interestService.likelist(userid);
+		Collections.sort(list, new Comparator<HashMap>() {
+
+			@Override
+			public int compare(HashMap o1, HashMap o2) {
+				int deal1=Integer.parseInt(String.valueOf(o1.get("count(*)")));
+				int deal2=Integer.parseInt(String.valueOf(o2.get("count(*)")));
+				return deal2-deal1;
+				
+			}
+		});
+		System.out.println(list.toString()); 
+		if(list !=null && !list.isEmpty()) {
+			return new ResponseEntity<List<HashMap>>(list, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+			
+	}
+	/**관심 목록 내림차순
+	 * @throws Exception */
+	@GetMapping("/interestdown")
+	public ResponseEntity<?> interestdown(HttpSession session) throws Exception {
+		System.out.println("hi");
+		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
+		String userid = user.getUserid();
+		List<HashMap> list= interestService.likelist(userid);
+		Collections.sort(list, new Comparator<HashMap>() {
+
+			@Override
+			public int compare(HashMap o1, HashMap o2) {
+				int deal1=Integer.parseInt(String.valueOf(o1.get("count(*)")));
+				int deal2=Integer.parseInt(String.valueOf(o2.get("count(*)")));
+				return deal1-deal2;
+				
+			}
+		});
+		
+		if(list !=null && !list.isEmpty()) {
+			return new ResponseEntity<List<HashMap>>(list, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+			
+	}
+	
 	/**관심 목록 삭제*/
 	@DeleteMapping("/interest/{aptName}")
 	@ResponseBody
@@ -106,7 +160,6 @@ public class InterestController {
 		String userid = user.getUserid();
 		interestService.delete(aptName , userid);
 		List<String> list= interestService.interest(userid);
-		System.out.println(list.toString()); 
 		if(list !=null && !list.isEmpty()) {
 			return new ResponseEntity<List<String>>(list, HttpStatus.OK);
 		} else {
@@ -129,25 +182,62 @@ public class InterestController {
 		}
 	}
 	
-	/**클릭한 아파트에 대한 오름정렬*/
+	/**오름차순 정렬 */
 	@GetMapping("/up/{aptName}")
 	@ResponseBody
 	public ResponseEntity<?> up(@PathVariable("aptName") String aptName) throws Exception{
-		//System.out.println(aptName);
 		List<HashMap> list = interestService.list(aptName);
-		if(list !=null && !list.isEmpty()) {
-			list.sort(new Comparator<HashMap>() {
+		System.out.println(list.toString());
+		Collections.sort(list, new Comparator<HashMap>() {
 
-				@Override
-				public int compare(HashMap first, HashMap second) {
-					String one = (String) first.get("dealAmount");
-					String two= (String)second.get("dealAmount");
-					return one.compareTo(two);
-				}
+			@Override
+			public int compare(HashMap o1, HashMap o2) {
+				String deal1=(String)o1.get("dealAmount");
+				System.out.println(deal1);
+				String deal2= (String)o2.get("dealAmount");
+				// 둘의 길이가 같으면 
+				if(deal1.length() > deal2.length()) 
+					return -1 ;
+				else if(deal2.length() > deal1.length()) return 1 ;
+				else return deal2.compareTo(deal1);
 				
-			});
-			System.out.println(list.toString());
+			}
+		});
 		
+		System.out.println(list.toString());
+
+		if(list !=null && !list.isEmpty()) {
+			return new ResponseEntity<List<HashMap>>(list, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	/**내림차순 정렬 */
+	@GetMapping("/down/{aptName}")
+	@ResponseBody
+	public ResponseEntity<?> down(@PathVariable("aptName") String aptName) throws Exception{
+		List<HashMap> list = interestService.list(aptName);
+		System.out.println(list.toString());
+		Collections.sort(list, new Comparator<HashMap>() {
+
+			@Override
+			public int compare(HashMap o1, HashMap o2) {
+				String deal1=(String)o1.get("dealAmount");
+				System.out.println(deal1);
+				String deal2= (String)o2.get("dealAmount");
+				// 둘의 길이가 같으면 
+				if(deal1.length() > deal2.length()) 
+					return 1;
+				else if(deal2.length() > deal1.length()) return -1 ;
+				else return deal1.compareTo(deal2);
+				
+			}
+		});
+		
+		System.out.println(list.toString());
+
+		if(list !=null && !list.isEmpty()) {
 			return new ResponseEntity<List<HashMap>>(list, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

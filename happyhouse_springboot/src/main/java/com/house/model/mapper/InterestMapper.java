@@ -21,5 +21,7 @@ public interface InterestMapper {
 
 	List<HashMap> list(String aptName) throws Exception;
 
+	List<HashMap> likelist(String userid) throws Exception;
+
 
 }

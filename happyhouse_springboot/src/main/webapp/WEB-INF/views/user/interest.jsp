@@ -48,6 +48,7 @@
 			
 			
 			let vid = $(this).attr("data-id");// 클릭한 아파트의 이름 
+			console.log(vid)
 			$.ajax({
 				url : '${root}/interest/list/' + vid,
 				type:'GET',
@@ -116,36 +117,55 @@
 					//매매가격낮은순 높은 순 눌렀을 때에 , 
 					$(document).on("change", "#dealsort", function(){
 						 var d = $('#dealsort').val();
-						 $.ajax({
-								url : '${root}/interest/list/' + vid,
-								type:'GET',
-								contentType:'application/json;charset=utf-8',
-								success:function(details) {
-									$("#detaillist").empty();
-									$(details).each(function(index, detail){
-										let str=`
-											<tr>
-											<td>${'${detail.dealAmount}'}</td>
-											<td>${'${detail.area}'}</td>
-											<td>${'${detail.floor}'}</td>
-										</tr>` ;
-										
-										$("#detaillist").append(str);
-									});
-									
-								
-								}, // end of success
-								error:function(xhr,status,msg){
-									console.log("상태값 : " + status + " Http에러메시지 : "+msg);
-								}
-							});
-			           	 // 매매가격 높은 순 정렬 
+			           	// 매매가격 높은 순 정렬 
 						 if(d=="up"){
-			           		alert(vid+"오ㅊ름차순")
+								$.ajax({
+									url : '${root}/interest/up/' + vid, 
+									type:'GET',
+									contentType:'application/json;charset=utf-8',
+									success:function(details) {
+										$("#detaillist").empty();
+										$(details).each(function(index, detail){
+											let str=`
+												<tr>
+												<td>${'${detail.dealAmount}'}</td>
+												<td>${'${detail.area}'}</td>
+												<td>${'${detail.floor}'}</td>
+											</tr>` ;
+											
+											$("#detaillist").append(str);
+										});
+									},
+										error:function(xhr,status,msg){
+											console.log("상태값 : " + status + " Http에러메시지 : "+msg);
+										}
+										
+								});
 			           	 }
 			           	 // 매매가격 낮은 순 정렬 
 						 else {
-			
+								$.ajax({
+									url : '${root}/interest/down/' + vid, 
+									type:'GET',
+									contentType:'application/json;charset=utf-8',
+									success:function(details) {
+										$("#detaillist").empty();
+										$(details).each(function(index, detail){
+											let str=`
+												<tr>
+												<td>${'${detail.dealAmount}'}</td>
+												<td>${'${detail.area}'}</td>
+												<td>${'${detail.floor}'}</td>
+											</tr>` ;
+											
+											$("#detaillist").append(str);
+										});
+									},
+										error:function(xhr,status,msg){
+											console.log("상태값 : " + status + " Http에러메시지 : "+msg);
+										}
+										
+								});
 						 }
 					}); // end of 매매정렬
 					
@@ -163,7 +183,35 @@
 		//찜 갯수많은순 적은 순 눌렀을 때 , 
 		$("#likesort").change(function(){
 			 var d = $('#likesort').val();
-             alert(d);
+			 if(d=="up"){ // 찜 오름차순
+					$.ajax({
+						url : '${root}/interest/interestup', 
+						type:'GET',
+						contentType:'application/json;charset=utf-8',
+						success:function(interests) {
+							makeLikeList(interests);
+						},
+							error:function(xhr,status,msg){
+								console.log("상태값 : " + status + " Http에러메시지 : "+msg);
+							}
+							
+					});
+        	 }
+        	 //찜 내림차순 
+			 else {
+					$.ajax({
+						url : '${root}/interest/interestdown' , 
+						type:'GET',
+						contentType:'application/json;charset=utf-8',
+						success:function(interests) {
+							makeLikeList(interests);
+						},
+							error:function(xhr,status,msg){
+								console.log("상태값 : " + status + " Http에러메시지 : "+msg);
+							}
+							
+					});
+			 }
 		});
 		
 	
@@ -205,7 +253,19 @@
 			$("#interestlist").append(str);
 		}) ; // each
 	}
-	
+	function makeLikeList(interests){
+		$("#interestlist").empty();
+		$(interests).each(function(index, interest){
+			let str =`
+				<tr id="view_${'${interest.aptname}'}" class="view" data-id="${'${interest.aptName}'}">
+					<td>${'${interest.aptName}'}</td>
+					<td><button type="button" class="cancelBtn btn btn-outline-danger">삭제</button></td>
+				</tr>	
+			`;
+			
+			$("#interestlist").append(str);
+		}) ; // each
+	}
 
 	</script>
 

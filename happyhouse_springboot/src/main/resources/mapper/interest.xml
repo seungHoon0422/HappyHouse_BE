@@ -41,4 +41,16 @@
 		where i.aptName = #{aptName};
 	</select> 
 	
+	<resultMap type="HashMap" id="likeList">
+		<result column="aptName" property="aptName"/>
+		<result column="count" property="count"/>	
+	</resultMap>
+	
+	<select id="likelist" parameterType="string" resultMap="likeList">
+		select count(*) , aptName from interest join houseinfo 
+		on houseinfo.aptCode= interest.aptCode 
+		where interest.aptCode in (select aptCode from interest where userid=#{userid})
+		group by interest.aptCode
+	</select> 
+	
 </mapper>
