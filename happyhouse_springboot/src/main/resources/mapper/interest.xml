@@ -23,14 +23,19 @@
 		aptCode = (select aptCode from houseinfo where aptName=#{aptName});
 	</delete>
 	
-	<resultMap type="HouseDealInfoDto" id="interestList">
+	<resultMap type="HashMap" id="interestList">
 		<result column="dealAmount" property="dealAmount"/>
 		<result column="area" property="area"/>
 		<result column="floor" property="floor"/>
+		<result column="aptName" property="aptName"/>
+		<result column="dongName" property="dongName"/>
+		<result column="jibun" property="jibun"/>
+		<result column="buildYear" property="buildYear"/>
+		
 	</resultMap>
 	
 	<select id="list" parameterType="string" resultMap="interestList">
-		select d.dealAmount, d.area, d.floor
+		select d.dealAmount, d.area, d.floor , i.aptName, i.dongName, i.jibun, i.buildYear
  		from houseinfo i join housedeal d
  		on i.aptCode = d.aptCode
 		where i.aptName = #{aptName};

@@ -1,5 +1,6 @@
 package com.house.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class InterestServiceImpl implements InterestService {
 	}
 
 	@Override
-	public List<HouseDealInfoDto> list(String aptName) throws Exception {
+	public List<HashMap> list(String aptName) throws Exception {
 		return interestMapper.list(aptName);
 	}
 }

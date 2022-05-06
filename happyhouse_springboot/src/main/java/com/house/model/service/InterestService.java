@@ -1,5 +1,6 @@
 package com.house.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.house.model.HouseDealInfoDto;
@@ -21,6 +22,6 @@ public interface InterestService {
 	void delete(String aptName, String userid) throws Exception;
 	
 	/**아파트 이름에 대한 모든 매매 목록 불러오기*/
-	List<HouseDealInfoDto> list(String aptName) throws Exception;
+	List<HashMap> list(String aptName) throws Exception;
 
 }

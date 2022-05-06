@@ -1,5 +1,8 @@
 package com.house.controller;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -116,11 +119,36 @@ public class InterestController {
 	@GetMapping("/list/{aptName}")
 	@ResponseBody
 	public ResponseEntity<?> list(@PathVariable("aptName") String aptName) throws Exception{
-		System.out.println(aptName);
-		List<HouseDealInfoDto> list = interestService.list(aptName);
+		//System.out.println(aptName);
+		List<HashMap> list = interestService.list(aptName);
 		System.out.println(list.toString());
 		if(list !=null && !list.isEmpty()) {
-			return new ResponseEntity<List<HouseDealInfoDto>>(list, HttpStatus.OK);
+			return new ResponseEntity<List<HashMap>>(list, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	/**클릭한 아파트에 대한 오름정렬*/
+	@GetMapping("/up/{aptName}")
+	@ResponseBody
+	public ResponseEntity<?> up(@PathVariable("aptName") String aptName) throws Exception{
+		//System.out.println(aptName);
+		List<HashMap> list = interestService.list(aptName);
+		if(list !=null && !list.isEmpty()) {
+			list.sort(new Comparator<HashMap>() {
+
+				@Override
+				public int compare(HashMap first, HashMap second) {
+					String one = (String) first.get("dealAmount");
+					String two= (String)second.get("dealAmount");
+					return one.compareTo(two);
+				}
+				
+			});
+			System.out.println(list.toString());
+		
+			return new ResponseEntity<List<HashMap>>(list, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		}

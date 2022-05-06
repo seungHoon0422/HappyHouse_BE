@@ -1,5 +1,6 @@
 package com.house.model.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -18,7 +19,7 @@ public interface InterestMapper {
 
 	void delete(String aptName, String userid) throws Exception;
 
-	List<HouseDealInfoDto> list(String aptName) throws Exception;
+	List<HashMap> list(String aptName) throws Exception;
 
 
 }
