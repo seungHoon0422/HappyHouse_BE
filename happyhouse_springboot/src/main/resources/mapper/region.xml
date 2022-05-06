@@ -8,6 +8,11 @@
 
 
 
+	<select id="getDongName" parameterType="String" resultType="String">
+		select dongName
+		from dongcode
+		where dongCode = #{dongcode}
+	</select>
 
 	<select id="getSido" resultMap="sidos">
 		select *
