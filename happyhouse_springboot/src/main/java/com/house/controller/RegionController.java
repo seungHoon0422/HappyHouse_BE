@@ -39,7 +39,8 @@ public class RegionController {
 	
 	@GetMapping(value="/sido")
 	public ResponseEntity<?> getSido(){
-		System.out.println("/reigon/sido");
+		
+		logger.info("/reigon/sido");
 		List<RegionDto> list = regionService.getSido();
 		 return new ResponseEntity<List<RegionDto>>(list, HttpStatus.OK);
 	}
@@ -47,23 +48,23 @@ public class RegionController {
 	@GetMapping(value="gugun/{regcode}")
 	public ResponseEntity<?> getGugun(@PathVariable("regcode") String regcode){
 		
-		System.out.println("/reigon/"+regcode);
+		logger.info("/reigon/gugun/"+regcode);
 		List<RegionDto> list = regionService.getGugun();
 		List<RegionDto> guguns = new ArrayList<RegionDto>();
 		String gugunCode = regcode.substring(0,2);
-		System.out.println(list.size());
+
 		for (RegionDto gugun : list) {
 			if(gugun.getCode().substring(0, 2).equals(gugunCode))
 				guguns.add(gugun);
 		}
-		System.out.println("list size : "+guguns.size());
+
 		return new ResponseEntity<List<RegionDto>>(guguns, HttpStatus.OK);
 	}
 
 	@GetMapping(value="dong/{regcode}")
 	public ResponseEntity<?> getDong(@PathVariable("regcode") String regcode){
 		
-		System.out.println("/reigon/"+regcode);
+		logger.info("/reigon/dong/"+regcode);
 		List<RegionDto> list = regionService.getDong();
 		List<RegionDto> dongs = new ArrayList<RegionDto>();
 		String gugunCode = regcode.substring(0,5);
@@ -79,14 +80,14 @@ public class RegionController {
 	
 	@GetMapping(value="/address/{code}")
 	public ResponseEntity<?> getAddress(@PathVariable("code") String code){
-		
+		logger.info("/region/address/"+code);
 		HouseInfoDto houseInfo = regionService.getAddress(code);		
 		return new ResponseEntity<HouseInfoDto>(houseInfo, HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/detail/{no}")
 	public ResponseEntity<?> getDetail(@PathVariable("no") String no){
-		
+		logger.info("region/detail/"+no);
 		HouseDealInfoDto dealInfo = houseService.dealInfoSearch(no);
 		HouseInfoDto houseInfo = houseService.houseInfoSearch(dealInfo.getAptCode());
 		Map<String, Object> map = new HashMap<String, Object>();
