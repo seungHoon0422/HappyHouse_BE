@@ -34,13 +34,13 @@
 <c:if test="${!empty userinfo}">
 	<ul class="navbar-nav justify-content-end">
 	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user/info">회원정보</a></li>
-	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/interest/interest">관심목록</a></li>
+	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user/interest">관심목록</a></li>
 	<c:if test="${userinfo.level ==0}">
 	<li class="nav-item"><a class="nav-link text-secondary" href="${root}/house?act=mvDealList">매매 목록</a></li>
 	</c:if>
-	<c:if test="${userinfo.level ==1}">
+<%-- 	<c:if test="${userinfo.level ==1}">
 	<li class="nav-item"><a class="nav-link text-secondary" href="${root}/house?act=mvDealList">매매 등록</a></li>
-	</c:if>
+	</c:if> --%>
 	<li class="nav-item"><a class="nav-link text-secondary" href = "${root}/user/logout">LogOut</a></li>
 	</ul>
 </c:if>

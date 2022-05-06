@@ -17,4 +17,23 @@
 		where interest.userid= #{userid};
 	</select>
 	
+	<delete id="delete">
+		delete from interest 
+		where userid = #{userid} and 
+		aptCode = (select aptCode from houseinfo where aptName=#{aptName});
+	</delete>
+	
+	<resultMap type="HouseDealInfoDto" id="interestList">
+		<result column="dealAmount" property="dealAmount"/>
+		<result column="area" property="area"/>
+		<result column="floor" property="floor"/>
+	</resultMap>
+	
+	<select id="list" parameterType="string" resultMap="interestList">
+		select d.dealAmount, d.area, d.floor
+ 		from houseinfo i join housedeal d
+ 		on i.aptCode = d.aptCode
+		where i.aptName = #{aptName};
+	</select> 
+	
 </mapper>

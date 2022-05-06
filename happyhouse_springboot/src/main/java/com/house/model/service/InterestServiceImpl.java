@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.house.model.HouseDealInfoDto;
+import com.house.model.HouseListVo;
 import com.house.model.InterestDto;
 import com.house.model.UserDto;
 import com.house.model.mapper.InterestMapper;
@@ -23,5 +25,16 @@ public class InterestServiceImpl implements InterestService {
 	@Override
 	public List<String> interest(String userid) throws Exception {
 		return interestMapper.interest(userid);
+	}
+
+	@Override
+	public void delete(String aptName, String userid) throws Exception {
+		interestMapper.delete(aptName, userid);
+		
+	}
+
+	@Override
+	public List<HouseDealInfoDto> list(String aptName) throws Exception {
+		return interestMapper.list(aptName);
 	}
 }

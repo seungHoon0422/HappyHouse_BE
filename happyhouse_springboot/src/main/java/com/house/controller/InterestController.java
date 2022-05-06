@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.house.model.HouseDealInfoDto;
+import com.house.model.HouseListVo;
 import com.house.model.InterestDto;
 import com.house.model.UserDto;
 import com.house.model.service.InterestService;
@@ -74,15 +77,53 @@ public class InterestController {
 	/**관심 목록 조회
 	 * @throws Exception */
 	@GetMapping("/interest")
-	public String interest(HttpSession session, Model model) throws Exception {
+	public ResponseEntity<?> interest(HttpSession session) throws Exception {
 		System.out.println("hi");
 		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
 		String userid = user.getUserid();
 		List<String> list= interestService.interest(userid);
 		System.out.println(list.toString()); 
-		model.addAttribute("apartlist", list);  // 관심등록한 아파트의 이름
-		return "user/interest"; 
+		if(list !=null && !list.isEmpty()) {
+			return new ResponseEntity<List<String>>(list, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+	
+//		model.addAttribute("apartlist", list);  // 관심등록한 아파트의 이름
+//		return "user/interest"; 
 			
 	}
 	
+	/**관심 목록 삭제*/
+	@DeleteMapping("/interest/{aptName}")
+	@ResponseBody
+	public ResponseEntity<?> delete(@PathVariable("aptName") String aptName , HttpSession session) throws Exception{
+		System.out.println(aptName);
+		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
+		String userid = user.getUserid();
+		interestService.delete(aptName , userid);
+		List<String> list= interestService.interest(userid);
+		System.out.println(list.toString()); 
+		if(list !=null && !list.isEmpty()) {
+			return new ResponseEntity<List<String>>(list, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+		
+	}
+	
+	/**클릭한 아파트에 대한 상세정보*/
+	@GetMapping("/list/{aptName}")
+	@ResponseBody
+	public ResponseEntity<?> list(@PathVariable("aptName") String aptName) throws Exception{
+		System.out.println(aptName);
+		List<HouseDealInfoDto> list = interestService.list(aptName);
+		System.out.println(list.toString());
+		if(list !=null && !list.isEmpty()) {
+			return new ResponseEntity<List<HouseDealInfoDto>>(list, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}
+	}
+
 }

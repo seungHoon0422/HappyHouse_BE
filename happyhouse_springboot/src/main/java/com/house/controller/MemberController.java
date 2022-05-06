@@ -137,4 +137,9 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	/**관심목록 페이지 이동*/
+	@GetMapping("/interest")
+	public String interest() {
+		return "user/interest";
+	}
 }	
