@@ -21,7 +21,7 @@
 		
 		
 		// 해당 아파트에 대한 목록 보기 
-		$(document).on("dblclick", "tr.view", function() {
+		$(document).on("click", ".listBtn", function() {
 			
 			let container = document.getElementById('interestmap'); //지도를 담을 영역의 DOM 레퍼런스
 			let options = { //지도를 생성할 때 필요한 기본 옵션
@@ -47,7 +47,7 @@
 			let count = 0;
 			
 			
-			let vid = $(this).attr("data-id");// 클릭한 아파트의 이름 
+			let vid = $(this).parents("tr").attr("data-id");// 클릭한 아파트의 이름 
 			console.log(vid)
 			$.ajax({
 				url : '${root}/interest/list/' + vid,
@@ -246,7 +246,8 @@
 			let str =`
 				<tr id="view_${'${aptname}'}" class="view" data-id="${'${aptname}'}">
 					<td>${'${aptname}'}</td>
-					<td><button type="button" class="cancelBtn btn btn-outline-danger">삭제</button></td>
+					<td><button type="button" class="listBtn btn btn-outline-primary">목록</button>
+					<button type="button" class="cancelBtn btn btn-outline-danger">삭제</button></td>
 				</tr>	
 			`;
 			
@@ -259,7 +260,8 @@
 			let str =`
 				<tr id="view_${'${interest.aptname}'}" class="view" data-id="${'${interest.aptName}'}">
 					<td>${'${interest.aptName}'}</td>
-					<td><button type="button" class="cancelBtn btn btn-outline-danger">삭제</button></td>
+					<td><button type="button" class="listBtn btn btn-outline-primary">목록</button>
+					<button type="button" class="cancelBtn btn btn-outline-danger">삭제</button></td>
 				</tr>	
 			`;
 			
@@ -292,7 +294,8 @@
 					<thead>
 					    <tr>
 					      <th scope="col">아파트 이름</th>
-					      <th scope="col">삭제</th>
+					      <th scope="col">-</th>
+					  
 					    </tr>
 					</thead>
 					<tbody id="interestlist">
