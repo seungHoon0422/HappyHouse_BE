@@ -44,6 +44,11 @@ public class RegionServiceImpl implements RegionService{
 		return regionMapper.getDetail(no);
 	}
 
+	@Override
+	public String getDongName(String dongcode) {
+		return regionMapper.getDongName(dongcode);
+	}
+
 	
 	
 }
