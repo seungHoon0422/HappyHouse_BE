@@ -3,6 +3,8 @@ package com.house.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,16 +24,21 @@ import com.house.model.service.StarbucksService;
 @CrossOrigin("*")
 public class StarbucksController {
 
-	
+	private Logger logger = LoggerFactory.getLogger(StarbucksController.class);
+
+
 	@Autowired
 	RegionService regionService;
 	
 	@Autowired
 	StarbucksService starbucksService;
 	
+	/** 같은 동에있는 스타벅스 매장 search */
 	@GetMapping("/search/{dongcode}")
 	public ResponseEntity<?> searchStarbucksByDong(@PathVariable("dongcode") String dongcode){
-		System.out.println("dongcode : "+dongcode);
+		
+		logger.info("starbucks search by dong code " + dongcode);
+
 		String dongname = regionService.getDongName(dongcode);
 		List<StarbucksDto> list = starbucksService.searchAll(); 
 		List<StarbucksDto> response = new ArrayList<StarbucksDto>();
@@ -40,6 +47,7 @@ public class StarbucksController {
 			if(dto.getAddress().contains(dongname)) response.add(dto);
 		}
 		
+//		logger.info("===========================");
 		for (StarbucksDto starbucksDto : response) {
 			System.out.println(starbucksDto.getName() + " " + starbucksDto.getAddress());
 		}
