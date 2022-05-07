@@ -320,14 +320,29 @@
 		    
 		    <!-- body -->
 		    <div class="modal-body">
-		    <div class="row mt-3">
-		    <table class="mb-5">
+		    <div class="container max-width">
+		    <table class="container mb-5">
+		    
+		    <thead>
 		    	<tr>
-		    		<tc>
-						<div id="interestmap" style="height: 250px"><strong>kakao map</strong></div>
-		    		</tc>		  	
-		  			<tc>
-					  	<tbody>
+		    		<th></th>
+		    		<th></th>
+		    	</tr>
+		    </thead>
+		    <tbody>
+		    	<tr>
+			    	<td>
+			    	<div id="interestmap" style="width:350px; height: 300px"><strong>kakao map</strong></div>
+			    	</td>
+			    	<td>
+			    		<table class="table m-2">
+			    			<thead>
+			    				<tr>
+			    				<th></th>
+			    				<th></th>
+			    				</tr>
+			    			</thead>
+			    			<tbody>
 					    	<tr>
 					      		<th scope="row">아파트명</th>
 					      		<td id="maptname"></td>
@@ -341,8 +356,11 @@
 					      		<td colspan="2" id="mbuildyear"></td>
 					    	</tr>
 					  	</tbody>	
-		    		</tc>
-		    
+			    		</table>
+			    	</td>
+		    	
+		    	</tr>
+		    </tbody>
 		    </table>
 		   	
 		 	</div >
