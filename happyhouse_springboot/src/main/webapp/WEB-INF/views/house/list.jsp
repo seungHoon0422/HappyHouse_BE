@@ -19,14 +19,14 @@ $(function () {
 	
 	
 // 	=========================  kakao map api 사용  =================================
-	let container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-	let options = { //지도를 생성할 때 필요한 기본 옵션
+	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
 		center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
 		level: 3 //지도의 레벨(확대, 축소 정도)
 	};
 
-	let map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
-	let geocoder = new kakao.maps.services.Geocoder();
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	var geocoder = new kakao.maps.services.Geocoder();
 	// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
 	let mapTypeControl = new kakao.maps.MapTypeControl();
 
@@ -35,15 +35,15 @@ $(function () {
 	map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
 	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	let zoomControl = new kakao.maps.ZoomControl();
+	var zoomControl = new kakao.maps.ZoomControl();
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	// 중복된 마커를 찍지 않게하기위해 사용
-	let prevAptCode = 0;
-	let count = 0;
+	var prevAptCode = 0;
+	var count = 0;
 	// =================== 1. 검색된 아파트마다 마커 생성 ==================================
 	$("input[name=aptCode]").each(function(index, code){
-		let value = $(this).val();
-		let parents = $(this).parents('tr');
+		var value = $(this).val();
+		var parents = $(this).parents('tr');
 		if(value == prevAptCode) return true;
 		prevAptCode = value;
 		
@@ -103,7 +103,7 @@ $(function () {
 	$(document).on("click", "[name=detailBtn]", function() {
 		
 		// 선택한 아파트 코드 저장
-		let aptid = 'aptCode' + $(this).attr('data-id');
+		var aptid = 'aptCode' + $(this).attr('data-id');
 		selectAptCode = $("#"+aptid).text();
 
 // 		$('#starbucksmap').css("display", "none");
@@ -201,11 +201,7 @@ $(function () {
 		        });
 		        // 인포윈도우로 장소에 대한 설명을 표시합니다
 		        let infowindow = new kakao.maps.InfoWindow({
-		            content: '<div style="width:200px;padding:6px 0;">'+
-		            '이름 : '+ deal.aptName + '</br>'+
-		            '주소 : '+ deal.address + '</br>'+
-		            '건축년도 : '+ deal.buildYear +
-		            '</div>'
+		            content: '<div style="width:200px;padding:6px 0;">아파트 위치</div>'
 		        });
 		        
 		        infowindow.close(map, marker);
@@ -280,7 +276,7 @@ $(document).on('click', '#starbucksBtn', function(){
 	        
 	        // 인포윈도우로 장소에 대한 설명을 표시합니다
 	        let infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:200px;padding:6px 0;">info window</div>'
+	            content: '<div style="width:200px;padding:6px 0;">아파트 위치</div>'
 	        });
 	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	        map.setCenter(coords);
@@ -314,7 +310,7 @@ $(document).on('click', '#starbucksBtn', function(){
 			dis = 10.0;
 			// 같은 행정동에 있는 스타버스 매장 map에 표시
 			for(let starbucks of response){
-				
+					
 				geocoder.addressSearch(starbucks['address'], function(result, status) {
 
 				    // 정상적으로 검색이 완료됐으면 

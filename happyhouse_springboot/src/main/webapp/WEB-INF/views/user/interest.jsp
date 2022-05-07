@@ -176,7 +176,8 @@
 					console.log("상태값 : " + status + " Http에러메시지 : "+msg);
 				}
 			});
-				
+			map.relayout();
+
 		
 		
 		});
@@ -214,6 +215,8 @@
 							
 					});
 			 }
+				map.relayout();
+
 		});
 		
 	
@@ -323,27 +326,12 @@
 		    <!-- body -->
 		    <div class="modal-body">
 		    <div class="container max-width">
-		    <table class="container mb-3">
-		    
-		    <thead>
-		    	<tr>
-		    		<th></th>
-		    		<th></th>
-		    	</tr>
-		    </thead>
-		    <tbody>
-		    	<tr>
-			    	<td>
-			    	<div id="interestmap" style="width:350px; height: 300px"><strong>kakao map</strong></div>
-			    	</td>
-			    	<td>
-			    		<table class="table m-2">
-			    			<thead>
-			    				<tr>
-			    				<th></th>
-			    				<th></th>
-			    				</tr>
-			    			</thead>
+		    <div class="row">
+		    	<div class="col-6">
+			    	<div id="interestmap" style="height:350px;"><strong>kakao map</strong></div>
+		    	</div>
+		    	<div class="col-6">
+			    		<table class="table mt-5">
 			    			<tbody>
 					    	<tr>
 					      		<th scope="row">아파트명</th>
@@ -359,12 +347,9 @@
 					    	</tr>
 					  	</tbody>	
 			    		</table>
-			    	</td>
-		    	
-		    	</tr>
-		    </tbody>
-		    </table>
-		   	
+		    	</div>
+		    
+		    </div>
 		 	</div >
 			
 			 <!-- 매매가격 순  정렬  -->
