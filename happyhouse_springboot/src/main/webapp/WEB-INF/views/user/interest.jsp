@@ -328,7 +328,7 @@
 		    <div class="container max-width">
 		    <div class="row">
 		    	<div class="col-6">
-			    	<div id="interestmap" style="height:100%"><strong>kakao map</strong></div>
+			    	<div id="interestmap" style="width:100%;height:200px;"><strong>kakao map</strong></div>
 		    	</div>
 		    	<div class="col-6">
 			    		<table class="table mt-5">
