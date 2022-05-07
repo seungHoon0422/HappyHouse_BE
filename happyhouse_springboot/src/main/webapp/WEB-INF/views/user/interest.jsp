@@ -62,6 +62,7 @@
 							<td>${'${detail.area}'}</td>
 							<td>${'${detail.floor}'}</td>
 						</tr>` ;
+						$("#modalapt").text(detail.aptName);
 						$('#maptname').text(detail.aptName);
 						$('#maddress').text(detail.dongName+` `+detail.jibun);
 						$('#mbuildyear').text(detail.buildYear+''); 
@@ -190,6 +191,7 @@
 						contentType:'application/json;charset=utf-8',
 						success:function(interests) {
 							makeLikeList(interests);
+							
 						},
 							error:function(xhr,status,msg){
 								console.log("상태값 : " + status + " Http에러메시지 : "+msg);
@@ -314,14 +316,14 @@
 			<div class="modal-content">
 			<!-- header -->
 			<div class="modal-header">
-		        <h4 class="modal-title">아파트 이름</h4>
+		        <h5 class="modal-title align-self-center" id="modalapt">아파트 이름</h5>
 		        <button type="button" class="close" data-dismiss="modal">&times;</button>
 		    </div>
 		    
 		    <!-- body -->
 		    <div class="modal-body">
 		    <div class="container max-width">
-		    <table class="container mb-5">
+		    <table class="container mb-3">
 		    
 		    <thead>
 		    	<tr>
