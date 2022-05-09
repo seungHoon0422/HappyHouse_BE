@@ -69,6 +69,7 @@
 						
 						// =================== 마커 생성 ==================================
 							
+							
 							let address = detail.dongName+' '+detail.jibun
 							
 							geocoder.addressSearch(address, function(result, status) {
@@ -106,8 +107,9 @@
 							        map.setCenter(coords);
 							    } 
 							}); // end of geocoder
-							
-							map.relayout();
+							setTimeout(function(){ map.relayout(); }, 0);
+
+						
 						//=================================================	
 						
 						$("#detaillist").append(str);
