@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,15 +30,21 @@ import com.house.model.InterestDto;
 import com.house.model.UserDto;
 import com.house.model.service.InterestService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 /***
  * 관심정보 처리 컨트롤러*/
 @RestController
 @RequestMapping("/interest")
+@CrossOrigin("*")
+@Api("House Controller v1")
 public class InterestController {
 	
 	@Autowired
 	private InterestService interestService;
 
+	
 	@GetMapping("/search")	
 	private ResponseEntity<?> searchById(HttpSession session){
 		
@@ -64,6 +71,7 @@ public class InterestController {
 		return new ResponseEntity<Integer>(0, HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "관심 지역 등록 ", notes = "관심지역을 등록합니다.")
 	/**관심 지역 등록*/
 	@PostMapping("/regist")
 	private ResponseEntity<?> regist(@RequestBody InterestDto interestDto, HttpSession session) throws Exception{
@@ -78,6 +86,7 @@ public class InterestController {
 	
 	/**관심 목록 조회
 	 * @throws Exception */
+	@ApiOperation(value = "관심목록조회", notes = "관심 등록한 목록을 조회합니다.")
 	@GetMapping("/interest")
 	public ResponseEntity<?> interest(HttpSession session) throws Exception {
 		System.out.println("hi");
@@ -150,6 +159,7 @@ public class InterestController {
 	}
 	
 	/**관심 목록 삭제*/
+	@ApiOperation(value = "관심 아파트 삭제", notes = "아파트를 관심 목록에서 삭제합니다.")
 	@DeleteMapping("/interest/{aptName}")
 	public ResponseEntity<?> delete(@PathVariable("aptName") String aptName , HttpSession session) throws Exception{
 		System.out.println(aptName);
@@ -166,6 +176,7 @@ public class InterestController {
 	}
 	
 	/**클릭한 아파트에 대한 상세정보*/
+	@ApiOperation(value = "관심 아파트 매물 정보", notes = "관심 아파트의 매물 목록을 확인합니다.")
 	@GetMapping("/list/{aptName}")
 	public ResponseEntity<?> list(@PathVariable("aptName") String aptName) throws Exception{
 		//System.out.println(aptName);
