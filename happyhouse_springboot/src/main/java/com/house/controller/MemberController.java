@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,6 +35,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RequestMapping("/user")
 public class MemberController {
 	
+	private static final String SUCCESS = "success";
+	private static final String FAIL = "fail";
+	
 	@Autowired
 	private UserService userService;
 	
@@ -53,10 +58,16 @@ public class MemberController {
 	
 	/**회원정보 입력 후 회원가입 버튼
 	 * @throws Exception */
-	@PostMapping("/register")
-	public String register(UserDto userDto) throws Exception {
-		userService.registerMember(userDto);
-		return "user/login";
+	@PostMapping
+	@ResponseBody
+	public ResponseEntity<String> register(@RequestBody UserDto userDto) throws Exception {
+	    System.out.println(userDto.toString());
+		if(userService.registerMember(userDto)) {
+	    	return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}
+	    return new ResponseEntity<String>(FAIL, HttpStatus.NO_CONTENT);
+		
+//		return "user/login";
 	}
 	
 	/**아이디 중복검사*/

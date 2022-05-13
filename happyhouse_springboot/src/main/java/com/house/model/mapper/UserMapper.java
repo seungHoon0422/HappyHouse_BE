@@ -9,7 +9,7 @@ import com.house.model.UserDto;
 @Mapper
 public interface UserMapper {
 
-	void registerMember(UserDto userDto) throws Exception;
+	int registerMember(UserDto userDto) throws Exception;
 
 	UserDto login(Map<String, String> map) throws Exception;
 

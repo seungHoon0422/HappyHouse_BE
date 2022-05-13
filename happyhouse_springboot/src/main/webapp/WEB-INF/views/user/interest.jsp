@@ -107,6 +107,8 @@
 							        map.setCenter(coords);
 							    } 
 							}); // end of geocoder
+							
+							
 							setTimeout(function(){ map.relayout(); }, 0);
 
 						
