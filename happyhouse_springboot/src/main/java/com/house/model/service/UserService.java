@@ -8,7 +8,7 @@ public interface UserService  {
 
 	/**회원 가입
 	 * @return */
-	boolean registerMember(UserDto userDto) throws Exception;
+	void registerMember(UserDto userDto) throws Exception;
 	/**로그인*/
 	UserDto login(Map<String, String> map) throws Exception;
 	/**아이디로 회원 정보 조회 */

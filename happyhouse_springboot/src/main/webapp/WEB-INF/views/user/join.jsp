@@ -48,31 +48,8 @@
 			}else{
 				$("#phone").val($("#phone1").val() +"-" + $("#phone2").val()+"-" + $("#phone3").val());
 				$("#email").val($("#emailid").val() +"@" + $("#emaildomain").val());
-				
-				let registerinfo = JSON.stringify({
-					"username" : $("#username").val(), 
-					"userid" : $("#userid").val(), 
-					"userpass" : $("#userpass").val(), 
-					"email" : $("#email").val(),
-					"phone" : $("#phone").val(),
-					"level" : $("level").val()
-				});
-				console.log(registerinfo);
-				$.ajax({
-					url : '${root}/user',
-					type : 'POST',
-					contentType:'application/json;charset=utf-8',
-					dataType:'json',
-					data: registerinfo,
-					success:function(response) {
-						alert('회원가입성공 !! '); 
-					},
-					error:function(xhr,status,msg){
-						alert('회원가입실패ㅜㅜ ');
-						console.log("상태값 : " + status + " Http에러메시지 : "+msg);
-					}
-				});
-				//$("#registerform").attr("action", "${root}/user/register").submit();
+		
+				$("#registerform").attr("action", "${root}/user/register").submit();
 			}
 		});
 			
