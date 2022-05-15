@@ -45,6 +45,7 @@ public class RegionController {
 		 return new ResponseEntity<List<RegionDto>>(list, HttpStatus.OK);
 	}
 
+	
 	@GetMapping(value="gugun/{regcode}")
 	public ResponseEntity<?> getGugun(@PathVariable("regcode") String regcode){
 		
