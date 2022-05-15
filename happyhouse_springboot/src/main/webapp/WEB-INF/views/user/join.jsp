@@ -81,7 +81,7 @@
                     <div id="idresult" class="mt-1"></div>
                 </div>
                 <div class="form-group">
-                    <label for="userpwd">비밀번호</label>
+                    <label for="userpass">비밀번호</label>
                     <input type="password" class="form-control" id="userpass" name="userpass" placeholder="비밀번호를 입력하세요">
                 </div>
                 <div class="form-group">
