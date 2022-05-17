@@ -54,9 +54,10 @@ public class MemberController {
 	/**회원정보 입력 후 회원가입 버튼
 	 * @throws Exception */
 	@PostMapping("/register")
+	@ResponseBody
 	public String register(UserDto userDto) throws Exception {
 		userService.registerMember(userDto);
-		return "user/login";
+		return "success";
 	}
 	
 	/**아이디 중복검사*/
