@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
@@ -87,11 +88,9 @@ public class InterestController {
 	/**관심 목록 조회
 	 * @throws Exception */
 	@ApiOperation(value = "관심목록조회", notes = "관심 등록한 목록을 조회합니다.")
-	@GetMapping("/interest")
-	public ResponseEntity<?> interest(HttpSession session) throws Exception {
-		System.out.println("hi");
-		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
-		String userid = user.getUserid();
+	@GetMapping("/{userid}")
+	public ResponseEntity<?> interest(@PathVariable String userid) throws Exception {
+		System.out.println("hi 관심목록조회해보자");
 		List<String> list= interestService.interest(userid);
 		System.out.println(list.toString()); 
 		if(list !=null && !list.isEmpty()) {
@@ -160,17 +159,15 @@ public class InterestController {
 	
 	/**관심 목록 삭제*/
 	@ApiOperation(value = "관심 아파트 삭제", notes = "아파트를 관심 목록에서 삭제합니다.")
-	@DeleteMapping("/interest/{aptName}")
-	public ResponseEntity<?> delete(@PathVariable("aptName") String aptName , HttpSession session) throws Exception{
-		System.out.println(aptName);
-		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
-		String userid = user.getUserid();
-		interestService.delete(aptName , userid);
+	@DeleteMapping("/{aptName}/{userid}")
+	public ResponseEntity<?> delete(@PathVariable("aptName") String aptName, @PathVariable("userid") String userid) throws Exception{
+		System.out.println(aptName +" "+ userid);
+ 		interestService.delete(aptName , userid);
 		List<String> list= interestService.interest(userid);
 		if(list !=null && !list.isEmpty()) {
-			return new ResponseEntity<List<String>>(list, HttpStatus.OK);
+			return new ResponseEntity<String>("success", HttpStatus.OK);
 		} else {
-			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<String>("fail",HttpStatus.NO_CONTENT);
 		}
 		
 	}
@@ -179,7 +176,7 @@ public class InterestController {
 	@ApiOperation(value = "관심 아파트 매물 정보", notes = "관심 아파트의 매물 목록을 확인합니다.")
 	@GetMapping("/list/{aptName}")
 	public ResponseEntity<?> list(@PathVariable("aptName") String aptName) throws Exception{
-		//System.out.println(aptName);
+		System.out.println(aptName);
 		List<HashMap> list = interestService.list(aptName);
 		System.out.println(list.toString());
 		if(list !=null && !list.isEmpty()) {

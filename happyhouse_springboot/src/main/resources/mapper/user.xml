@@ -40,7 +40,7 @@
 	<!-- 회원 정보 수정 -->
 	<update id="update" parameterType="UserDto">
 		update user
-		set userpass=#{userpass}
+		set userpass=#{userpass}, username=#{username}, email=#{email}, phone=#{phone}
 		where userid= #{userid} 
 	</update>
 

@@ -20,7 +20,7 @@
 	<delete id="delete">
 		delete from interest 
 		where userid = #{userid} and 
-		aptCode = (select aptCode from houseinfo where aptName=#{aptName});
+		aptCode in (select aptCode from houseinfo where aptName=#{aptName});
 	</delete>
 	
 	<resultMap type="HashMap" id="interestList">
