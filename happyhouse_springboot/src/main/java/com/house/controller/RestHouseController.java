@@ -78,6 +78,15 @@ public class RestHouseController {
 		List<SimpleHouseInfoDto> dealinfos = houseService.apartNameSearch(name);
 		 return new ResponseEntity<List<SimpleHouseInfoDto>>(dealinfos, HttpStatus.OK);
 	}
+	/** 매매번호로 상세정보 검색 */
+	@ApiOperation(value = "매매 상세정보(거래번호)", notes = "매매 상세 정보를 리턴합니다.")
+	@GetMapping("/dealInfoByDealNo/{no}")
+	public ResponseEntity<?> getDealInfoByDealNo(@PathVariable("no") String no){
+		
+		logger.info("/dealInfoByDealNo/"+ no + ", getDealInfoByDealNo()");
+		HouseDealInfoDto houseDealInfoDto = houseService.dealInfoSearch(no);
+		 return new ResponseEntity<HouseDealInfoDto>(houseDealInfoDto, HttpStatus.OK);
+	}
 	
 	/** 매매정보 등록 */
 	@ApiOperation(value = "매매 정보 등록", notes = "매매 정보를 등록합니다.")
