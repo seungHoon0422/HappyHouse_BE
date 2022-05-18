@@ -54,10 +54,21 @@ public class RestMemberController {
 		
 	}
 	
-	@PostMapping("regist")
+	@PostMapping("/regist")
 	public String regist(UserDto userDto) throws Exception{
 		System.out.println(userDto.toString());
 		userService.registerMember(userDto);
 		return "success"; 
+	}
+	
+	//회원정보 얻어오기 
+	@GetMapping("user")
+	public ResponseEntity<?> info(UserDto userDto) throws Exception{
+		UserDto user = userService.info(userDto); 
+		System.out.println("회원정보 불러올게요 : "+user.toString());
+		if(user!=null) {
+			return new ResponseEntity<UserDto>(user, HttpStatus.OK);
+		}
+		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
 	}
 }	 
