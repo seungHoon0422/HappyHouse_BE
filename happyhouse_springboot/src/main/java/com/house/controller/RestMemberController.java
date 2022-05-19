@@ -47,11 +47,13 @@ public class RestMemberController {
 		System.out.println(map.get("userid"));
 		System.out.println("hi");
 		UserDto userDto = userService.login(map);
+		
 		if(userDto != null) {
 			session.setAttribute("userinfo", userDto);
 			return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
 			}
-		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+		System.out.println("로그인실패");
+		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		
 	}
 	
@@ -67,9 +69,21 @@ public class RestMemberController {
 	public ResponseEntity<?> info(UserDto userDto) throws Exception{
 		UserDto user = userService.info(userDto); 
 		System.out.println("회원정보 불러올게요 : "+user.toString());
-		if(user!=null) {
+		if(user !=null) {
 			return new ResponseEntity<UserDto>(user, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
 	}
+	
+	/**회원 정보 수정 
+	 * @throws Exception */
+	@PostMapping("/update")
+	public ResponseEntity<?> update(UserDto userDto) throws Exception {
+		userService.update(userDto);
+		
+		return new ResponseEntity<String>("update", HttpStatus.OK);
+		
+	}
+	
 }	 
