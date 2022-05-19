@@ -43,11 +43,12 @@ public class RestMemberController {
 	
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestParam Map<String, String> map) throws Exception {
+	public ResponseEntity<?> login(@RequestParam Map<String, String> map, HttpSession session) throws Exception {
 		System.out.println(map.get("userid"));
 		System.out.println("hi");
 		UserDto userDto = userService.login(map);
 		if(userDto != null) {
+			session.setAttribute("userinfo", userDto);
 			return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
 			}
 		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);

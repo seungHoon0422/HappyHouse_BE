@@ -74,11 +74,12 @@ public class InterestController {
 	@ApiOperation(value = "관심 지역 등록 ", notes = "관심지역을 등록합니다.")
 	/**관심 지역 등록*/
 	@PostMapping("/regist")
-	private ResponseEntity<?> regist(@RequestBody InterestDto interestDto, HttpSession session) throws Exception{
+	private ResponseEntity<?> regist(@RequestBody InterestDto interestDto) throws Exception{
 //		System.out.println(aptCode);
-		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
-		String userid = user.getUserid(); 
-		interestDto.setUserid(userid);
+		System.out.println(interestDto.getUserid() + interestDto.getAptCode());
+//		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
+//		String userid = user.getUserid(); 
+//		interestDto.setUserid(userid);
 			interestService.regist(interestDto);
 			return new ResponseEntity<Integer>(1, HttpStatus.OK);
 	
