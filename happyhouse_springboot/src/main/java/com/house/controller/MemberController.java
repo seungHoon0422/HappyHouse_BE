@@ -110,8 +110,8 @@ public class MemberController {
 	public String info(HttpSession session, Model model) throws Exception {
 		UserDto user = (UserDto) session.getAttribute("userinfo"); 
 		if(user != null ) System.out.println(user.toString());
-		UserDto userDto = userService.info(user); // 사용자의 정보 담겨있는 userDto 
-		model.addAttribute("userlist", userDto);  
+		//UserDto userDto = userService.info(user); // 사용자의 정보 담겨있는 userDto 
+		//model.addAttribute("userlist", userDto);  
 		return "user/info";
 		
 	}

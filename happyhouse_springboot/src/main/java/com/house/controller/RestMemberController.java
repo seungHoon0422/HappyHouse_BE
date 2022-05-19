@@ -1,9 +1,11 @@
 package com.house.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +29,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.house.model.InterestDto;
 import com.house.model.UserDto;
+import com.house.model.service.JwtService;
 import com.house.model.service.UserService;
 
+import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 
@@ -38,6 +43,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @CrossOrigin("*")
 public class RestMemberController {
 	
+	@Autowired 
+	private JwtService jwtService;
+	
 	@Autowired
 	private UserService userService;
 	
@@ -45,17 +53,57 @@ public class RestMemberController {
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestParam Map<String, String> map, HttpSession session) throws Exception {
 		System.out.println(map.get("userid"));
-		System.out.println("hi");
+		System.out.println(map.get("userpass"));
+//		System.out.println("hi");
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = null; 
 		UserDto userDto = userService.login(map);
-		
-		if(userDto != null) {
-			session.setAttribute("userinfo", userDto);
-			return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
+		try {
+			if(userDto != null ) {
+				String token = jwtService.create("userid", userDto.getUserid(), "access-token"); // key, data, subject
+				resultMap.put("access-token", token);
+				resultMap.put("username", userDto.getUsername());
+				resultMap.put("message", "success");
+				status = HttpStatus.ACCEPTED;
+			}else {
+				resultMap.put("message", "fail");
+				status = HttpStatus.ACCEPTED;
 			}
-		System.out.println("로그인실패");
-		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		}catch(Exception e) {
+			System.out.println("로그인 실패 ");
+			resultMap.put("message", e.getMessage());
+			status = HttpStatus.INTERNAL_SERVER_ERROR;
+			
+		}
+		return new ResponseEntity<Map<String,Object>>(resultMap, status);
 		
 	}
+	
+	@ApiOperation(value="회원인증 ", notes ="해당 회원정보의 token 반환 ")
+	@GetMapping("/info/{userid}")
+	public ResponseEntity<Map<String,Object>> getInfo(@PathVariable("userid") String userid, HttpServletRequest request){
+		Map<String, Object> resultMap = new HashMap<>();
+		HttpStatus status = HttpStatus.ACCEPTED;
+		if(jwtService.isUsable(request.getHeader("access-token"))) { //요청헤더에 담겨온 토큰 
+			System.out.println("사용가능한 토큰 !! ");
+			try {
+				UserDto user = userService.info(userid);
+				resultMap.put("userInfo", user);
+				System.out.println(user);
+				resultMap.put("message", "success");
+			}catch(Exception e) {
+				resultMap.put("message", e.getMessage()); 
+				status = HttpStatus.INTERNAL_SERVER_ERROR;
+			}
+		}else {
+			System.out.println("사용 불가능한 토큰 : 해당 로그인 정보가 없거나 사용 시간 만료 ");
+			resultMap.put("message", "fail");
+			status = HttpStatus.ACCEPTED;
+		}
+		return new ResponseEntity<Map<String, Object>>(resultMap, status);
+	}
+		
+	
 	
 	@PostMapping("/regist")
 	public String regist(UserDto userDto) throws Exception{
@@ -67,7 +115,8 @@ public class RestMemberController {
 	//회원정보 얻어오기 
 	@GetMapping("user")
 	public ResponseEntity<?> info(UserDto userDto) throws Exception{
-		UserDto user = userService.info(userDto); 
+		String userid = userDto.getUserid();
+		UserDto user = userService.info(userid); 
 		System.out.println("회원정보 불러올게요 : "+user.toString());
 		if(user !=null) {
 			return new ResponseEntity<UserDto>(user, HttpStatus.OK);

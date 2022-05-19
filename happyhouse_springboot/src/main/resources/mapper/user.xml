@@ -25,10 +25,10 @@
 	</select>
 	
 	<!-- 회원정보조회 -->
-	<select id="info" parameterType="UserDto" resultType="UserDto">
+	<select id="info" parameterType="string" resultType="UserDto">
 		select username, userid, userpass, email, phone,level 
 		from user
-		where username=#{username} and userid=#{userid}
+		where userid=#{userid}
 	</select>
 	
 	<!-- 회원 정보 삭제 (탈퇴) -->
