@@ -106,10 +106,15 @@ public class RestMemberController {
 	
 	
 	@PostMapping("/regist")
-	public String regist(UserDto userDto) throws Exception{
+	public ResponseEntity<?> regist(UserDto userDto){
 		System.out.println(userDto.toString());
-		userService.registerMember(userDto);
-		return "success"; 
+		try{
+			userService.registerMember(userDto);
+			return new ResponseEntity<String>("환영합니다.", HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 	
 	//회원정보 얻어오기 
