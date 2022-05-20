@@ -2,8 +2,16 @@ package com.house.model;
 
 public class HouseListVo {
 
-	// foreign key
+	private int no;
 	private int aptCode;
+	private String dealAmount; //거래가격
+	private int dealYear; // 년(조회)
+	private int dealMonth;// 월(조회)
+	private int dealDay;  // 일(결과)
+	private String area;  // 면적
+	private String floor;  //층
+	private String type;   //종류
+	private String rentMoney;//대출
 	
 	// house info data
 	private String aptName;//아파트명
@@ -14,31 +22,12 @@ public class HouseListVo {
     private String lat;  //위도
     private String lng;   //경도
     private String img;   //사진
-    
-    // house deal data
-	private int no;
-	private String dealAmount; //거래가격
-    private int dealYear; // 년(조회)
-    private int dealMonth;// 월(조회)
-    private int dealDay;  // 일(결과)
-    private String area;  // 면적
-    private String floor;  //층
-    private String type;   //종류
-    private String rentMoney;//대출
-    
-	public HouseListVo(int aptCode, String aptName, String dongCode, String dongName, int buildYear, String jibun,
-			String lat, String lng, String img, int no, String dealAmount, int dealYear, int dealMonth, int dealDay,
-			String area, String floor, String type, String rentMoney) {
-		this.aptCode = aptCode;
-		this.aptName = aptName;
-		this.dongCode = dongCode;
-		this.dongName = dongName;
-		this.buildYear = buildYear;
-		this.jibun = jibun;
-		this.lat = lat;
-		this.lng = lng;
-		this.img = img;
+	public HouseListVo(int no, int aptCode, String dealAmount, int dealYear, int dealMonth, int dealDay, String area,
+			String floor, String type, String rentMoney, String aptName, String dongCode, String dongName,
+			int buildYear, String jibun, String lat, String lng, String img) {
+		super();
 		this.no = no;
+		this.aptCode = aptCode;
 		this.dealAmount = dealAmount;
 		this.dealYear = dealYear;
 		this.dealMonth = dealMonth;
@@ -47,60 +36,13 @@ public class HouseListVo {
 		this.floor = floor;
 		this.type = type;
 		this.rentMoney = rentMoney;
-	}
-	
-	public int getAptCode() {
-		return aptCode;
-	}
-	public void setAptCode(int aptCode) {
-		this.aptCode = aptCode;
-	}
-	public String getAptName() {
-		return aptName;
-	}
-	public void setAptName(String aptName) {
 		this.aptName = aptName;
-	}
-	public String getDongCode() {
-		return dongCode;
-	}
-	public void setDongCode(String dongCode) {
 		this.dongCode = dongCode;
-	}
-	public String getDongName() {
-		return dongName;
-	}
-	public void setDongName(String dongName) {
 		this.dongName = dongName;
-	}
-	public int getBuildYear() {
-		return buildYear;
-	}
-	public void setBuildYear(int buildYear) {
 		this.buildYear = buildYear;
-	}
-	public String getJibun() {
-		return jibun;
-	}
-	public void setJibun(String jibun) {
 		this.jibun = jibun;
-	}
-	public String getLat() {
-		return lat;
-	}
-	public void setLat(String lat) {
 		this.lat = lat;
-	}
-	public String getLng() {
-		return lng;
-	}
-	public void setLng(String lng) {
 		this.lng = lng;
-	}
-	public String getImg() {
-		return img;
-	}
-	public void setImg(String img) {
 		this.img = img;
 	}
 	public int getNo() {
@@ -108,6 +50,12 @@ public class HouseListVo {
 	}
 	public void setNo(int no) {
 		this.no = no;
+	}
+	public int getAptCode() {
+		return aptCode;
+	}
+	public void setAptCode(int aptCode) {
+		this.aptCode = aptCode;
 	}
 	public String getDealAmount() {
 		return dealAmount;
@@ -157,8 +105,54 @@ public class HouseListVo {
 	public void setRentMoney(String rentMoney) {
 		this.rentMoney = rentMoney;
 	}
-    
-    
+	public String getAptName() {
+		return aptName;
+	}
+	public void setAptName(String aptName) {
+		this.aptName = aptName;
+	}
+	public String getDongCode() {
+		return dongCode;
+	}
+	public void setDongCode(String dongCode) {
+		this.dongCode = dongCode;
+	}
+	public String getDongName() {
+		return dongName;
+	}
+	public void setDongName(String dongName) {
+		this.dongName = dongName;
+	}
+	public int getBuildYear() {
+		return buildYear;
+	}
+	public void setBuildYear(int buildYear) {
+		this.buildYear = buildYear;
+	}
+	public String getJibun() {
+		return jibun;
+	}
+	public void setJibun(String jibun) {
+		this.jibun = jibun;
+	}
+	public String getLat() {
+		return lat;
+	}
+	public void setLat(String lat) {
+		this.lat = lat;
+	}
+	public String getLng() {
+		return lng;
+	}
+	public void setLng(String lng) {
+		this.lng = lng;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
     
     
 }

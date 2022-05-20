@@ -100,4 +100,6 @@ public class RegionController {
 		System.out.println(houseInfo.getAptName());
 		return new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 	}
+	
+
 }

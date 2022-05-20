@@ -34,6 +34,9 @@
 		GROUP BY aptCode
 	</select>
 
+	<select id="getGugunName"  parameterType="String" resultType="String">
+		select gugunName from guguncode where gugunCode = #{gugunCode};
+	</select>
 	<select id="detailVo" parameterType="String" resultType="DetailVo">
 		select *
 		from houseinfo as hi, housedeal as hd

@@ -1,5 +1,6 @@
 package com.house.model.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.house.model.HouseDealInfoDto;
 import com.house.model.HouseInfoDto;
+import com.house.model.HouseListVo;
 import com.house.model.SimpleHouseInfoDto;
 import com.house.model.mapper.HouseMapper;
 
@@ -50,8 +52,22 @@ public class HouseServiceImpl implements HouseService{
 
 	@Override
 	public void registDealInfo(HouseDealInfoDto houseDealInfoDto) {
-		houseMapper.registDealInfo(houseDealInfoDto);
 		
+		houseMapper.registDealInfo(houseDealInfoDto);
+	}
+	@Override
+	public List<HouseListVo> searchByGugunName(Map<String, String> param, String name) {
+		List<HouseListVo> houseListVo = houseMapper.searchByGugunName(name);
+		String area = param.get("area");
+		String floor = param.get("floor");
+		String dealAmount = param.get("dealAmount");
+		
+		dealAmount = dealAmount.replace(" ", "").replace(",", "");
+		System.out.println(area+" "+ floor+" "+ dealAmount);
+		
+		List<HouseListVo> result = new ArrayList<HouseListVo>();
+		
+		return houseListVo;
 	}
 
 }

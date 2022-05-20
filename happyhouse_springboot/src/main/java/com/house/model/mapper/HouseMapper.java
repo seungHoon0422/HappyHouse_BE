@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.house.model.HouseDealInfoDto;
 import com.house.model.HouseInfoDto;
+import com.house.model.HouseListVo;
 import com.house.model.SimpleHouseInfoDto;
 @Mapper
 public interface HouseMapper {
@@ -18,5 +19,6 @@ public interface HouseMapper {
 	HouseInfoDto houseInfoSearch(int aptCode);
 	List<HouseInfoDto> searchHouseByDong(String dongcode);
 	void registDealInfo(HouseDealInfoDto houseDealInfoDto);
+	List<HouseListVo> searchByGugunName(String name);
 
 }

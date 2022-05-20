@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.house.model.HouseDealInfoDto;
 import com.house.model.HouseInfoDto;
+import com.house.model.HouseListVo;
 import com.house.model.SimpleHouseInfoDto;
 
 public interface HouseService {
@@ -16,5 +17,6 @@ public interface HouseService {
 	public HouseInfoDto houseInfoSearch(int aptCode);
 	public List<HouseInfoDto> searchHouseByDong(String dongcode);
 	public void registDealInfo(HouseDealInfoDto houseDealInfoDto);
+	public List<HouseListVo> searchByGugunName(Map<String, String> param, String name);
 	
 }

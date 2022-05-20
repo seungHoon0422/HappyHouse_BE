@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.house.model.HouseDealInfoDto;
 import com.house.model.HouseInfoDto;
+import com.house.model.HouseListVo;
 import com.house.model.SimpleHouseInfoDto;
 import com.house.model.service.HouseService;
+import com.house.model.service.RegionService;
 /***
  * 아파트 처리 컨트롤러*/
 @Controller
@@ -33,6 +35,8 @@ public class HouseController {
 	
 	@Autowired
 	HouseService houseService;
+	@Autowired
+	RegionService regionService;
 	
 	@GetMapping("/register")
 	private String register() {
@@ -73,22 +77,7 @@ public class HouseController {
 	}
 
 	
-//	@PostMapping("/register")
-//	public String register(@RequestParam Map<String, String> select, Model model) throws Exception {
-//		
-//		List<HouseDealInfoDto> houseDealList = houseService.search(select);
-//		for (HouseDealInfoDto info : houseDealList) {
-//			model.addAttribute(info);
-//		}
-//
-//		Set<String> keySet = select.keySet();
-//		System.out.println("<request parameters>");
-//		for (String key : keySet) {
-//			System.out.println(key+" : "+select.get(key));
-//		}
-//		
-//		return "/house/search";
-//	}
+
 
 	// 입력된 dong code에 해당하는 모들 매물정보를 보여준다.
 	// aptName(아파트 이름), area(면적), dealAmount(거래가격), buildYear(건축년도), 거래년도(년,월,일)
