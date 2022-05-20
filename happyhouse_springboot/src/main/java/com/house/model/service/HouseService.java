@@ -3,6 +3,7 @@ package com.house.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.house.model.FilterDto;
 import com.house.model.HouseDealInfoDto;
 import com.house.model.HouseInfoDto;
 import com.house.model.HouseListVo;
@@ -17,6 +18,6 @@ public interface HouseService {
 	public HouseInfoDto houseInfoSearch(int aptCode);
 	public List<HouseInfoDto> searchHouseByDong(String dongcode);
 	public void registDealInfo(HouseDealInfoDto houseDealInfoDto);
-	public List<HouseListVo> searchByGugunName(Map<String, String> param, String name);
+	public List<HouseListVo> searchByGugunName(FilterDto filterDto, String name);
 	
 }

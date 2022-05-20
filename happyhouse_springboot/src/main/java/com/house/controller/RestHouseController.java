@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.house.model.FilterDto;
 import com.house.model.HouseDealInfoDto;
 import com.house.model.HouseInfoDto;
 import com.house.model.HouseListVo;
@@ -100,13 +102,14 @@ public class RestHouseController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	
-	@GetMapping("/filterSearch")
-	private ResponseEntity<?> searchByGugunName(@RequestBody Map<String, String> param, Model model) {
-	
-		String gugunName = regionService.getGugunName(param.get("gugunCode"));
+	@PostMapping("/filterSearch")
+	private ResponseEntity<?> searchByGugunName(@RequestBody FilterDto filterDto) {
+		
+		System.out.println(filterDto.getGugunCode());
+		String gugunName = regionService.getGugunName(filterDto.getGugunCode());
 		gugunName = gugunName.split(" ")[1];
 		System.out.println("gugunName : "+gugunName);
-		List<HouseListVo> houseListVo = houseService.searchByGugunName(param, gugunName);
+		List<HouseListVo> houseListVo = houseService.searchByGugunName(filterDto, gugunName);
 		return new ResponseEntity<List<HouseListVo>>(houseListVo, HttpStatus.OK);
 	}
 
