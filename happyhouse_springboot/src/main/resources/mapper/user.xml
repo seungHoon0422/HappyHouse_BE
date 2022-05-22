@@ -43,5 +43,11 @@
 		set userpass=#{userpass}, username=#{username}, email=#{email}, phone=#{phone}
 		where BINARY(userid)= #{userid} 
 	</update>
+	
+	<select id="findpass" parameterType="UserDto" resultType="string">
+		select userpass 
+		from user
+		where BINARY(userid)= #{userid} and username =#{username}
+	</select>
 
 </mapper>

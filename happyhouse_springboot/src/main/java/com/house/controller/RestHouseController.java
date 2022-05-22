@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -101,7 +102,7 @@ public class RestHouseController {
 	}
 	
 	@GetMapping("/filterSearch")
-	private ResponseEntity<?> searchByGugunName(@RequestBody Map<String, String> param, Model model) {
+	private ResponseEntity<?> searchByGugunName(@RequestParam Map<String, String> param, Model model) {
 	
 		String gugunName = regionService.getGugunName(param.get("gugunCode"));
 		gugunName = gugunName.split(" ")[1];

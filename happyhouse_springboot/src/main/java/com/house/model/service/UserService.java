@@ -19,5 +19,7 @@ public interface UserService  {
 	void update(UserDto user) throws Exception;
 	/**아이디 중복검사*/
 	int idCheck(String checkId) throws Exception;
+	/**비밀번호 찾기*/
+	String findpass(UserDto userDto) throws Exception;
 
 }

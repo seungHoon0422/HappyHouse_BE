@@ -46,4 +46,9 @@ public class UserServiceImpl implements UserService {
 		return userMapper.idCheck(checkId);
 	}
 
+	@Override
+	public String findpass(UserDto userDto) throws Exception {
+		return userMapper.findpass(userDto);
+	}
+
 }

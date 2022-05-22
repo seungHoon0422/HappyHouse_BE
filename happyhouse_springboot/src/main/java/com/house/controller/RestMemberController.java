@@ -140,4 +140,24 @@ public class RestMemberController {
 		
 	}
 	
+	/**비밀번호 찾기 
+	 * @throws Exception */
+	@GetMapping("/findpass/{userid}/{username}")
+	public ResponseEntity<?> findpass(@PathVariable("userid") String userid, @PathVariable("username") String username) throws Exception{
+		UserDto user = new UserDto();
+		user.setUserid(userid);
+		user.setUsername(username);
+		System.out.println("비밀번호찾기  : "+username + " "+userid);
+		String userpass = userService.findpass(user);
+		System.out.println(userpass);
+			if(userpass != null) {
+			return new ResponseEntity<String>(userpass, HttpStatus.OK);
+		
+			} else {
+			return new ResponseEntity<String>("아이디랑 비밀번호를 확인해주세요!! ", HttpStatus.NO_CONTENT);
+			}
+		
+		
+	}
+	
 }	 
