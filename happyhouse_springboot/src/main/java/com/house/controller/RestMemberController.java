@@ -160,4 +160,24 @@ public class RestMemberController {
 		
 	}
 	
+	/**아이디 찾기 */
+	@GetMapping("/findid/{username}/{email}")
+	public ResponseEntity<?> findid(@PathVariable("username") String username, @PathVariable("email") String email) throws Exception{
+		UserDto user = new UserDto();
+		user.setUsername(username);
+		user.setEmail(email);
+		System.out.println("아이디 찾기 : "+username + " "+email);
+		String userid = userService.findid(user);
+		
+		System.out.println(userid);
+		if(userid != null) {
+		return new ResponseEntity<String>(userid, HttpStatus.OK);
+	
+		} else {
+		return new ResponseEntity<String>("이름과 이메일 정보를 확인해주세요!! ", HttpStatus.NO_CONTENT);
+		}
+	
+		
+	}
+	
 }	 

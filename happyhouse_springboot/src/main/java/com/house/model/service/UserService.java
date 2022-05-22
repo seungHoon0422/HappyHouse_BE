@@ -21,5 +21,7 @@ public interface UserService  {
 	int idCheck(String checkId) throws Exception;
 	/**비밀번호 찾기*/
 	String findpass(UserDto userDto) throws Exception;
+	/**아이디 찾기*/
+	String findid(UserDto userDto) throws Exception;
 
 }

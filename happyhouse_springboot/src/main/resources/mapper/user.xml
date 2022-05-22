@@ -49,5 +49,11 @@
 		from user
 		where BINARY(userid)= #{userid} and username =#{username}
 	</select>
+	
+	<select id="findid" parameterType= "UserDto" resultType=  "string">
+		select userid 
+		from user 
+		where BINARY(username)= #{username} and email =#{email}
+	</select>
 
 </mapper>
