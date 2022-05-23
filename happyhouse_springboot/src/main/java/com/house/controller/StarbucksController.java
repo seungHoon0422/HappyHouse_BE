@@ -39,7 +39,7 @@ public class StarbucksController {
 	public ResponseEntity<?> searchStarbucksByDong(@PathVariable("dongcode") String dongcode){
 		
 		logger.info("starbucks search by dong code " + dongcode);
-
+		System.out.println("dongcode : "+dongcode);
 		String dongname = regionService.getDongName(dongcode);
 		List<StarbucksDto> list = starbucksService.searchAll(); 
 		List<StarbucksDto> response = new ArrayList<StarbucksDto>();
