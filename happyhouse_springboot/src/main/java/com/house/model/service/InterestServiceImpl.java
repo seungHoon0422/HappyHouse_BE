@@ -46,7 +46,7 @@ public class InterestServiceImpl implements InterestService {
 	}
 
 	@Override
-	public DongCodeDto sido(String dongName) throws Exception {
-		return interestMapper.sido(dongName);
+	public DongCodeDto sido(String dongCode) throws Exception {
+		return interestMapper.sido(dongCode);
 	}
 }

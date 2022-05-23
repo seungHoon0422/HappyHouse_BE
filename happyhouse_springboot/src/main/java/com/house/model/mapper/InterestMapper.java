@@ -24,7 +24,7 @@ public interface InterestMapper {
 
 	List<HashMap> likelist(String userid) throws Exception;
 
-	DongCodeDto sido(String dongName) throws Exception;
+	DongCodeDto sido(String dongCode) throws Exception;
 
 
 }

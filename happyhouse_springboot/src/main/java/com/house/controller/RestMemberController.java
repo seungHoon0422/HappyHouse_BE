@@ -136,7 +136,6 @@ public class RestMemberController {
 @PostMapping("/update")
 public ResponseEntity<?> update(UserDto userDto) throws Exception {
     userService.update(userDto);
-    
     return new ResponseEntity<String>("update", HttpStatus.OK);
     
 }

@@ -76,14 +76,18 @@ public class InterestController {
 	@ApiOperation(value = "관심 지역 등록 ", notes = "관심지역을 등록합니다.")
 	/**관심 지역 등록*/
 	@PostMapping("/regist")
-	private ResponseEntity<?> regist(@RequestBody InterestDto interestDto) throws Exception{
+	private ResponseEntity<?> regist(InterestDto interestDto){
 //		System.out.println(aptCode);
 		System.out.println(interestDto.getUserid() + interestDto.getAptCode());
 //		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
 //		String userid = user.getUserid(); 
 //		interestDto.setUserid(userid);
-			interestService.regist(interestDto);
-			return new ResponseEntity<Integer>(1, HttpStatus.OK);
+			try{
+				interestService.regist(interestDto);
+				return new ResponseEntity<String>("success", HttpStatus.OK);
+			}catch(Exception e) {
+				return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 	
 	}
 	
@@ -249,10 +253,10 @@ public class InterestController {
 	}
 	
 	/**아파트 동네임에 대한 시도 네임 얻어오기*/
-	@GetMapping("/sidoName/{dongName}")
-	public ResponseEntity<?> sido(@PathVariable("dongName") String dongName) throws Exception{
-		System.out.println(dongName);
-		DongCodeDto dong= interestService.sido(dongName);
+	@GetMapping("/sidoName/{dongCode}")
+	public ResponseEntity<?> sido(@PathVariable("dongCode") String dongCode) throws Exception{
+		System.out.println(dongCode);
+		DongCodeDto dong= interestService.sido(dongCode);
 		System.out.println(dong.toString());
 		if(dong != null) {
 			return new ResponseEntity<DongCodeDto>(dong, HttpStatus.OK);

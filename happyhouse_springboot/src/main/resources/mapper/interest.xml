@@ -5,8 +5,8 @@
 <mapper namespace= "com.house.model.mapper.InterestMapper">
 
 	<insert id="regist" parameterType="InterestDto">
-		insert ignore into interest(userid, aptCode)
-	 	values(#{userid} , ${aptCode})
+		replace into interest
+	 	values(#{userid} , #{aptCode})
 	</insert> 
  
  	
@@ -24,6 +24,7 @@
 	</delete>
 	
 	<resultMap type="HashMap" id="interestList">
+		<result column="dongCode" property="dongCode"/>
 		<result column="dealAmount" property="dealAmount"/>
 		<result column="area" property="area"/>
 		<result column="floor" property="floor"/>
@@ -35,7 +36,7 @@
 	</resultMap>
 	
 	<select id="list" parameterType="string" resultMap="interestList">
-		select d.dealAmount, d.area, d.floor , i.aptName, i.dongName, i.jibun, i.buildYear
+		select i.dongCode, d.dealAmount, d.area, d.floor , i.aptName, i.dongName, i.jibun, i.buildYear
  		from houseinfo i join housedeal d
  		on i.aptCode = d.aptCode
 		where i.aptName = #{aptName}
@@ -56,6 +57,6 @@
 	<select id="sido" parameterType = "string" resultType="DongCodeDto">
 		select * 
 		from dongCode 
-		where dongName = #{dongName}
+		where dongCode = #{dongCode}
 	</select>
 </mapper>

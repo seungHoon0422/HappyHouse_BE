@@ -28,6 +28,6 @@ public interface InterestService {
 	/**찜 등록순으로 정렬하기 위해 count 값 얻어오기*/
 	List<HashMap> likelist(String userid) throws Exception;
 
-	DongCodeDto sido(String dongName) throws Exception;
+	DongCodeDto sido(String dongCode) throws Exception;
 
 }
