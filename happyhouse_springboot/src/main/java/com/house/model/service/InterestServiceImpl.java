@@ -49,4 +49,10 @@ public class InterestServiceImpl implements InterestService {
 	public DongCodeDto sido(String dongCode) throws Exception {
 		return interestMapper.sido(dongCode);
 	}
+
+	@Override
+	public int already(InterestDto interest) throws Exception {
+		return interestMapper.already(interest);
+	
+	}
 }

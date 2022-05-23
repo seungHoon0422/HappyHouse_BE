@@ -5,7 +5,7 @@
 <mapper namespace= "com.house.model.mapper.InterestMapper">
 
 	<insert id="regist" parameterType="InterestDto">
-		replace into interest
+		insert into interest
 	 	values(#{userid} , #{aptCode})
 	</insert> 
  
@@ -58,5 +58,11 @@
 		select * 
 		from dongCode 
 		where dongCode = #{dongCode}
+	</select>
+	
+	<select id = "already" parameterType = "interestDto" resultType = "int">
+		select count(*) 
+		from interest 
+		where userid = #{userid} and aptCode = #{aptCode}
 	</select>
 </mapper>

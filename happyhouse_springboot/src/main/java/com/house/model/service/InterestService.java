@@ -30,4 +30,6 @@ public interface InterestService {
 
 	DongCodeDto sido(String dongCode) throws Exception;
 
+	int already(InterestDto interest) throws Exception;
+
 }

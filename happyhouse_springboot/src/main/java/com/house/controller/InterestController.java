@@ -75,20 +75,33 @@ public class InterestController {
 	
 	@ApiOperation(value = "관심 지역 등록 ", notes = "관심지역을 등록합니다.")
 	/**관심 지역 등록*/
-	@PostMapping("/regist")
-	private ResponseEntity<?> regist(InterestDto interestDto){
+	@GetMapping("/regist/{userid}/{aptCode}")
+	private ResponseEntity<?> regist(@PathVariable("userid") String userid, @PathVariable("aptCode") int aptCode){
 //		System.out.println(aptCode);
-		System.out.println(interestDto.getUserid() + interestDto.getAptCode());
+		InterestDto interest = new InterestDto(userid, aptCode);
+		System.out.println("여기 "+ userid + " "+ aptCode);
 //		UserDto user = (UserDto)session.getAttribute("userinfo"); // 로그인 되어있는 사람의 정보 
 //		String userid = user.getUserid(); 
 //		interestDto.setUserid(userid);
 			try{
-				interestService.regist(interestDto);
+				interestService.regist(interest);
 				return new ResponseEntity<String>("success", HttpStatus.OK);
 			}catch(Exception e) {
 				return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 	
+	}
+	
+	/**관심지역 표시 했던건지 아닌건지 확인, 0이면 관심 x / 1 이상 관심 O 
+	 * @throws Exception */
+	@GetMapping("/already/{userid}/{aptCode}")
+	private ResponseEntity<?> already(@PathVariable("userid") String userid, @PathVariable("aptCode") int aptCode) throws Exception{
+		System.out.println("여ㅛ기왔따"+userid + " "+ aptCode);
+		InterestDto interest= new InterestDto(userid, aptCode);
+		System.out.println(interest.toString());
+		int count = interestService.already(interest);
+		System.out.println("관심 등록 한적 없으면 0  : " + count);
+		return new ResponseEntity<Integer> (count, HttpStatus.OK);
 	}
 	
 	/**관심 목록 조회
