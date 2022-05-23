@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.house.model.DongCodeDto;
 import com.house.model.HouseDealInfoDto;
 import com.house.model.HouseListVo;
 import com.house.model.InterestDto;
@@ -42,5 +43,10 @@ public class InterestServiceImpl implements InterestService {
 	@Override
 	public List<HashMap> likelist(String userid) throws Exception {
 		return interestMapper.likelist(userid);
+	}
+
+	@Override
+	public DongCodeDto sido(String dongName) throws Exception {
+		return interestMapper.sido(dongName);
 	}
 }

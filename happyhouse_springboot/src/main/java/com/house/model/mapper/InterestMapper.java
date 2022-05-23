@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.house.model.DongCodeDto;
 import com.house.model.HouseDealInfoDto;
 import com.house.model.HouseListVo;
 import com.house.model.InterestDto;
@@ -22,6 +23,8 @@ public interface InterestMapper {
 	List<HashMap> list(String aptName) throws Exception;
 
 	List<HashMap> likelist(String userid) throws Exception;
+
+	DongCodeDto sido(String dongName) throws Exception;
 
 
 }

@@ -3,6 +3,7 @@ package com.house.model.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.house.model.DongCodeDto;
 import com.house.model.HouseDealInfoDto;
 import com.house.model.HouseListVo;
 import com.house.model.InterestDto;
@@ -26,5 +27,7 @@ public interface InterestService {
 
 	/**찜 등록순으로 정렬하기 위해 count 값 얻어오기*/
 	List<HashMap> likelist(String userid) throws Exception;
+
+	DongCodeDto sido(String dongName) throws Exception;
 
 }

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.house.model.DongCodeDto;
 import com.house.model.HouseDealInfoDto;
 import com.house.model.HouseListVo;
 import com.house.model.InterestDto;
@@ -245,6 +246,20 @@ public class InterestController {
 		} else {
 			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 		}
+	}
+	
+	/**아파트 동네임에 대한 시도 네임 얻어오기*/
+	@GetMapping("/sidoName/{dongName}")
+	public ResponseEntity<?> sido(@PathVariable("dongName") String dongName) throws Exception{
+		System.out.println(dongName);
+		DongCodeDto dong= interestService.sido(dongName);
+		System.out.println(dong.toString());
+		if(dong != null) {
+			return new ResponseEntity<DongCodeDto>(dong, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+		}
+		
 	}
 
 }

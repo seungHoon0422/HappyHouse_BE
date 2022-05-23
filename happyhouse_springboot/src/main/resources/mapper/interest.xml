@@ -38,7 +38,7 @@
 		select d.dealAmount, d.area, d.floor , i.aptName, i.dongName, i.jibun, i.buildYear
  		from houseinfo i join housedeal d
  		on i.aptCode = d.aptCode
-		where i.aptName = #{aptName};
+		where i.aptName = #{aptName}
 	</select> 
 	
 	<resultMap type="HashMap" id="likeList">
@@ -53,4 +53,9 @@
 		group by interest.aptCode
 	</select> 
 	
+	<select id="sido" parameterType = "string" resultType="DongCodeDto">
+		select * 
+		from dongCode 
+		where dongName = #{dongName}
+	</select>
 </mapper>
