@@ -13,4 +13,5 @@ public interface BoardMapper {
 	public int insertBoard(BoardDto board);
 	public int updateBoard(BoardDto board);
 	public int deleteBoard(int articleno);
+	public int updateHit(int articleno);
 }

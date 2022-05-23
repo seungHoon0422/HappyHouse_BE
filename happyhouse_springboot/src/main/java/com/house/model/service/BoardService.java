@@ -10,4 +10,5 @@ public interface BoardService {
 	public boolean writeBoard(BoardDto board);
 	public boolean updateBoard(BoardDto board);
 	public boolean deleteBoard(int articleno);
+	public boolean updateHit(int articleno);
 }
