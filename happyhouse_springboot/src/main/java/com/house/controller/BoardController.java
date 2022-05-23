@@ -22,7 +22,8 @@ import com.house.model.service.BoardService;
 
 import io.swagger.annotations.ApiOperation;
 
-@CrossOrigin(origins = { "*" }, maxAge = 6000)
+//@CrossOrigin(origins = { "*" }, maxAge = 6000)
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/board")
 public class BoardController {
