@@ -6,6 +6,11 @@ public class FilterDto {
 	private String area;
 	private String floor;
 	private String dealAmount;
+	
+	
+	public FilterDto() {
+		super();
+	}
 	public FilterDto(String gugunCode, String inputName, String area, String floor, String dealAmount) {
 		super();
 		this.gugunCode = gugunCode;

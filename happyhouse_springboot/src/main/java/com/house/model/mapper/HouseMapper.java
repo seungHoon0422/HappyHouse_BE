@@ -20,5 +20,6 @@ public interface HouseMapper {
 	List<HouseInfoDto> searchHouseByDong(String dongcode);
 	void registDealInfo(HouseDealInfoDto houseDealInfoDto);
 	List<HouseListVo> searchByGugunName(String name);
+	List<HouseListVo> searchByApartName(String apartname);
 
 }

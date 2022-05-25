@@ -28,7 +28,7 @@
 	<select id="info" parameterType="string" resultType="UserDto">
 		select username, userid, userpass, email, phone,level 
 		from user
-		where BINARY(userid)=#{userid}
+		where userid=#{userid}
 	</select>
 	
 	<!-- 회원 정보 삭제 (탈퇴) -->
@@ -41,7 +41,7 @@
 	<update id="update" parameterType="UserDto">
 		update user
 		set userpass=#{userpass}, username=#{username}, email=#{email}, phone=#{phone}
-		where BINARY(userid)= #{userid} 
+		where userid= #{userid} 
 	</update>
 	
 	<select id="findpass" parameterType="UserDto" resultType="string">

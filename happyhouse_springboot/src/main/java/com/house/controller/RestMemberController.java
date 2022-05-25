@@ -85,12 +85,9 @@ public class RestMemberController {
             System.out.println("로그인 실패 ");
             resultMap.put("message", e.getMessage());
             status = HttpStatus.INTERNAL_SERVER_ERROR;
-            
         }
         return new ResponseEntity<Map<String,Object>>(resultMap, status);
-        
     }
-    
     @ApiOperation(value="회원인증 ", notes ="해당 회원정보의 token 반환 ")
     @GetMapping("/info/{userid}")
     public ResponseEntity<Map<String,Object>> getInfo(@PathVariable("userid") String userid, HttpServletRequest request){
@@ -145,9 +142,11 @@ public class RestMemberController {
     /**회원 정보 수정 
 
  * @throws Exception */
-@PostMapping("/update")
+@PutMapping("/update")
 public ResponseEntity<?> update(UserDto userDto) throws Exception {
     userService.update(userDto);
+    UserDto info = userService.info(userDto.getUserid());
+    System.out.println("info : "+info);
     return new ResponseEntity<String>("update", HttpStatus.OK);
     
 }

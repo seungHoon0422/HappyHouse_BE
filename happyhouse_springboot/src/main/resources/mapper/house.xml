@@ -88,5 +88,15 @@
 		where b.gugunName=#{name}
 		);
 	</select>
+
+	<select id="searchByApartName" parameterType="String" resultType="HouseListVo">
+	select  no, d.aptCode, dealAmount, dealYear, dealMonth, dealDay, area, floor, type, rentMoney, aptName, dongCode, dongName, buildYear, jibun, lat, lng, img
+	from housedeal as d
+	join houseinfo as i
+	on d.aptCode = i.aptCode
+	where i.aptName = #{apartname};
+	</select>
+	
+	
 		
 </mapper>

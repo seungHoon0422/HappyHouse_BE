@@ -94,4 +94,9 @@ public class HouseServiceImpl implements HouseService{
 		return result;
 	}
 
+	@Override
+	public List<HouseListVo> searchByApartName(String apartname) {
+		return houseMapper.searchByApartName(apartname);
+	}
+
 }

@@ -19,5 +19,6 @@ public interface HouseService {
 	public List<HouseInfoDto> searchHouseByDong(String dongcode);
 	public void registDealInfo(HouseDealInfoDto houseDealInfoDto);
 	public List<HouseListVo> searchByGugunName(FilterDto filterDto, String name);
+	public List<HouseListVo> searchByApartName(String apartname);
 	
 }
