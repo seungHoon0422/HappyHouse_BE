@@ -50,18 +50,6 @@ public class CrawlingController {
 	    	return null;
 	    }
 	}
-	public static String getStockHeader(Document document) {
-	    Elements stockTableBody = document.select("table.type_2 thead tr");
-	    StringBuilder sb = new StringBuilder();
-	    for (Element element : stockTableBody) {
-	      for (Element td : element.select("th")) {
-	        sb.append(td.text());
-	        sb.append("   ");
-	      }
-	      break;
-	    }
-	    return sb.toString();
-	  }
 
 	  public static List<NewsDto> getStockList(Document document) {
 	    Elements stockTableBody = document.select("ul.type2 li");
@@ -70,7 +58,6 @@ public class CrawlingController {
 	    
 	    for (Element element : stockTableBody) {
 	    	NewsDto dto = new NewsDto();
-	    	System.out.println( "element : " + element);
 	    	dto.setTitle(element.select("li h4").text());
 	    	dto.setUrl("http://www.hapt.co.kr"+element.select("li a").attr("href"));
 	    	news.add(dto);

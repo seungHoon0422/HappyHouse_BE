@@ -19,10 +19,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfiguration {
 
 //	Swagger-UI 2.x 확인
-//	http://localhost:8080/{your-app-root}/swagger-ui.html
-//	Swagger-UI 3.x 확인
-//	http://localhost:8080/{your-app-root}/swagger-ui/index.html
-
+//	http://localhost:9999/server/swagger-ui.html
+//	Swagger-UI 3.x 확인 ( 현재 Swagger 3.x 버전 사용
+//	http://localhost:9999/server/swagger-ui/index.html
 	private String version = "V1";
 	private String title = "HappyHouse API " + version;
 	
