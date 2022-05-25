@@ -23,5 +23,7 @@ public interface UserService  {
 	String findpass(UserDto userDto) throws Exception;
 	/**아이디 찾기*/
 	String findid(UserDto userDto) throws Exception;
+	/**비밀번호 바꾸기*/
+	void changepass(UserDto user) throws Exception;
 
 }

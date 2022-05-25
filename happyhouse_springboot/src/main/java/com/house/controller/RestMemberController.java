@@ -168,9 +168,18 @@ public ResponseEntity<?> findpass(@PathVariable("userid") String userid, @PathVa
         } else {
         return new ResponseEntity<String>("아이디랑 비밀번호를 확인해주세요!! ", HttpStatus.NO_CONTENT);
         }
-    
-    
 }
+
+	/**비밀번호 변경 */
+	@PutMapping("/changepass")
+	public ResponseEntity<?> changepass(UserDto user){
+		try {			
+			userService.changepass(user);
+			return new ResponseEntity<String>("success" , HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<String>(e.getMessage(), HttpStatus.NO_CONTENT);
+		}
+	}
 
 /**아이디 찾기 */
 @GetMapping("/findid/{username}/{email}")

@@ -56,4 +56,10 @@ public class UserServiceImpl implements UserService {
 		return userMapper.findid(userDto);
 	}
 
+	@Override
+	public void changepass(UserDto user) throws Exception {
+		userMapper.changepass(user);
+		
+	}
+
 }

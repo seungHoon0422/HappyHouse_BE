@@ -24,5 +24,7 @@ public interface UserMapper {
 	String findpass(UserDto userDto) throws Exception;
 	
 	String findid(UserDto userDto) throws Exception;
+
+	void changepass(UserDto user) throws Exception;
 	
 }

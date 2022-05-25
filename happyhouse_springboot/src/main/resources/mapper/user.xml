@@ -55,5 +55,11 @@
 		from user 
 		where BINARY(username)= #{username} and email =#{email}
 	</select>
+	
+	<update id="changepass" parameterType="UserDto">
+		update user 
+		set userpass = #{userpass} 
+		where userid =#{userid} and username =#{username}
+	</update>
 
 </mapper>
