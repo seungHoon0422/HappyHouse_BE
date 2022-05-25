@@ -16,5 +16,6 @@ public interface RegionService {
 	DetailVo getDetail(String no);
 	String getDongName(String dongcode);
 	String getGugunName(String gugunCode);
+	List<HouseInfoDto> getApt(String dongCode);
 
 }

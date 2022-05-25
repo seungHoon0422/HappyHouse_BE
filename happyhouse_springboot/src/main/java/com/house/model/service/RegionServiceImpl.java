@@ -54,6 +54,11 @@ public class RegionServiceImpl implements RegionService{
 		return regionMapper.getGugunName(gugunCode);
 	}
 
+	@Override
+	public List<HouseInfoDto> getApt(String dongCode) {
+		return regionMapper.getApt(dongCode);
+	}
+
 	
 	
 }

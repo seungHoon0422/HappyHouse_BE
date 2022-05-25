@@ -61,6 +61,21 @@ public class RegionController {
 
 		return new ResponseEntity<List<RegionDto>>(guguns, HttpStatus.OK);
 	}
+	@GetMapping("/apt/{regcode}")
+	public ResponseEntity<?> getApt(@PathVariable("regcode") String regcode) throws Exception{
+		String dongCode = regcode.substring(0,5);
+		System.out.println(dongCode);
+		List<HouseInfoDto> list= regionService.getApt(dongCode);
+		System.out.println(list.toString());
+		if(list != null && !list.isEmpty()) {
+			
+			return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+			
+		}
+	}
+	
 
 	@GetMapping(value="dong/{regcode}")
 	public ResponseEntity<?> getDong(@PathVariable("regcode") String regcode){
