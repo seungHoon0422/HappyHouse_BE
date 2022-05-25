@@ -49,7 +49,19 @@ public class RestMemberController {
     @Autowired
     private UserService userService;
 
-
+    /**아이디 중복 체크*/
+    @GetMapping("/checkid/{userid}")
+    public ResponseEntity<?> checkId(@PathVariable("userid") String userid ) throws Exception{
+    	int count = userService.idCheck(userid);
+    	// count 가 0 이면 사용가능한거고, 1이면 중복아ㅣ디
+    	if(count==0) {
+    		return new ResponseEntity<String>("ok", HttpStatus.OK);
+    	}else {
+    		return new ResponseEntity<String>("no", HttpStatus.NO_CONTENT);
+    	}
+    }
+    
+    
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestParam Map<String, String> map, HttpSession session) throws Exception {
         System.out.println(map.get("userid"));
