@@ -64,6 +64,12 @@
 	<resultMap type="HouseInfoDto" id="apts">
 		<result column="aptCode" property="aptCode"/>
 		<result column="aptName" property="aptName"/>
+		<result column="dongCode" property="dongCode"/>
+		<result column="dongName" property="dongName"/>
+		<result column="buildYear" property="buildYear"/>
+		<result column="jibun" property="jibun"/>
+		<result column="lat" property="lat"/>
+		<result column="lng" property="lng"/>
 	</resultMap>
 	
 </mapper>
