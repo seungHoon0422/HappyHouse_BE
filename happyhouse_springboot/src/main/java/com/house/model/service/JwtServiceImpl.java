@@ -44,18 +44,7 @@ public class JwtServiceImpl implements JwtService {
 	}
 	
 	
-	@Override
-	public Map<String, String> get(String key) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	
-	@Override
-	public String getUserId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	// 토큰 유효성 검사 
 	@Override
