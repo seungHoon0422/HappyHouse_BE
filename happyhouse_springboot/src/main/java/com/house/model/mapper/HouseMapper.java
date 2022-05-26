@@ -22,6 +22,7 @@ public interface HouseMapper {
 	List<HouseListVo> searchByGugunName(String name);
 	List<HouseListVo> searchByApartName(String apartname);
 	void sellHouse(HouseDealInfoDto house);
+
 	
 
 }

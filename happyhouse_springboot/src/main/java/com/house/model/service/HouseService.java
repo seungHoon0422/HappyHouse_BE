@@ -23,4 +23,5 @@ public interface HouseService {
 	public void sellHouse(HouseDealInfoDto house);
 	
 	
+	
 }

@@ -124,11 +124,14 @@ private static final Logger logger = LoggerFactory.getLogger(RestHouseController
 	/**중개인이 매물 등록*/
 	@PostMapping("/sell")
 	private ResponseEntity<?> sell(HouseDealInfoDto house){
+		System.out.println("팔사람 : " + house.getSellerid());
 		houseService.sellHouse(house);
 		
 		return new ResponseEntity<String>("hi", HttpStatus.OK);
 		
 	}
+	
+	
 
 
 }

@@ -12,6 +12,7 @@ public class HouseDealInfoDto{
     private String floor;  //층
     private String type;   //종류
     private String rentMoney;//대출
+    private String sellerid; //  판매자 아이디
     
     
     
@@ -21,7 +22,7 @@ public class HouseDealInfoDto{
     
 
 	public HouseDealInfoDto(int no, int aptCode, String dealAmount, int dealYear, int dealMonth, int dealDay,
-			String area, String floor, String type, String rentMoney) {
+			String area, String floor, String type, String rentMoney, String sellerid) {
 		super();
 		this.no = no;
 		this.aptCode = aptCode;
@@ -33,8 +34,12 @@ public class HouseDealInfoDto{
 		this.floor = floor;
 		this.type = type;
 		this.rentMoney = rentMoney;
+		this.sellerid= sellerid;
 	}
 
+
+
+	
 
 
 	public int getNo() {
@@ -153,6 +158,18 @@ public class HouseDealInfoDto{
 
 	public void setRentMoney(String rentMoney) {
 		this.rentMoney = rentMoney;
+	}
+
+
+
+	public String getSellerid() {
+		return sellerid;
+	}
+
+
+
+	public void setSellerid(String sellerid) {
+		this.sellerid = sellerid;
 	}
 
 

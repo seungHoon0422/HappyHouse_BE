@@ -104,6 +104,7 @@ public class HouseServiceImpl implements HouseService{
 		houseMapper.sellHouse(house);
 		
 	}
+
 	
 	}
 
