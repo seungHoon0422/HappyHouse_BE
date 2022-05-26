@@ -21,5 +21,7 @@ public interface HouseMapper {
 	void registDealInfo(HouseDealInfoDto houseDealInfoDto);
 	List<HouseListVo> searchByGugunName(String name);
 	List<HouseListVo> searchByApartName(String apartname);
+	void sellHouse(HouseDealInfoDto house);
+	
 
 }

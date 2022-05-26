@@ -15,7 +15,7 @@ public interface UserMapper {
 
 	UserDto info(String userid) throws Exception;
 
-	void delete(UserDto user) throws Exception;
+	void delete(String userid) throws Exception;
 
 	void update(UserDto user) throws Exception;
 
@@ -26,5 +26,6 @@ public interface UserMapper {
 	String findid(UserDto userDto) throws Exception;
 
 	void changepass(UserDto user) throws Exception;
+
 	
 }

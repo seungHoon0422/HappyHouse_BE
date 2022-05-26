@@ -120,6 +120,15 @@ private static final Logger logger = LoggerFactory.getLogger(RestHouseController
 	    List<HouseListVo> houseListVo = houseService.searchByApartName(apartname);
 	    return new ResponseEntity<List<HouseListVo>>(houseListVo, HttpStatus.OK);
 	}
+	
+	/**중개인이 매물 등록*/
+	@PostMapping("/sell")
+	private ResponseEntity<?> sell(HouseDealInfoDto house){
+		houseService.sellHouse(house);
+		
+		return new ResponseEntity<String>("hi", HttpStatus.OK);
+		
+	}
 
 
 }

@@ -97,6 +97,13 @@
 	where i.aptName = #{apartname};
 	</select>
 	
+	<insert id="sellHouse" parameterType="HouseDealInfoDto">
+	insert into housedeal(aptCode, dealAmount, dealYear, dealMonth, dealDay, area, floor, type)
+		values (#{aptCode}, #{dealAmount}, #{dealYear}, #{dealMonth}, #{dealDay}, #{area}, #{floor} ,#{type})
+	</insert>	
+	
+	
+
 	
 		
 </mapper>

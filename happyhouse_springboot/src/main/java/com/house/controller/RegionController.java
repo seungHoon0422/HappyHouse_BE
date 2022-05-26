@@ -66,7 +66,7 @@ public class RegionController {
 		String dongCode = regcode.substring(0,5);
 		System.out.println(dongCode);
 		List<HouseInfoDto> list= regionService.getApt(dongCode);
-		System.out.println(list.toString());
+		
 		if(list != null && !list.isEmpty()) {
 			
 			return new ResponseEntity<List<HouseInfoDto>>(list, HttpStatus.OK);

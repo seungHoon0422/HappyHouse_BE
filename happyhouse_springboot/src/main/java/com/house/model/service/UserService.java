@@ -14,7 +14,7 @@ public interface UserService  {
 	/**아이디로 회원 정보 조회 */
 	UserDto info(String userid) throws Exception;
 	/**회원 정보 삭제 ( 회원 탈퇴 ) */
-	void delete(UserDto user) throws Exception;
+	void delete(String userid) throws Exception;
 	/**회원 정보 수정 (아이디는 그대로) */
 	void update(UserDto user) throws Exception;
 	/**아이디 중복검사*/
@@ -25,5 +25,6 @@ public interface UserService  {
 	String findid(UserDto userDto) throws Exception;
 	/**비밀번호 바꾸기*/
 	void changepass(UserDto user) throws Exception;
+	
 
 }

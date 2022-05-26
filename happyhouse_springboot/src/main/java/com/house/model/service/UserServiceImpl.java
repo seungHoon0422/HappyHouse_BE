@@ -30,8 +30,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void delete(UserDto user) throws Exception {
-		userMapper.delete(user);
+	public void delete(String userid) throws Exception {
+		userMapper.delete(userid);
 		
 	}
 
@@ -61,5 +61,7 @@ public class UserServiceImpl implements UserService {
 		userMapper.changepass(user);
 		
 	}
+
+	
 
 }

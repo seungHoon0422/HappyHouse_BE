@@ -45,7 +45,8 @@
 	</select>
 	
 	<select id="getApt" parameterType="string" resultMap="apts">
-		select * from houseinfo
+		select aptCode, aptName 
+		from houseinfo
 		where dongCode like concat(#{dongCode},'%')
 	</select>
 

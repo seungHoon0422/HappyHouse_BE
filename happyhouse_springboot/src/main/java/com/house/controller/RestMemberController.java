@@ -199,5 +199,16 @@ public ResponseEntity<?> findid(@PathVariable("username") String username, @Path
 
     
 }
+@DeleteMapping("/{userid}")
+public ResponseEntity<?> deleteUser(@PathVariable("userid") String userid){
+	System.out.println(userid);
+	try {
+		userService.delete(userid);
+		return new ResponseEntity<String>("success", HttpStatus.OK);
+	}catch(Exception e) {
+		return new ResponseEntity<String>("fail", HttpStatus.NO_CONTENT);
+	}
+	
+}
 }     
 

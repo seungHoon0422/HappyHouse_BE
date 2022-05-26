@@ -99,4 +99,12 @@ public class HouseServiceImpl implements HouseService{
 		return houseMapper.searchByApartName(apartname);
 	}
 
-}
+	@Override
+	public void sellHouse(HouseDealInfoDto house) {
+		houseMapper.sellHouse(house);
+		
+	}
+	
+	}
+
+

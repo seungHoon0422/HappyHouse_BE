@@ -20,5 +20,7 @@ public interface HouseService {
 	public void registDealInfo(HouseDealInfoDto houseDealInfoDto);
 	public List<HouseListVo> searchByGugunName(FilterDto filterDto, String name);
 	public List<HouseListVo> searchByApartName(String apartname);
+	public void sellHouse(HouseDealInfoDto house);
+	
 	
 }
